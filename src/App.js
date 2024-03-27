@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import { Link, Route, Routes } from "react-router-dom";
+import { Home } from "./pages/Home";
+import { Profile } from "./pages/Profile";
+import{Album} from "./pages/Album";
+import {Event} from "./pages/Event";
+import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <nav className="navBar">
+        <ul>
+          <div className="navButton">
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+          </div>
+          <div className="navButton"> 
+            <li>
+              <Link to="/profile">Profile</Link>
+            </li>
+          </div>
+        </ul>
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<Home />}/>
+        <Route path="/profile" element={<Profile />}/>
+        <Route path="/album" element={<Album />}/>
+        <Route path="/event" element={<Event/>}/>
+    
+      </Routes>
+    </>
   );
 }
 
 export default App;
+// actual ruti tuka kje gi definirame so path
