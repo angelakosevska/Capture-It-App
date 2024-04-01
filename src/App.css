@@ -1,14 +1,1 @@
-.navBar {
-  height: 56px;
-  background-color: aquamarine;
-}
 
-ul {
-  list-style: none;
-}
-
-.navButton li {
-  display: flex;
-  text-decoration: none;
-  flex-direction: column;
-}

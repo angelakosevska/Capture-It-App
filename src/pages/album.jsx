@@ -9,4 +9,5 @@ return (<>
 </>)
 
 }
+export default Album;
 //od slikite se ukluchva slikite so komentarite

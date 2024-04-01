@@ -1,0 +1,5 @@
+@font-face {
+  font-family: "Scripto";
+  src: local("Scripto"),
+    url("../src/Fonts/scripto-font/Scripto-2OR2v.ttf") format("opentype");
+}

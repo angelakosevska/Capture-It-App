@@ -1,0 +1,18 @@
+.Logo{
+    font-family:"Scripto";
+    font-size: 36px;
+    
+}
+.NavBar{
+display: grid;
+grid-template-columns: repeat(12, 80px);
+grid-template-rows: auto;
+
+    height: 56px;
+    width: max;
+    background-color: #E4E4FF;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+
+}
