@@ -9,9 +9,8 @@ main {
   padding: 0;
 }
 
-
 .AlbumName {
-  margin:auto;
+  margin: auto;
   height: 70px;
   justify-content: left;
   padding-left: 20px;
@@ -19,12 +18,9 @@ main {
   align-items: center;
 }
 .album-grid {
-  padding-left: 20px;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding: 20px;
   margin: auto;
   height: auto;
-  width: 1200px;
   background-color: chartreuse;
   display: flex;
   flex-wrap: wrap;
@@ -35,3 +31,29 @@ main {
   width: 380px;
   height: 460px;
 }
+
+@media only screen and (max-width: 1912px) {
+  .album-grid {
+    width: 1580px;
+  }
+}
+
+@media only screen and (max-width: 1528px) {
+  .album-grid {
+    width: 1200px;
+  }
+}
+
+
+@media only screen and (max-width: 1020px) {
+  .album-grid {
+    width: 780px;
+  }
+}
+@media only screen and (max-width: 770px) {
+  .album-grid {
+    width: 380px;
+  }
+}
+/* 4*380+60(3*gap)/
+/* https://www.webfx.com/tools/whats-my-browser-size/*/
