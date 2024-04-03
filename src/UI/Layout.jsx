@@ -3,7 +3,7 @@ import Header from "../components/Header/Header.js";
 import Footer from "../components/Footer/Footer.js";
 
 
-const Layout =({children}) => {
+export const Layout =({children}) => {
     return(
         <>
         <Header/>

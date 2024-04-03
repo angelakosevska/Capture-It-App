@@ -1,0 +1,22 @@
+
+#profPic{
+    margin: 10px;
+    align-content: center;
+    justify-self: center;
+    display: flex;
+}
+.userInfo{
+    display: flex;
+   align-items: center;
+   justify-content: left;
+    
+}
+.profilePic img {
+    width: 50px; /* Adjust the size of the profile picture as needed */
+    height: 50px;
+    border-radius: 50px;
+}
+.username {
+    color: #ff0404; /* Adjust text color as needed */
+    margin: 10px;
+}

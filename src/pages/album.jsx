@@ -1,13 +1,15 @@
-
-
-export function Album (){
-return (<>
-<h1>Album</h1>
-<div className="albumPic">Slika 1</div>
-<br></br>
-<div className="albumPic">Slika 2</div>
-</>)
-
+import {Layout} from "../UI/Layout";
+import "./Album.css"
+import {AlbumPicture} from "../components/Picture/AlbumPicture";
+ export function Album() {
+  return (
+    <>
+      <Layout>
+        <main> <AlbumPicture/></main>
+     
+      </Layout>
+    </>
+  );
 }
 export default Album;
 //od slikite se ukluchva slikite so komentarite

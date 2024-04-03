@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Layout from "../UI/Layout";
+import {Layout} from "../UI/Layout";
 export function Profile() {
   return (
     <>
