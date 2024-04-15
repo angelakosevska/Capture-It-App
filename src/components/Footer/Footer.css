@@ -1,5 +1,22 @@
-h2{
-    color: blue; 
-    background-color: aqua;
-    margin: 0;
+
+.container-f {
+    background-color: #5757c1;
+    height: fit-content;
+    width: max;
+
 }
+.Footer{
+display: grid;
+grid-template-columns: repeat(12, 80px);
+grid-template-rows: auto;
+
+    height: 56px;
+    max-width: 100%;
+    background-color: #5757c1;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin: auto;
+    padding:-10px;
+}
+

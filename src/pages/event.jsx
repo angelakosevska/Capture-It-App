@@ -8,9 +8,9 @@ export function Event(){
     <h1>Event Name</h1>
     <div>Event description</div>
     <div className="eventCover">
-        <Link to="/album">Album 1</Link>
+        <Link to="/album">Album</Link>
         <br/>
-        <Link to="/album">Album 2</Link>
+
     </div>
     </Layout>
     </>)

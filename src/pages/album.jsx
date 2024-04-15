@@ -10,7 +10,7 @@ export function Album() {
         <body>
           <main>
             <div className="AlbumName">
-              <h1>Event Name / Album name by </h1>
+              <div className="AlbumPath">Event Name / Album name by</div>  
               <PPandUN />
             </div>
 
@@ -38,6 +38,24 @@ export function Album() {
               </div>
               <div>
                 <AlbumPicture />
+              </div>
+              <div>
+                <AlbumPicture />
+              </div>
+              <div>
+                <AlbumPicture />
+              </div>
+              <div>
+                <AlbumPicture />
+              </div>
+              <div>
+                <AlbumPicture />
+              </div>
+              <div>
+                <AlbumPicture />
+              </div>
+              <div>
+               
               </div>
             </div>
           </main>

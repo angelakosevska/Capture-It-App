@@ -1,29 +1,73 @@
-.Logo{
-    font-family:"Scripto";
-    font-size: 36px;
-    margin-left: 20px;
-    
+.Logo {
+  font-family: "Scripto";
+  font-size: 36px;
+  margin-right: 10px;
+  padding: 10px;
 }
-.NavBar{
-display: grid;
-grid-template-columns: repeat(12, 80px);
-grid-template-rows: auto;
+.container-h {
+  background-color: #e4e4ff;
+  box-shadow: 2px 3px 5px 1px rgba(95, 93, 156, 0.51);
+  -webkit-box-shadow: 2px 3px 5px 1px rgba(95, 93, 156, 0.51);
+  -moz-box-shadow: 2px 3px 5px 1px rgba(95, 93, 156, 0.51);
+  z-index: 2;
+  height: fit-content;
+  width: max;
+}
+.NavBar {
+  display: grid;
+  grid-template-columns: repeat(12, 80px);
+  grid-template-rows: auto;
 
-    height: 56px;
-    width: max;
-    background-color: #E4E4FF;
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    margin: 0;
-    box-shadow: 2px 3px 5px 1px rgba(95,93,156,0.51);
-    -webkit-box-shadow: 2px 3px 5px 1px rgba(95,93,156,0.51);
-    -moz-box-shadow: 2px 3px 5px 1px rgba(95,93,156,0.51);
+  height: 56px;
+  max-width: 100%;
+  background-color: #e4e4ff;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  margin: auto;
+}
 
-    z-index: 2;
+.navButton {
+  width: 80px;
+  height: 56px;
+  padding: 10px;
+  text-align: center;
+  margin-left: 10px;
+  margin-right: 10px;
+  align-content: center;
+
+
 }
-.Buttons{
-    display: flex;
-    justify-content: right;
+h1 {
+  margin: 0;
 }
-h1{margin: 0}
+a{
+  text-decoration: none;
+color: black;
+}
+
+@media only screen and (max-width: 1912px) {
+  .Navbar {
+    width: 1580px;
+  }
+}
+
+@media only screen and (max-width: 1528px) {
+  .NavBar {
+    width: 1200px;
+  }
+}
+
+@media only screen and (max-width: 1020px) {
+  .NavBar {
+    width: 780px;
+  }
+}
+@media only screen and (max-width: 770px) {
+  .NavBar {
+    width: 380px;
+  }
+  .navButton {
+    width: 40px;
+  }
+}

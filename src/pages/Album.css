@@ -1,15 +1,19 @@
 body {
-  background-color: cadetblue;
+  background-color: rgb(170, 175, 233);
+  margin: 0 auto;
 }
 main {
-  background-color: rosybrown;
+  background-color: rgb(33, 251, 178);
   display: block;
   flex-wrap: wrap;
   flex-direction: column;
   padding: 0;
+  margin: auto;
+  max-width: 100%;
 }
 
 .AlbumName {
+
   margin: auto;
   height: 70px;
   justify-content: left;
@@ -17,43 +21,54 @@ main {
   display: flex;
   align-items: center;
 }
+.AlbumPath{
+  margin: 10px;
+  align-content: center;
+}
+
 .album-grid {
-  padding: 20px;
+  padding-top: 20px;
   margin: auto;
+  width: 100%;
   height: auto;
   background-color: chartreuse;
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
-  justify-content: flex-start;
+  gap: 5px;
+  justify-content: center;
+  box-sizing: border-box;
 }
 .album-grid div {
-  width: 380px;
-  height: 460px;
-}
+  width: auto;
+  height: auto;
 
-@media only screen and (max-width: 1912px) {
-  .album-grid {
-    width: 1580px;
-  }
-}
 
-@media only screen and (max-width: 1528px) {
-  .album-grid {
-    width: 1200px;
-  }
 }
 
 
-@media only screen and (max-width: 1020px) {
-  .album-grid {
-    width: 780px;
-  }
+@media only screen and (max-width: 600px) {
+
 }
-@media only screen and (max-width: 770px) {
-  .album-grid {
-    width: 380px;
-  }
+
+@media only screen and (min-width: 600px) {
+
 }
+
+
+@media only screen and (min-width: 768px) {
+
+}
+
+
+@media only screen and (min-width: 992px) {
+
+}
+
+@media only screen and (min-width: 1200px) {
+.AlbumPath{
+  font-size: 20px;
+}
+}
+
 /* 4*380+60(3*gap)/
 /* https://www.webfx.com/tools/whats-my-browser-size/*/

@@ -4,14 +4,11 @@ function Header() {
   return (
     <>
       <header>
-        <div className="NavBar">
-          {/* <Logo> </Logo>
-    <Search></Search>
-    <ProfileIcon></ProfileIcon> */}
-          <div>
-            <h1 className="Logo">Capture It </h1>
-          </div>
-          <div className="">
+        <div className="container-h">
+          <div className="NavBar">
+            <div>
+              <div className="Logo"><a href="https://www.freepnglogos.com/images/camera-logo-png-7456.html">Capture It</a> </div>
+            </div>
             <div className="navButton">
               <Link to="/">Home</Link>
             </div>

@@ -6,6 +6,7 @@ import { Profile } from "./pages/profile";
 import { Album } from "./pages/album";
 import { Event } from "./pages/event";
 
+
 function App() {
   return (
     <>
@@ -14,6 +15,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/album" element={<Album />} />
         <Route path="/event" element={<Event />} />
+     
       </Routes>
     </>
   );
