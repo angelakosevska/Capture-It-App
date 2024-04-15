@@ -2,6 +2,8 @@ import { Layout } from "../UI/Layout";
 import "./Album.css";
 import { AlbumPicture } from "../components/Picture/AlbumPicture";
 import { PPandUN } from "../components/PPandUN/PPandUN";
+
+import Breadcrumbs from "../components/BreadCrumbs/BreadCrumb";
 export function Album() {
   return (
     <>
@@ -9,51 +11,24 @@ export function Album() {
         <Layout>
         <body>
           <main>
-            <div className="AlbumName">
-              <div className="AlbumPath">Event Name / Album name by</div>  
-              <PPandUN />
-            </div>
+          
+              <Breadcrumbs/> 
+           
 
             <div className="album-grid">
               <div>
-                <AlbumPicture />
+           <AlbumPicture/>
               </div>
               <div>
-                <AlbumPicture />
+             
               </div>
               <div>
-                <AlbumPicture />
+         
               </div>
               <div>
-                <AlbumPicture />
+              
               </div>
-              <div>
-                <AlbumPicture />
-              </div>
-              <div>
-                <AlbumPicture />
-              </div>
-              <div>
-                <AlbumPicture />
-              </div>
-              <div>
-                <AlbumPicture />
-              </div>
-              <div>
-                <AlbumPicture />
-              </div>
-              <div>
-                <AlbumPicture />
-              </div>
-              <div>
-                <AlbumPicture />
-              </div>
-              <div>
-                <AlbumPicture />
-              </div>
-              <div>
-                <AlbumPicture />
-              </div>
+              
               <div>
                
               </div>

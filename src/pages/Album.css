@@ -12,19 +12,8 @@ main {
   max-width: 100%;
 }
 
-.AlbumName {
 
-  margin: auto;
-  height: 70px;
-  justify-content: left;
-  padding-left: 20px;
-  display: flex;
-  align-items: center;
-}
-.AlbumPath{
-  margin: 10px;
-  align-content: center;
-}
+
 
 .album-grid {
   padding-top: 20px;
@@ -38,6 +27,7 @@ main {
   justify-content: center;
   box-sizing: border-box;
 }
+
 .album-grid div {
   width: auto;
   height: auto;
