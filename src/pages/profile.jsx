@@ -8,6 +8,7 @@ export function Profile() {
       <br />
       <h1>Profile page</h1>
       <Link to="/event">Event 1</Link>
+      <Link to="/album">ALbum</Link>
       </Layout>
     </>
   );

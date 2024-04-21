@@ -1,13 +1,13 @@
 import { Link, useLocation } from "react-router-dom";
-import "./BreadCrumb.css";
-import PPandUN from "../PPandUN/PPandUN";
+import "./style.css";
+import PictureAndUsername from "../PictureAndUsername";
 
-function Breadcrumbs() {
+const BreadCrumbs = () => {
   const location = useLocation();
 
   return (
     <div className="container">
-      <div className="breadcrumb-div">
+      {/*<div className="breadcrumb-div">
         <Link
           to="/"
           className={
@@ -18,7 +18,8 @@ function Breadcrumbs() {
         >
           Home
         </Link>
-      </div>
+      </div> */}
+      
       <div className="breadcrumb-div">
         <Link
           to="/event"
@@ -52,11 +53,11 @@ function Breadcrumbs() {
               : "breadcrumb-not-active"
           }
         >
-          <PPandUN />
+          <PictureAndUsername/>
         </Link>
       </div>
     </div>
   );
 }
 
-export default Breadcrumbs;
+export default BreadCrumbs;
