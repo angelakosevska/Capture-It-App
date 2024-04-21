@@ -1,10 +1,10 @@
 
 import {Route, Routes} from "react-router-dom";
 import "./App.css";
-import { Home } from "./pages/home";
+import { Home } from "./pages/HomePage/index.jsx";
 import { Profile } from "./pages/profile";
-import { Album } from "./pages/album";
-import { Event } from "./pages/event";
+import { Album } from "./pages/AlbumPage/index.jsx";
+import { Event } from "./pages/EventPage/index.jsx";
 
 
 function App() {
