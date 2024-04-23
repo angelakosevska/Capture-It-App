@@ -7,7 +7,7 @@ export function Like({ initialLikes = 0 }) {
   const [likeCount, setLikeCount] = useState(0);
 
   const handleLike = () => {
-    setLikeCount((prevCount) => (isLiked ? 1 : 0));
+    setLikeCount((prevCount) => (isLiked ? 0 : 1));
     setIsLiked(!isLiked);
   };
 
@@ -21,8 +21,8 @@ export function Like({ initialLikes = 0 }) {
     <>
       <button onClick={handleLike} className="buttonLike">
         {icon}
-        <span>{likeCount} </span>
-        <span>{isLiked ? "Liked" : "Like"}</span>
+        <span>{likeCount}</span>
+        <span>{isLiked ? " Likes" : " Like"}</span>
       </button>
     </>
   );
