@@ -1,0 +1,50 @@
+img {
+}
+
+.container {
+  position: relative;
+  width: 100%;
+}
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+
+}
+.overlay{
+    position:absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background: rgba(255,0,0,0);
+background: radial-gradient(circle farthest-corner at center center, rgba(255,0,0,0) 0%, rgba(209,173,239,0.74) 80%);
+background: -webkit-radial-gradient(circle farthest-corner at center center, rgba(255,0,0,0) 0%, rgba(209,173,239,0.74) 80%);
+background: -moz-radial-gradient(circle farthest-corner at center center, rgba(255,0,0,0) 0%, rgba(209,173,239,0.74) 80%);
+}
+.container:hover .overlay{
+    opacity: .8;
+}
+.PandU {
+  display: none;
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+}
+.container:hover  .PandU {
+  display: block;
+}
+.imageShadow {
+
+  
+}
+.image:hover + .imageShadow {
+  display: block;
+}
+
+/* bottom: 8px;
+left:16px;*/

@@ -4,6 +4,7 @@ import "./style.css";
 import PictureAndUsername from "../../components/PictureAndUsername/index.jsx";
 import Breadcrumbs from "../../components/BreadCrumbs/index.jsx";
 import  Like  from "../../components/Like/index.jsx";
+import AlbumCoverCardInEvent from "../../components/AlbumCoverCardInEvent/index.jsx";
 export function Album() {
   return (
     <>
@@ -16,7 +17,10 @@ export function Album() {
             <div className="album-grid">
             
               <Like />
+
+             
             </div>
+            <AlbumCoverCardInEvent/>
           </main>
         </body>
       </Layout>
