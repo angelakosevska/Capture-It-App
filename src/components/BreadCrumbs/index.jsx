@@ -6,7 +6,7 @@ const BreadCrumbs = () => {
   const location = useLocation();
 
   return (
-    <div className="container">
+    <div className="breadCrumbsContainer">
       {/*<div className="breadcrumb-div">
         <Link
           to="/"

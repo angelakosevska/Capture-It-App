@@ -20,7 +20,8 @@ export function Album() {
 
              
             </div>
-            <AlbumCoverCardInEvent/>
+            
+       
           </main>
         </body>
       </Layout>

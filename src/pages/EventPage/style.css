@@ -42,21 +42,9 @@
   background-color: antiquewhite;
   grid-area: 5/1/ 6 / span 12;
 }
-.albumContainer {
-  width: 1200px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  background-color: crimson;
-  margin: auto;
-  grid-gap: 5px;
-}
-.albumContainer > div,
-img {
-  width: 396px;
-  background-color: aquamarine;
-}
 
-/* Extra small devices (phones, 600px and down) */
+
+/* Extra small devices (phones, 600px and down) *//*
 @media only screen and (max-width: 600px) {
   .albumContainer {
     background-color: red;
@@ -70,9 +58,9 @@ img {
   img {
     width: 550px;
   }
-}
+}*/
 
-/* Small devices (portrait tablets and large phones, 600px and up) */
+/* Small devices (portrait tablets and large phones, 600px and up) *//*
 @media only screen and (min-width: 600px) {
   .albumContainer {
     background-color: green;
@@ -86,9 +74,9 @@ img {
   img {
     width: 580px;
   }
-}
+}*/
 
-/* Medium devices (landscape tablets, 768px and up) */
+/* Medium devices (landscape tablets, 768px and up) *//*
 @media only screen and (min-width: 768px) {
   .albumContainer {
     background-color: blue;
@@ -103,8 +91,8 @@ img {
     width: 760px;
   }
 }
-
-/* Large devices (laptops/desktops, 992px and up) */
+*/
+/* Large devices (laptops/desktops, 992px and up) *//*
 @media only screen and (min-width: 992px) {
   .albumContainer {
     background-color: orange;
@@ -118,8 +106,8 @@ img {
     width: 900px;
   }
 }
-
-/* Extra large devices (large laptops and desktops, 1200px and up) */
+*/
+/* Extra large devices (large laptops and desktops, 1200px and up) *//*
 @media only screen and (min-width: 1200px) {
   .albumContainer {
     background-color: pink;
@@ -132,4 +120,4 @@ img {
   img {
     width: 396px;
   }
-}
+}*/

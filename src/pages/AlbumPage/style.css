@@ -1,9 +1,9 @@
 body {
-  background-color: rgb(219, 222, 255);
+  background-color: rgb(213, 244, 255);
   margin: 0 auto;
 }
 main {
-  background-color: rgb(224, 225, 252);
+
   display: block;
   flex-wrap: wrap;
   flex-direction: column;
@@ -17,7 +17,7 @@ main {
 }
 
 .album-grid {
-  background-color: red;
+  background-color: rgb(201, 255, 249);
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   width: 1000px;

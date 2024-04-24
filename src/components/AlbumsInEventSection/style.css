@@ -1,0 +1,8 @@
+.albumsContainer {
+    width: 1200px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    background-color: rgb(223, 246, 255);
+    margin: auto;
+    grid-gap: 5px;
+  }
