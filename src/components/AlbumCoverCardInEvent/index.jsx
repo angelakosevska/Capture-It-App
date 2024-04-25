@@ -5,11 +5,12 @@ const AlbumCoverCardInEvent = ({ imageUrl, altText }) => {
   return (
     <>
       <div className="container">
-        <img src={imageUrl} alt={altText} className="image"/>
-        
-          <div className="overlay">
-            <div className="PandU"><PictureAndUsername/></div>
-         
+        <img src={imageUrl} alt={altText} className="image" />
+
+        <div className="overlay">
+          <div className="PandU">
+            <PictureAndUsername />
+          </div>
         </div>
       </div>
     </>

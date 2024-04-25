@@ -13,12 +13,12 @@ export function Event() {
       <Layout>
         <div className="pageContainer">
           <div className="gridContainer">
-            <div className="eventName">event name</div>
+            <div className="eventName">event header</div>
             <div className="description">Event decription</div>
             <div className="buttons">like and comment </div>
 
             <div className="comments"> display comments</div>
-            <div className="addAcomment"> add a comment</div>
+            <div className="addAcomment"> <AddComment/></div>
           </div>
         </div>
       <AlbumsInEventSection/>

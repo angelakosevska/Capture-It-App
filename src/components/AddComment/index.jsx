@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./style.css";
- const AddComment = ({ onAddComment }) => {
+const AddComment = ({ onAddComment }) => {
   const [commentCount, setCommentCount] = useState(0);
   const [newComment, setNewComment] = useState("");
 
@@ -18,21 +18,18 @@ import "./style.css";
 
   return (
     <>
-  
-
-
-    <div className="comment-counter">
-      <span></span>
-      <input
-        type="text"
-        placeholder="Add a comment"
-        value={newComment}
-        onChange={handleCommentChange}
-      />
-      <button onClick={handleIncrement}>Comment</button>
-    </div>
+      <div className="comment-counter">
+        <span>{commentCount}</span>
+        <input
+          type="text"
+          placeholder="Add a comment"
+          value={newComment}
+          onChange={handleCommentChange}
+        />
+        <button onClick={handleIncrement}>Comment</button>
+      </div>
     </>
   );
-}
+};
 
 export default AddComment;

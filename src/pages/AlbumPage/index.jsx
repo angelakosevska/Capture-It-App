@@ -30,3 +30,4 @@ export function Album() {
 }
 export default Album;
 //od slikite se ukluchva slikite so komentarite
+
