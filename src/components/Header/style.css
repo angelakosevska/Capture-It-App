@@ -13,7 +13,7 @@ header {
   z-index: 2;
   height: 56px;
   max-width: 100%;
-  background-color: #e4e4ff;
+  background-color: #6a5294;
   display: flex;
   justify-content: left;
   align-items: center;
@@ -29,20 +29,18 @@ header {
   margin-left: 10px;
   margin-right: 10px;
   align-content: center;
-
-
 }
 h1 {
   margin: 0;
 }
-a{
+a {
   text-decoration: none;
-color: black;
+  color:rgb(255, 255, 255)1;
 }
 
 @media only screen and (max-width: 1912px) {
   .Navbar {
-    width: 1580px;
+    width: 100%;
   }
 }
 

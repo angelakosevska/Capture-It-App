@@ -1,0 +1,22 @@
+.primary-button {
+    background: #7978c4;
+   
+    background-image: linear-gradient(to bottom, #7978c4, #5F5D9C);
+    -webkit-border-radius: 10;
+    -moz-border-radius: 10;
+    border-radius: 10px;
+    -webkit-box-shadow: 2px 3px 12px #E4E4FF;
+    -moz-box-shadow: 2px 3px 12px #E4E4FF;
+    box-shadow: 2px 3px 12px #E4E4FF;
+    font-family: Georgia;
+    color: #ffffff;
+    font-size: 18px;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+}
+
+.primary-button:hover {
+    background: #5F5D9C;
+    background-image: linear-gradient(to bottom, #5F5D9C, #7978c4);
+    text-decoration: none;
+}

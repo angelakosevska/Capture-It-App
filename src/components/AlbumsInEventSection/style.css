@@ -1,8 +1,17 @@
-.albumsContainer {
-    width: 1200px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+
+/*
+ display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-content: left;
     background-color: rgb(223, 246, 255);
     margin: auto;
     grid-gap: 5px;
-  }
+    */
+    /*
+     display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+   margin: auto;
+justify-content: left;
+ width: auto;
+  max-width: 70%;*/

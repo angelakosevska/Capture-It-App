@@ -1,13 +1,15 @@
 import "./style.css";
-import PictureAndUsername
- from "../../PictureAndUsername";
-const EventName =({userName, eventName})=>{
-return(
+import PictureAndUsername from "../../PictureAndUsername";
+
+const EventName = () => {
+
+  return (
     <>
-    <div><PictureAndUsername {userName,, }/> 's {eventName}</div>
-    
+      <div className="eventName">
+        <PictureAndUsername textColor={"black"} />'s birthday
+      </div>
     </>
-)
+  );
+};
 
-
-}
+export default EventName;

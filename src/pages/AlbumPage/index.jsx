@@ -5,10 +5,11 @@ import PictureAndUsername from "../../components/PictureAndUsername/index.jsx";
 import Breadcrumbs from "../../components/BreadCrumbs/index.jsx";
 import  Like  from "../../components/Like/index.jsx";
 import AlbumCoverCardInEvent from "../../components/AlbumCoverCardInEvent/index.jsx";
+
 export function Album() {
   return (
     <>
-      <Layout>
+    
         <body>
           <main>
             <div className="BreadC-position">
@@ -24,7 +25,7 @@ export function Album() {
        
           </main>
         </body>
-      </Layout>
+      
     </>
   );
 }

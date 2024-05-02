@@ -3,30 +3,45 @@ import { Layout } from "../../UI/Layout.jsx";
 import Like from "../../components/Like/index.jsx";
 import AddComment from "../../components/AddComment/index.jsx";
 import "./style.css";
-import CommentCount from "../../components/CommentCount/index.jsx";
 import LikeCommentSection from "../../components/LikeCommentSection/index.jsx";
 import AlbumCoverCardInEvent from "../../components/AlbumCoverCardInEvent/index.jsx";
 import AlbumsInEventSection from "../../components/AlbumsInEventSection/index.jsx";
+
+import EventHeader from "../../components/EventHeader/index.jsx";
+import CommentsSection from "../../components/CommentsSection/index.jsx";
+import EventLocation from "../../components/EventHeader/EventLocation/index.jsx";
+import PrimaryButton from "../../components/Buttons/PrimaryButton/index.jsx";
+
 export function Event() {
   return (
     <>
-      <Layout>
-        <div className="pageContainer">
-          <div className="gridContainer">
-            <div className="eventName">event header</div>
-            <div className="description">Event decription</div>
-            <div className="buttons">like and comment </div>
-
-            <div className="comments"> display comments</div>
-            <div className="addAcomment"> <AddComment/></div>
+      <div className="pageContainer">
+        <div className="gridContainer">
+          <div className="eventHeader"><EventHeader/></div>
+          <div className="description">
+            1
+            2
+            3
           </div>
+          <div className="buttons"><PrimaryButton buttonText="Like"/> </div>
+
+          <div className="addAcomment"></div>
         </div>
-      <AlbumsInEventSection/>
-      </Layout>
+      </div>
+      <main className="AlbumAndComment">
+        <div className="containerForPictures">
+            <AlbumsInEventSection />
+
+        </div>
+        <div className="containerForCommentSection">
+          <CommentsSection />
+        </div>
+      </main>
     </>
   );
 }
 //soodvetna pateka do albumite
 export default Event;
 
+//search po ime
 //da se bira cover photo so tochno odredeni dimenzii

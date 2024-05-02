@@ -1,0 +1,9 @@
+.eventName{
+    display: flex;
+    align-items: center;
+    color: rgb(212, 0, 0);
+    margin: 0;
+}
+.black-event-name{
+    color: black;
+}

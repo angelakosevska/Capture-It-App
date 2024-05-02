@@ -18,15 +18,17 @@ const AddComment = ({ onAddComment }) => {
 
   return (
     <>
-      <div className="comment-counter">
-        <span>{commentCount}</span>
-        <input
-          type="text"
-          placeholder="Add a comment"
-          value={newComment}
-          onChange={handleCommentChange}
-        />
-        <button onClick={handleIncrement}>Comment</button>
+      <div className="commentAll">
+        <div className="comment-counter">
+          <span>{commentCount}</span>
+          <input
+            type="text"
+            placeholder="Add a comment"
+            value={newComment}
+            onChange={handleCommentChange}
+          />
+          <button onClick={handleIncrement}>Comment</button>
+        </div>
       </div>
     </>
   );

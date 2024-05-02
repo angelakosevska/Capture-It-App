@@ -4,16 +4,18 @@ import "./style.css";
 const AlbumCoverCardInEvent = ({ imageUrl, altText }) => {
   return (
     <>
+    
       <div className="container">
         <img src={imageUrl} alt={altText} className="image" />
-
         <div className="overlay">
           <div className="PandU">
-            <PictureAndUsername />
+            <PictureAndUsername textColor={"white"} /> 
           </div>
         </div>
       </div>
+  
     </>
   );
 };
 export default AlbumCoverCardInEvent;
+/* ovde e izgledo na edna cover slika  */
