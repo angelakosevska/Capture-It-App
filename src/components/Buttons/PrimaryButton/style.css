@@ -1,22 +1,17 @@
 .primary-button {
-    background: #7978c4;
-   
-    background-image: linear-gradient(to bottom, #7978c4, #5F5D9C);
-    -webkit-border-radius: 10;
-    -moz-border-radius: 10;
-    border-radius: 10px;
-    -webkit-box-shadow: 2px 3px 12px #E4E4FF;
-    -moz-box-shadow: 2px 3px 12px #E4E4FF;
-    box-shadow: 2px 3px 12px #E4E4FF;
-    font-family: Georgia;
-    color: #ffffff;
-    font-size: 18px;
-    padding: 10px 20px 10px 20px;
-    text-decoration: none;
-}
-
-.primary-button:hover {
+    font-family: arial;
+    color: #FFFFFF ;
+    font-size: 14px;
+    text-shadow: 1px 1px 1px #CFCCFF;
+    box-shadow: 3px 3px 3px #EEE8F9;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 0px solid #3866A3;
     background: #5F5D9C;
-    background-image: linear-gradient(to bottom, #5F5D9C, #7978c4);
-    text-decoration: none;
+    background: linear-gradient(to top, #5F5D9C, #9B98FF);
+}
+.primary-button:hover {
+    color: #FFFFFF ;
+  background: #9B98FF;
+  background: linear-gradient(to top, #9B98FF, #5F5D9C);
 }

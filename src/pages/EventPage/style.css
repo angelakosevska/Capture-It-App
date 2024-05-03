@@ -34,13 +34,14 @@ flex-direction: column;}
   justify-content: center;
 }
 .containerForPictures{
-  width: 65%;
+  width: 70%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
-
-
+.containerForCommentSection{
+  width: 30%;
+}
 /* Extra small devices (phones, 600px and down) *//*
 @media only screen and (max-width: 600px) {
   .albumContainer {

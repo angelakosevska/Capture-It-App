@@ -1,10 +1,10 @@
 import "./style.css";
 
-const PrimaryButton = ({buttonText, })=>{
+const PrimaryButton = ({buttonText, onClick })=>{
 
 return(
     <>
-    <button className="primary-button"> {buttonText}</button>
+    <button className="primary-button" onClick={onClick}> {buttonText}</button>
     
     </>
 )
