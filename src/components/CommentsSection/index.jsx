@@ -1,21 +1,12 @@
-import AddComment from "../AddComment";
+import AddComment from "../CommentsSection/AddComment";
 import "./style.css";
 
-
-
-const CommentsSection =()=>{
-
-
-
-
-return (
-
+const CommentsSection = () => {
+  return (
     <>
-    <AddComment/>
-    
+      <AddComment />
     </>
-)
-
-}
+  );
+};
 
 export default CommentsSection;

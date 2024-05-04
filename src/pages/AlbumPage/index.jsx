@@ -18,7 +18,7 @@ export function Album() {
             <div className="album-grid">
             
               <Like />
-
+<img src="../../Logo/logo1.svg"/>
              
             </div>
             

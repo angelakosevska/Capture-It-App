@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./style.css";
-import PrimaryButton from "../Buttons/PrimaryButton";
+import PrimaryButton from "../../Buttons/PrimaryButton";
 
 const dummyComments = [
   {
@@ -23,8 +23,8 @@ const AddComment = ({ onAddComment }) => {
 
   const onComment = () => {
     const newComment = {
-      id: (comments.length +1).toString(),
-      body: commentBody
+      id: (comments.length + 1).toString(),
+      body: commentBody,
     };
 
     setComments((prev) => [newComment, ...prev]);
@@ -52,4 +52,3 @@ const AddComment = ({ onAddComment }) => {
 };
 
 export default AddComment;
-

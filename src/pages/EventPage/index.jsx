@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { Layout } from "../../UI/Layout.jsx";
 import Like from "../../components/Like/index.jsx";
-import AddComment from "../../components/AddComment/index.jsx";
+
 import "./style.css";
 import LikeCommentSection from "../../components/LikeCommentSection/index.jsx";
-import AlbumCoverCardInEvent from "../../components/AlbumCoverCardInEvent/index.jsx";
+
 import AlbumsInEventSection from "../../components/AlbumsInEventSection/index.jsx";
 
 import EventHeader from "../../components/EventHeader/index.jsx";

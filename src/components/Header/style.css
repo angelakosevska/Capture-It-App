@@ -35,7 +35,7 @@ h1 {
 }
 a {
   text-decoration: none;
-  color:rgb(255, 255, 255)1;
+  color: rgb(255, 255, 255) 1;
 }
 
 @media only screen and (max-width: 1912px) {
@@ -62,4 +62,87 @@ a {
   .navButton {
     width: 40px;
   }
+}
+.Logo {
+  display: flex;
+  align-items: center;
+}
+
+.Logo img {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.menuAndItem {
+  width: 100%;
+}
+
+.SearchBar {
+  margin: auto;
+  width: 45%;
+}
+
+.SearchBar input {
+  width: 100%;
+  height: 36px;
+  padding: 0 10px;
+  border: 1px solid #a72828;
+  border-radius: 4px;
+}
+
+.DropdownMenu {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid #ccc;
+
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 2px 5px rgba(247, 238, 238, 0.1);
+  z-index: 1;
+}
+
+.DropdownItem {
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.DropdownItem:hover {
+  background-color: #bd1d1d;
+}
+
+header {
+  display: grid;
+  box-shadow: 2px 3px 5px 1px rgba(95, 93, 156, 0.51);
+  -webkit-box-shadow: 2px 3px 5px 1px rgba(95, 93, 156, 0.51);
+  -moz-box-shadow: 2px 3px 5px 1px rgba(95, 93, 156, 0.51);
+  z-index: 2;
+  height: 56px;
+  max-width: 100%;
+  background-color: #6a5294;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.navButton {
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 80px;
+  height: 56px;
+  padding: 10px;
+  text-align: center;
+  align-content: center;
+}
+
+h1 {
+  margin: 0;
+}
+a {
+  text-decoration: none;
+  color: rgb(255, 255, 255);
 }
