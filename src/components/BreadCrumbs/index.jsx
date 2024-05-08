@@ -7,19 +7,6 @@ const BreadCrumbs = () => {
 
   return (
     <div className="breadCrumbsContainer">
-      {/*<div className="breadcrumb-div">
-        <Link
-          to="/"
-          className={
-            location.pathname === "/"
-              ? "breadcrumb-active"
-              : "breadcrumb-not-active"
-          }
-        >
-          Home
-        </Link>
-      </div> */}
-      
       <div className="breadcrumb-div">
         <Link
           to="/event"
@@ -53,11 +40,11 @@ const BreadCrumbs = () => {
               : "breadcrumb-not-active"
           }
         >
-          <PictureAndUsername/>
+          <PictureAndUsername />
         </Link>
       </div>
     </div>
   );
-}
+};
 
 export default BreadCrumbs;

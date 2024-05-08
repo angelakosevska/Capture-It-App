@@ -1,13 +1,17 @@
-import { Route, Routes, Outlet } from "react-router-dom";
-import { Home } from "./pages/HomePage/index.jsx";
-import { Profile } from "./pages/profile.jsx";
-import { Album } from "./pages/AlbumPage/index.jsx";
-import { Event } from "./pages/EventPage/index.jsx";
-import Footer from "./components/Footer/index.jsx";
-import Header from "./components/Header/index.jsx";
+
+import { useEffect, useState } from "react";
 import "./App.css";
 import Routing from "./components/Routing/index.jsx";
+import Loading from "./components/Loading/index.jsx";
+
 function App() {
+  const[loading, setLoading]=useState(true)
+  useEffect(()=>{
+    setTimeout(()=> setLoading(false), 3300)
+  },[])
+  if (loading){
+    return(<><div className="loading"><Loading/></div></> )
+  }
   return (
     <><Routing/></>
   );

@@ -3,15 +3,17 @@ import "./style.css";
 
 import CommentInput from "./CommentInput";
 import CommentItem from "./CommentItem";
+import PrimaryButton from "../../Buttons/PrimaryButton";
 
 const dummyComments = [];
 
 const AddComment = (onAddComment) => {
   const [comments, setComments] = useState(dummyComments);
-
+   let commentCount=0;
   const onComment = (newComment) => {
     if (newComment.body.trim()) {
-      setComments((prev) => [newComment, ...prev]);
+      setComments((prev) => [newComment, ...prev]) ;
+      commentCount++;
     } else console.warn("Add a comment ");
   };
 
@@ -25,6 +27,7 @@ const AddComment = (onAddComment) => {
           <CommentItem key={comment.id} comment={comment} />
         ))}
       </div>
+   
     </>
   );
 };

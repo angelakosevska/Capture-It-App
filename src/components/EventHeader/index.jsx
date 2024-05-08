@@ -5,16 +5,20 @@ import SearchAlbums from "./SearchAlbums";
 import InvitePeople from "./InvitePeople";
 
 import "./style.css";
-const EventHeader =() =>{
-
-    return(
-        <>
-        <div className="eventHeader-flex">   <EventName/><EventLocation/></div>
-     
+import EventDescription from "./EventDescription";
+const EventHeader = () => {
+  return (
+    <>    <div className="event-header">
+      <div className="eventHeader-flex">
+        <EventName />
+        <EventLocation />
        
-       
-        </>
-    )
-}
+      </div>
+  
+      <EventDescription />
+      </div>
+    </>
+  );
+};
 
 export default EventHeader;

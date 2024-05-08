@@ -1,5 +1,5 @@
 .breadcrumb-not-active {
-  color: #f20606;
+  color: #c9abe9;
 }
 
 .breadcrumb-active {
@@ -10,14 +10,13 @@
   margin-left: 10px;
   margin-right: 10px;
 }
-.breadCrumbsContainer{
- display: flex;
- align-items: center;
- margin-left: 20px;
+.breadCrumbsContainer {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
 }
 
 .breadcrumb-div {
- 
   display: inline-block;
   margin-right: 10px;
 }

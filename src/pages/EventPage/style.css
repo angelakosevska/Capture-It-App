@@ -1,48 +1,45 @@
-.pageContainer {
-  width: 100%;
-  margin: auto;
-}
-
-.gridContainer {
- 
-}
 
 .eventHeader {
-  width: 100%;
- height: 60px;
- margin-top: 5px;
+  width: auto;
+  height: 60px;
+  margin: 5px 50px 0 50px;
+  background-color: antiquewhite;
 }
 
-.description {
-display: flex;
-flex-direction: column;}
 
-.buttons {}
- 
-.comments {
- 
+
+.buttons {
+  margin-left: 5px;
+
 }
-.addAcomment {
-  
+.buttons-and-albums {
+  width: 75%;
 }
-.AlbumAndComment{
+
+.AlbumAndComment {
   background-color: rgba(255, 201, 181, 0);
   width: 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+  padding: 5px 50px;
 }
-.containerForPictures{
-  width: 70%;
+.containerForPictures {
+  width: 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
-.containerForCommentSection{
-  width: 30%;
+.containerForCommentSection {
+  max-height: 650px;
+  overflow-y: auto;
+
+  font-size: 16px;
+  background-color: antiquewhite;
+  width: 25%;
 }
-/* Extra small devices (phones, 600px and down) *//*
+/* Extra small devices (phones, 600px and down) */ /*
 @media only screen and (max-width: 600px) {
   .albumContainer {
     background-color: red;
@@ -58,7 +55,7 @@ flex-direction: column;}
   }
 }*/
 
-/* Small devices (portrait tablets and large phones, 600px and up) *//*
+/* Small devices (portrait tablets and large phones, 600px and up) */ /*
 @media only screen and (min-width: 600px) {
   .albumContainer {
     background-color: green;
@@ -74,7 +71,7 @@ flex-direction: column;}
   }
 }*/
 
-/* Medium devices (landscape tablets, 768px and up) *//*
+/* Medium devices (landscape tablets, 768px and up) */ /*
 @media only screen and (min-width: 768px) {
   .albumContainer {
     background-color: blue;
@@ -90,7 +87,7 @@ flex-direction: column;}
   }
 }
 */
-/* Large devices (laptops/desktops, 992px and up) *//*
+/* Large devices (laptops/desktops, 992px and up) */ /*
 @media only screen and (min-width: 992px) {
   .albumContainer {
     background-color: orange;
@@ -105,7 +102,7 @@ flex-direction: column;}
   }
 }
 */
-/* Extra large devices (large laptops and desktops, 1200px and up) *//*
+/* Extra large devices (large laptops and desktops, 1200px and up) */ /*
 @media only screen and (min-width: 1200px) {
   .albumContainer {
     background-color: pink;
