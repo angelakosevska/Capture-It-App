@@ -8,10 +8,10 @@
     border-radius: 5px;
     border: 0px solid #3866A3;
     background: #5F5D9C;
-    background: linear-gradient(to top, #5F5D9C, #9B98FF);
+
 }
 .primary-button:hover {
     color: #FFFFFF ;
   background: #9B98FF;
-  background: linear-gradient(to top, #9B98FF, #5F5D9C);
+  background: linear-gradient(to top, #5F5D9C, #9B98FF);
 }

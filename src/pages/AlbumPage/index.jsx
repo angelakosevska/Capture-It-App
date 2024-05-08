@@ -1,10 +1,9 @@
-import { Layout } from "../../UI/Layout.jsx";
-import "./style.css";
 
-import PictureAndUsername from "../../components/PictureAndUsername/index.jsx";
+import "./style.css";
+import CaptureItAnimation from "../../components/Animation/CaptureItAnimation/index.jsx";
 import Breadcrumbs from "../../components/BreadCrumbs/index.jsx";
 import  Like  from "../../components/Like/index.jsx";
-import AlbumCoverCardInEvent from "../../components/AlbumCoverCardInEvent/index.jsx";
+
 
 export function Album() {
   return (
@@ -18,10 +17,11 @@ export function Album() {
             <div className="album-grid">
             
               <Like />
-<img src="../../Logo/logo1.svg"/>
+
              
             </div>
             
+            <CaptureItAnimation/>
        
           </main>
         </body>
