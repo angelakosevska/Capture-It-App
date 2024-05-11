@@ -1,10 +1,10 @@
 import "./style.css";
 
-const PrimaryButton = ({ buttonText, onClick, buttonWidth, buttonIcon, buttonHeight }) => {
+const IconButton = ({ buttonText, onClick, buttonWidth, buttonIcon, buttonHeight }) => {
   return (
     <>
       <button
-        className="primary-button"
+        className="icon-button"
         onClick={onClick}
         style={{ width: buttonWidth, height: buttonHeight}}
       >
@@ -15,4 +15,4 @@ const PrimaryButton = ({ buttonText, onClick, buttonWidth, buttonIcon, buttonHei
   );
 };
 
-export default PrimaryButton;
+export default IconButton;

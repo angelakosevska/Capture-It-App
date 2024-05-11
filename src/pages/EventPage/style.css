@@ -1,43 +1,82 @@
+.all-in-events {
+  background-color: rgba(188, 143, 143, 0);
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 10px auto;
+  justify-content: center;
+  align-content: flex-start;
+}
+
+.name-and-events {
+  width: 75%;
+  height: 600px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background-color: rgba(127, 255, 212, 0);
+  margin: 0;
+}
 
 .eventHeader {
-  width: auto;
-  height: 60px;
-  margin: 5px 50px 0 50px;
-  background-color: antiquewhite;
-}
-
-
-
-.buttons {
-  margin-left: 5px;
-
-}
-.buttons-and-albums {
-  width: 75%;
-}
-
-.AlbumAndComment {
-  background-color: rgba(255, 201, 181, 0);
   width: 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
-  padding: 5px 50px;
+  background-color: rgba(250, 235, 215, 0);
+
+  margin: 5px 20px 5px 0px;
 }
 .containerForPictures {
   width: 100%;
+  max-height: 510px;
+  overflow-y: auto;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  margin: 5px 20px 5px 0px;
+  background-color: rgba(250, 235, 215, 0);
 }
-.containerForCommentSection {
-  max-height: 650px;
-  overflow-y: auto;
 
-  font-size: 16px;
-  background-color: antiquewhite;
+/* desno>>*/
+.likes-comments-description {
+  background-color: rgba(95, 158, 160, 0);
   width: 25%;
+}
+.event-description {
+  width: 100%;
+  height: auto;
+}
+
+.counters {
+  display: flex;
+  height: 40px;
+  border-top: 1px solid var(--primaryColor);
+  border-bottom: 1px solid var(--primaryColor);
+  border-radius: 5px;
+  margin: 5px 0px;
+}
+.counter {
+  width: 50%;
+  height: 100%;
+  text-align: center;
+  padding: 10px 10px;
+}
+.like-counter {
+  border-right: 0.5px solid var(--primaryColor);
+}
+.comment-counter {
+  border-left: 0.5px solid var(--primaryColor);
+}
+
+.containerForCommentSection {
+  max-height: 600px;
+  font-size: 16px;
+  background-color: rgba(250, 235, 215, 0);
+  width: 100%;
+  margin-top: 5px;
 }
 /* Extra small devices (phones, 600px and down) */ /*
 @media only screen and (max-width: 600px) {

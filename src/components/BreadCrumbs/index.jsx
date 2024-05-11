@@ -40,7 +40,7 @@ const BreadCrumbs = () => {
               : "breadcrumb-not-active"
           }
         >
-          <PictureAndUsername />
+          <PictureAndUsername ppDimension={"30px"} username={"@angela234"} />
         </Link>
       </div>
     </div>

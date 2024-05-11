@@ -1,11 +1,10 @@
 .eventHeader-flex {
+    width: 100%;
+    padding: 5px;
     display: flex;
     flex-direction: row;
     align-items: center;
-    height: 60px;
+    height: 70px;
  font-size: large;
-}
 
-.event-header{
-    
 }

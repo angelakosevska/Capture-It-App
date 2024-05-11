@@ -7,7 +7,7 @@ const EventDescription =()=>{
 
 return (
     <>
-            <div className="description">Best birthday ever 💗</div>
+            <div className="description">Best birthday ever 💗I had so much fun thank you everyone!</div>
 
     </>
 )

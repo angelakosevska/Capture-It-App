@@ -1,9 +1,12 @@
+import IconButton from "../../../Buttons/IconButton";
+import NoBgButton from "../../../Buttons/NoBGButton";
 import PrimaryButton from "../../../Buttons/PrimaryButton";
 import "./style.css";
-
+import SendIcon from '@mui/icons-material/Send';
 import { useState } from "react";
 
-const CommentInput = ({ onComment, placeholderInput }) => {
+
+const CommentInput = ({ onComment, placeholderInput, buttonText, buttonIcon, buttonWidth, buttonHeight }) => {
   const [commentBody, setCommentBody] = useState("");
 
   return (
@@ -16,12 +19,15 @@ const CommentInput = ({ onComment, placeholderInput }) => {
         type="text"
       />
 
-      <PrimaryButton
-        buttonText="Comment"
-        buttonWidth="150px"
+      <IconButton
+        buttonText={buttonText}
+        buttonIcon={buttonIcon}
+        buttonWidth={buttonWidth}
+        buttonHeight={buttonHeight}
         onClick={() => {
           onComment({ body: commentBody, comments: [] });
-          setCommentBody("");
+          setCommentBody("")
+
         }}
       />
     </>
@@ -29,3 +35,4 @@ const CommentInput = ({ onComment, placeholderInput }) => {
 };
 
 export default CommentInput;
+/* ova e glavniot inpuut*/

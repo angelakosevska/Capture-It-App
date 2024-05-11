@@ -6,7 +6,7 @@ const EventName = () => {
   return (
     <>
       <div className="eventName">
-        <PictureAndUsername textColor={"black"} />'s birthday
+        <PictureAndUsername textColor={"black"} ppDimension={"40px"} username={"@Abgela"} />'s birthday
       </div>
     </>
   );

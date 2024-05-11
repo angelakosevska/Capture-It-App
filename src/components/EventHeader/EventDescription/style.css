@@ -1,8 +1,12 @@
-.description
-{
-    display: flex;
-    flex-direction: column;
-    border: 1px solid red;
-    padding: 5px;
-    margin: 5px 0;
+.description {
+  display: flex;
+  flex-direction: column;
+background-color: #fafafb;
+  overflow-wrap: break-word;
+  border: 0px solid #ff7e4f;
+  box-shadow: 4px 1px 2px 2px var(--primaryColor);
+  height: 70px;
+  padding: 10px;
+  margin: 5px 0px 5px 0px;
+
 }
