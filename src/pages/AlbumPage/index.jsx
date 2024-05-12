@@ -1,24 +1,27 @@
 import "./style.css";
-import CaptureItAnimation from "../../components/Animation/CaptureItAnimation/index.jsx";
 import Breadcrumbs from "../../components/BreadCrumbs/index.jsx";
-import Like from "../../components/Like/index.jsx";
-import AlbumsInEventSection from "../../components/AlbumsInEventSection/index.jsx";
+import PicturesInAlbumSection from "../../components/AlbumPagePictures/PicturesInAlbumSection/index.jsx";
 
 export function Album() {
   return (
     <>
-      <body>
-        <main>
-          <div className="BreadC-position">
-            <Breadcrumbs />
-          </div>
-          <div className="pictures-in-album-gallery">
-            <AlbumsInEventSection />
-          </div>
-        </main>
-      </body>
+      <div className="breadCrumbs-counters">
+        <div className="BreadC-position">
+          <Breadcrumbs />
+        </div>
+        <div className="counters">
+          <div className="like-counter counter"> 22 likes</div>
+          <div className="comment-counter counter">15 comments</div>
+        </div>
+      </div>
+
+      <div className="all-in-albums">
+        <div className="containerForPictures">
+          <PicturesInAlbumSection picEHeight={"300px"} picEWidth={"225px"} />
+        </div>
+      </div>
     </>
   );
 }
 export default Album;
-//od slikite se ukluchva slikite so komentarite
+//od slikite se ukluchva slika so komentarite

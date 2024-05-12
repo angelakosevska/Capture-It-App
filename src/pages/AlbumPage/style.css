@@ -1,26 +1,67 @@
-
-main {
-
-  display: block;
-  flex-wrap: wrap;
+.breadCrumbs-counters{
+  display: flex;
   flex-direction: column;
-  padding: 0;
-  margin: auto;
-  max-width: 100%;
-}
-.BreadC-position {
-  width: auto;
-  margin: 0 50px;
 }
 
-.album-grid {
-  background-color: rgb(201, 255, 249);
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  width: 1000px;
-  margin: auto;
-  padding: 0;
+
+.BreadC-position {
+  width: 70%;
+  margin: 10px 0;
 }
+.counters {
+  width: 30%;
+  display: flex;
+  height: 40px;
+  border-top: 1px solid var(--primaryColor);
+  border-bottom: 1px solid var(--primaryColor);
+  border-radius: 5px;
+  margin: 5px 0px;
+}
+.counter {
+  width: 50%;
+  height: 100%;
+  text-align: center;
+  padding: 10px 10px;
+}
+.like-counter {
+  border-right: 0.5px solid var(--primaryColor);
+}
+.comment-counter {
+  border-left: 0.5px solid var(--primaryColor);
+}
+.all-in-albums {
+  background-color: rgba(188, 143, 143, 0);
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 10px auto;
+  justify-content: center;
+  align-content: flex-start;
+}
+.name-and-pictures {
+  width: 100%;
+  height: 450px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background-color: rgba(127, 255, 212, 0);
+  margin: 0;
+}
+
+.containerForPictures {
+  width: 100%;
+  max-height: 510px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 5px 20px 5px 0px;
+  background-color: rgba(250, 235, 215, 0);
+}
+
+
 
 
 
@@ -37,7 +78,6 @@ main {
 }
 
 @media only screen and (min-width: 1200px) {
- 
 }
 
 /* 4*380+60(3*gap)/

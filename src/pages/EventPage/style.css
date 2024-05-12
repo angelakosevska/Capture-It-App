@@ -10,7 +10,7 @@
   align-content: flex-start;
 }
 
-.name-and-events {
+.name-and-albums {
   width: 75%;
   height: 600px;
   display: flex;
@@ -29,7 +29,7 @@
 
   margin: 5px 20px 5px 0px;
 }
-.containerForPictures {
+.containerForAlbums {
   width: 100%;
   max-height: 510px;
   overflow-y: auto;
@@ -38,6 +38,7 @@
   flex-wrap: wrap;
   margin: 5px 20px 5px 0px;
   background-color: rgba(250, 235, 215, 0);
+
 }
 
 /* desno>>*/
@@ -50,7 +51,7 @@
   height: auto;
 }
 
-.counters {
+.counters-inEvent {
   display: flex;
   height: 40px;
   border-top: 1px solid var(--primaryColor);
@@ -58,7 +59,7 @@
   border-radius: 5px;
   margin: 5px 0px;
 }
-.counter {
+.counter-event {
   width: 50%;
   height: 100%;
   text-align: center;
