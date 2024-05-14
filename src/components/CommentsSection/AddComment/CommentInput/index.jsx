@@ -1,8 +1,7 @@
 import IconButton from "../../../Buttons/IconButton";
-import NoBgButton from "../../../Buttons/NoBGButton";
-import PrimaryButton from "../../../Buttons/PrimaryButton";
+
 import "./style.css";
-import SendIcon from '@mui/icons-material/Send';
+
 import { useState } from "react";
 
 

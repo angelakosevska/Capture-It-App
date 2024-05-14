@@ -1,6 +1,7 @@
 .breadCrumbs-counters{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
 }
 
 
@@ -15,7 +16,7 @@
   border-top: 1px solid var(--primaryColor);
   border-bottom: 1px solid var(--primaryColor);
   border-radius: 5px;
-  margin: 5px 0px;
+  margin: 5px 5px;
 }
 .counter {
   width: 50%;

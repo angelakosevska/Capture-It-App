@@ -3,6 +3,9 @@ import AlbumsInEventSection from "../../components/EventPageAlbums/AlbumsInEvent
 import EventHeader from "../../components/EventHeader/index.jsx";
 import CommentsSection from "../../components/CommentsSection/index.jsx";
 import EventDescription from "../../components/EventHeader/EventDescription/index.jsx";
+import PrimaryButton from "../../components/Buttons/PrimaryButton/index.jsx";
+import SecondaryButton from "../../components/Buttons/SecondaryButton/index.jsx";
+import SearchIcon from "@mui/icons-material/Search";
 
 export function Event() {
   return (
@@ -11,6 +14,21 @@ export function Event() {
         <main className="name-and-albums">
           <div className="eventHeader">
             <EventHeader />
+            <PrimaryButton
+              buttonWidth={"150px"}
+              buttonHeight={"40px"}
+              buttonText={"Invite People"}
+            />
+            <SecondaryButton
+              buttonWidth={"150px"}
+              buttonHeight={"40px"}
+              buttonText={"Create Album"}
+            />
+            <SecondaryButton
+              buttonHeight={"40px"}
+              buttonWidth={"40px"}
+              buttonIcon={<SearchIcon />}
+            />
           </div>
           <div className="containerForAlbums">
             <AlbumsInEventSection picEHeight={"225px"} picEWidth={"225px"} />

@@ -10,5 +10,5 @@
 }
 .primary-button:hover {
   color: #ffffff;
-  background: linear-gradient(to top, var(--primaryColor), #ffc3ad);
+  background: linear-gradient(to top, var(--primaryColor), #9d9aee);
 }

@@ -1,0 +1,15 @@
+.secondary-button {
+    color: #FF7E4F;
+    font-size: 14px;
+   
+    border-radius: 5px;
+    border: 2px solid #FF7E4F;
+    background: none;
+    margin: 0 2px;
+    align-items: center;
+  }
+  .secondary-button:hover {
+    border: 0px;
+    color: #ffffff;
+    background: linear-gradient(to top, #FF7E4F, #ffc3ad);
+  }

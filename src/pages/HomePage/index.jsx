@@ -1,4 +1,5 @@
 
+import SecondaryButton from "../../components/Buttons/SecondaryButton";
 import "./style.css";
 import { Link } from "react-router-dom";
 export function Home() {
@@ -7,6 +8,13 @@ export function Home() {
     
       <div>Events preview</div>
       <Link to="/event">Event 1</Link>
+
+      <SecondaryButton
+      buttonText={"Probno"}
+      buttonWidth={"100px"}
+      buttonHeight={"40px"}
+      buttonColor={"#FF7E4F"}
+      />
     </>
   );
 }

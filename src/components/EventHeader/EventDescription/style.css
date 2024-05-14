@@ -3,10 +3,11 @@
   flex-direction: column;
 background-color: #fafafb;
   overflow-wrap: break-word;
-  border: 0px solid #ff7e4f;
-  box-shadow: 4px 1px 2px 2px var(--primaryColor);
+  border-top: 1px solid var(--primaryColor);
+  border-bottom: 1px solid var(--primaryColor);
+  
   height: 70px;
   padding: 10px;
-  margin: 5px 0px 5px 0px;
-
+  margin: 5px 1px 5px 0px;
+  border-radius: 5px;
 }
