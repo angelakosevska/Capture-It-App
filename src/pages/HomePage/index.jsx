@@ -1,12 +1,15 @@
-
+import Modalche from "../../components/Modal";
 import "./style.css";
 import { Link } from "react-router-dom";
 export function Home() {
   return (
     <>
-    
-      <div>Events preview</div>
-      <Link to="/event">Event 1</Link>
+      <div className="home-all">
+        <div>Events preview</div>
+        <Link to="/event">Event 1</Link>
+        <Modalche />
+       
+      </div>
     </>
   );
 }

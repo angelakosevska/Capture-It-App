@@ -4,3 +4,12 @@
 .albumPic{
     background-color: rgb(132, 141, 228);
 }
+.Modalche{
+    width: 100%;
+}
+.comments-modal{
+    width: 30%;
+}
+.home-all{
+    display: flex;
+}

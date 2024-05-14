@@ -1,17 +1,14 @@
 .userInfo {
   display: flex;
   align-content: center;
-margin: 0;
+  margin: 0;
 }
 .profilePic img {
-  
   border-radius: 50px;
-
 }
 .username {
   margin: 0px 0px 0px 10px;
   align-content: center;
 }
-.profilePic{
-
+.profilePic {
 }
