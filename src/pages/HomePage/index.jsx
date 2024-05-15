@@ -1,4 +1,4 @@
-
+import Modalche from "../../components/Modal";
 import SecondaryButton from "../../components/Buttons/SecondaryButton";
 import "./style.css";
 import { Link } from "react-router-dom";
@@ -6,7 +6,6 @@ export function Home() {
   return (
     <>
     
-      <div>Events preview</div>
       <Link to="/event">Event 1</Link>
 
       <SecondaryButton
@@ -15,6 +14,12 @@ export function Home() {
       buttonHeight={"40px"}
       buttonColor={"#FF7E4F"}
       />
+      <div className="home-all">
+  
+        <Link to="/event">Event 1</Link>
+        <Modalche />
+       
+      </div>
     </>
   );
 }

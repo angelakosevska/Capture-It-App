@@ -1,0 +1,15 @@
+.button-modal{
+    align-self: flex-end;
+}
+
+.Modalche{
+ background-color: rgb(217, 126, 8);
+ display: flex;
+}
+.picture-modal{
+width: 70%;
+background-color: antiquewhite;
+}
+.comments-modal{
+
+}
