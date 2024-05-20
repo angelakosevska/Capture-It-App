@@ -1,12 +1,11 @@
 import "./style.css";
 
 
-const EventLocation = () => {
+const EventLocation = ({event}) => {
   return (
     <>
       <div className="event-location">
-        <span class="material-symbols-outlined">location_on</span> Bitola,
-        Bitola, Macedonia
+        <span class="material-symbols-outlined">location_on</span> {event.location}
       </div>
     </>
   );

@@ -6,8 +6,49 @@ import EventDescription from "../../components/EventHeader/EventDescription/inde
 import PrimaryButton from "../../components/Buttons/PrimaryButton/index.jsx";
 import SecondaryButton from "../../components/Buttons/SecondaryButton/index.jsx";
 import SearchIcon from "@mui/icons-material/Search";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 export function Event() {
+  const { id } = useParams();
+  const [event, setEvent] = useState({
+    location: "",
+    username: "",
+    eventProfilePic: "",
+  });
+  // const [eventLocation, setEventLocation]=useState("");
+  // const [eventUsername, setEventUsername]=useState("");
+  // const [eventProfilePic, setEventProfilePic]=useState("");
+
+  const fetchEvent = async () => {
+    try {
+      const response = await axios.get(
+        "https://captureit.azurewebsites.net/api/event/${id}",
+        {
+          headers: {
+            Authorization:
+              "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMCIsImV4cCI6MTcxNjI0NzA4Nn0.lrLhozwuxbuWngNAMaMnTr6h4i8bZ87Gawh_6lUTs-0",
+          },
+        }
+      );
+      setEvent({
+        location: response.data.location,
+        username: response.data.username,
+        eventProfilePic: response.data.eventProfilePic,
+      });
+
+      // setEventLocation(response.data.location);
+      // setEventUsername(response.data.username);
+      // setEventProfilePic(response.data.eventProfilePic);
+    } catch (error) {
+      console.error("error fetching data: ", error);
+    }
+  };
+  useEffect(() => {
+    fetchEvent();
+  }, [id]);
+
   return (
     <>
       <div className="all-in-events">

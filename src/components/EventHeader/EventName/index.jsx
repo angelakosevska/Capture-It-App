@@ -1,12 +1,12 @@
 import "./style.css";
 import PictureAndUsername from "../../PictureAndUsername";
 
-const EventName = () => {
+const EventName = ({event}) => {
 
   return (
     <>
       <div className="eventName">
-        <PictureAndUsername textColor={"black"} ppDimension={"40px"} username={"@Abgela"} />'s birthday
+        <PictureAndUsername textColor={"black"} ppDimension={"40px"} event={event} />'s birthday
       </div>
     </>
   );
