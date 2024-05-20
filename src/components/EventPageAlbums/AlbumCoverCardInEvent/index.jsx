@@ -8,6 +8,7 @@ const AlbumCoverCardInEvent = ({
   picHeight,
   username,
   albumName,
+  profilePic
 }) => {
   return (
     <>
@@ -19,6 +20,7 @@ const AlbumCoverCardInEvent = ({
               textColor={"rgb(168, 166, 166)"}
               ppDimension={"30px"}
               username={username}
+              imageUrl={profilePic}
             />
             <div className="album-name">{albumName}</div>
           </div>

@@ -1,4 +1,5 @@
 //ova e overlay za slikite vo album i ima na hover samo koj ja postira slikata
+import { Link } from "react-router-dom";
 import PictureAndUsername from "../../PictureAndUsername";
 import "./style.css";
 
@@ -18,6 +19,7 @@ const PictureCoverCardInAlbum = ({
       >
         <img src={imageUrl} alt={altText} className="picture" />
         <div className="overlay-pic">
+
           <div className="PandU-pic">
             <PictureAndUsername
               textColor={"black"}
