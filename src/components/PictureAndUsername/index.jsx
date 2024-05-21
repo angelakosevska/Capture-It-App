@@ -11,12 +11,12 @@ const PictureAndUsername = ({ textColor, ppDimension, event, album }) => {
           style={{ width: ppDimension, height: ppDimension }}
         >
           <img
-            src={event.profilePic}
+            //src={event.profilePic}
             alt="blueman"
           />
         </div>
         <div className="username" style={{ color: textColor}}>
-          {event.username}
+     sashdasd
         </div>
       </div>
     </>

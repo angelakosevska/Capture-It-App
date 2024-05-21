@@ -8,9 +8,12 @@ const PictureCoverCardInAlbum = ({
   altText,
   picWidth,
   picHeight,
-  username,
-  albumName,
+
 }) => {
+
+
+
+  
   return (
     <>
       <div
@@ -19,12 +22,10 @@ const PictureCoverCardInAlbum = ({
       >
         <img src={imageUrl} alt={altText} className="picture" />
         <div className="overlay-pic">
-
           <div className="PandU-pic">
             <PictureAndUsername
               textColor={"black"}
               ppDimension={"30px"}
-              username={username}
             />
           </div>
         </div>

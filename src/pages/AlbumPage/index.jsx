@@ -2,6 +2,8 @@ import "./style.css";
 import Breadcrumbs from "../../components/BreadCrumbs/index.jsx";
 import PicturesInAlbumSection from "../../components/AlbumPagePictures/PicturesInAlbumSection/index.jsx";
 import PrimaryButton from "../../components/Buttons/PrimaryButton/index.jsx";
+import Axios from "axios";
+import { useState } from "react";
 
 export function Album() {
   return (
@@ -15,14 +17,14 @@ export function Album() {
           <div className="comment-counter counter">15 comments</div>
         </div>
         <div>
-        <PrimaryButton
-          buttonWidth={"150px"}
-          buttonHeight={"40px"}
-          buttonText={"Invite People"}
-        />
+          <PrimaryButton
+            buttonWidth={"150px"}
+            buttonHeight={"40px"}
+            buttonText={"Invite People"}
+          />
+        </div>
       </div>
-      </div>
- 
+
       <div className="all-in-albums">
         <div className="containerForPictures">
           <PicturesInAlbumSection picEHeight={"300px"} picEWidth={"225px"} />

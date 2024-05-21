@@ -12,45 +12,48 @@ import axios from "axios";
 
 export function Event() {
   const { id } = useParams();
-  const [event, setEvent] = useState({
-    location: "",
-    username: "",
-    eventProfilePic: "",
-  });
-  // const [eventLocation, setEventLocation]=useState("");
-  // const [eventUsername, setEventUsername]=useState("");
-  // const [eventProfilePic, setEventProfilePic]=useState("");
+  const [event, setEvent] = useState("");
+  const [eventLocation, setEventLocation] = useState("");
+  const [eventUsername, setEventUsername] = useState("");
+  const [eventProfilePic, setEventProfilePic] = useState("");
+  const [eventID, setEventId] = useState("");
+const[albums, setAlbums]=useState([]);
 
-  const fetchEvent = async () => {
+  const fetchEventAlbums = () => {
     try {
-      const response = await axios.get(
-        "https://captureit.azurewebsites.net/api/event/${id}",
+      const res = axios.get(
+        `https://captureit.azurewebsites.net/api/album?createdAt=2024-05-11&eventId=22`,
         {
           headers: {
             Authorization:
-              "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMCIsImV4cCI6MTcxNjI0NzA4Nn0.lrLhozwuxbuWngNAMaMnTr6h4i8bZ87Gawh_6lUTs-0",
+              "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMCIsImV4cCI6MTcxNjMxMjA4Mn0.A962dK8XbLpnMzXUsnSDN7v_PaQdsLQBW7Rhf83uHLY",
+              
           },
         }
-      );
-      setEvent({
-        location: response.data.location,
-        username: response.data.username,
-        eventProfilePic: response.data.eventProfilePic,
-      });
+      ).then((res)=>{
+        console.log(res.data);
+      })
+    
 
       // setEventLocation(response.data.location);
       // setEventUsername(response.data.username);
       // setEventProfilePic(response.data.eventProfilePic);
+      /*
+        setEventLocation(response.data.location);
+      setEventUsername(response.data.username);
+      setEventProfilePic(response.data.eventProfilePic);
+      setEventId(response.data.eventId);*/
     } catch (error) {
       console.error("error fetching data: ", error);
     }
   };
   useEffect(() => {
-    fetchEvent();
-  }, [id]);
+    fetchEventAlbums();
+  }, []);
 
   return (
     <>
+    <div> {albums}</div>
       <div className="all-in-events">
         <main className="name-and-albums">
           <div className="eventHeader">
