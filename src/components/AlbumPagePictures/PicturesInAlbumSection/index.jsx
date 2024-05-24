@@ -3,34 +3,23 @@ import "./style.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const PicturesInAlbumSection = ({ picEWidth, picEHeight }) => {
-  const [pictures, setPictures] = useState([]);
-  const [pictureId, setPIctureId]=useState("");
-  useEffect(()=>{
-    axios
-    .get(
-      `https://captureit.azurewebsites.net/api/picture?createdAt=2024-05-11&albumId=${pictureId}`,
-      {
-        headers: {
-          Authorization:
-            "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMCIsImV4cCI6MTcxNjMxMDIzN30.pYvjwK4Ftl4iXthZ2c2pKB4mGp9I-hjE18IsNrWEKrY",
-        },
-      }
-    )
-    .then((res) => {
-      setPictures(res.data);
-    });
-  },[]);
-  
-
-
+const PicturesInAlbumSection = ({
+  picEWidth,
+  picEHeight,
+  slikaA,
+  imageUrl,
+  username,
+  onClick
+}) => {
   return (
     <>
       <PictureCoverCardInAlbum
-        imageUrl={pictures.imageUrl}
+        slika={slikaA}
         picWidth={picEWidth}
         picHeight={picEHeight}
-        //albumName={pictureInAlbum.albumName}
+        imageUrl={imageUrl}
+        username={username}
+        onClick={onClick}
       />
     </>
   );

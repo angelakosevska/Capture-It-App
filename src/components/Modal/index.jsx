@@ -5,6 +5,8 @@ import PictureContainer from "../PictureContainer/index";
 import "./style.css";
 import NoBgButton from "../Buttons/NoBGButton";
 import CloseIcon from "@mui/icons-material/Close";
+import PrimaryButton from "../Buttons/PrimaryButton";
+import SecondaryButton from "../Buttons/SecondaryButton";
 
 Modal.setAppElement("#root");
 const customStyles = {
@@ -18,41 +20,45 @@ const customStyles = {
   },
 };
 
-const Modalche = () => {
-  const [modalIsOpen, setIsOpen] = useState(false);
+const Modalche = ({imageUrl, onClose}) => {
 
-  function openModal() {
-    setIsOpen(true);
-  }
-  function closeModal() {
-    setIsOpen(false);
-  }
 
   return (
     <>
       <div>
-        <NoBgButton
-          className="button-modal"
-          onClick={openModal}
-          buttonText={"open"}
-          buttonHeight={"30px"}
-          buttonWidth={"60px"}
-        />
+     
         <Modal
-          isOpen={modalIsOpen}
-          onRequestClose={closeModal}
+          isOpen={!!imageUrl}
+          onRequestClose={onClose}
           style={customStyles}
           contentLabel="Example Modal"
         >
-          <NoBgButton onClick={closeModal} buttonIcon={<CloseIcon />}>
-            close
-          </NoBgButton>
-          <div className="Modalche">
-            <div className="picture-modal">
-              <PictureContainer />
+          <div className="modal-content">
+            <div className="close-modal-button">
+              <NoBgButton onClick={onClose} buttonIcon={<CloseIcon />}>
+                close
+              </NoBgButton>
             </div>
-            <div className="comments-modal">
-              <CommentsSection />
+            <div className="Modalche">
+              <div className="picture-modal">
+                <PictureContainer imageUrl={imageUrl}/>
+              </div>
+              <div className="comments-modal">
+                <div> Picture descriptin</div>
+                <div className="modal-buttons">
+                  <SecondaryButton
+                    buttonHeight={"40px"}
+                    buttonWidth={"40%"}
+                    buttonText={"like"}
+                  />
+                  <SecondaryButton
+                    buttonHeight={"40px"}
+                    buttonWidth={"40%"}
+                    buttonText={"addcomment"}
+                  />
+                </div>
+                <CommentsSection />
+              </div>
             </div>
           </div>
         </Modal>

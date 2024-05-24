@@ -3,13 +3,13 @@ import EventLocation from "./EventLocation/index";
 
 import "./style.css";
 
-const EventHeader = ({event}) => {
+const EventHeader = () => {
   return (
     <>
      
         <div className="eventHeader-flex">
-          <EventName event={event} />
-          <EventLocation event={event}/>
+          <EventName />
+          <EventLocation/>
         </div>
  
     </>

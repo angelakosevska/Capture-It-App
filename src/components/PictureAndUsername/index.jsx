@@ -1,6 +1,6 @@
 import "./style.css";
 
-const PictureAndUsername = ({ textColor, ppDimension, event, album }) => {
+const PictureAndUsername = ({ textColor, ppDimension, imageUrl, username}) => {
 
 
   return (
@@ -11,12 +11,12 @@ const PictureAndUsername = ({ textColor, ppDimension, event, album }) => {
           style={{ width: ppDimension, height: ppDimension }}
         >
           <img
-            //src={event.profilePic}
+            src={imageUrl}
             alt="blueman"
           />
         </div>
         <div className="username" style={{ color: textColor}}>
-     sashdasd
+     {username}
         </div>
       </div>
     </>
