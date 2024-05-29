@@ -1,101 +1,65 @@
+import axios from "axios";
 import AlbumCoverCardInEvent from "../AlbumCoverCardInEvent";
 
 import "./style.css";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
-const AlbumsInEventSection = ({ picEWidth, picEHeight }) => {
-  const albumCoverPhotos = [
-    {
-      key: "1",
-      src: "https://images.unsplash.com/reserve/LJIZlzHgQ7WPSh5KVTCB_Typewriter.jpg?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8d2hpdGUlMjBwaWN0dXJlJTIwY292ZXJ8ZW58MHx8MHx8fDA%3D",
-      alt: "slika1",
-      username: "@angela1234",
-      albumName: "ajshdfkaa",
-    },
-    {
-      key: "2",
-      src: "https://images.unsplash.com/photo-1494403687614-8ca3e13f154f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8d2hpdGUlMjBwaWN0dXJlJTIwY292ZXJ8ZW58MHx8MHx8fDA%3D",
-      alt: "slika3",
-      username: "@angela134",
-      albumName: "ajshdfkaa",
-    },
-    {
-      key: "3",
-      src: "https://images.unsplash.com/photo-1489769002049-ccd828976a6c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHdoaXRlJTIwcGljdHVyZSUyMGNvdmVyfGVufDB8fDB8fHww",
-      alt: "slika4",
-      username: "@andrea1234",
-      albumName: "ajshdfkaa",
-    },
-    {
-      key: "4",
-      src: "https://images.unsplash.com/photo-1504051771394-dd2e66b2e08f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fHdoaXRlJTIwcGljdHVyZSUyMGNvdmVyfGVufDB8fDB8fHww",
-      alt: "slika5",
-      username: "@magi13423",
-      albumName: "ajshdfkaa",
-    },
-    {
-      key: "5",
-      src: "https://images.unsplash.com/reserve/LJIZlzHgQ7WPSh5KVTCB_Typewriter.jpg?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8d2hpdGUlMjBwaWN0dXJlJTIwY292ZXJ8ZW58MHx8MHx8fDA%3D",
-      alt: "slika1",
-      username: "@andrea24325",
-      albumName: "ajshdfkaa",
-    },
-    {
-      key: "6",
-      src: "https://images.unsplash.com/photo-1494403687614-8ca3e13f154f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8d2hpdGUlMjBwaWN0dXJlJTIwY292ZXJ8ZW58MHx8MHx8fDA%3D",
-      alt: "slika3",
-      username: "@magi265643",
-      albumName: "ajshdfkaa",
-    },
-    {
-      key: "6",
-      src: "https://images.unsplash.com/reserve/LJIZlzHgQ7WPSh5KVTCB_Typewriter.jpg?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8d2hpdGUlMjBwaWN0dXJlJTIwY292ZXJ8ZW58MHx8MHx8fDA%3D",
-      alt: "slika1",
-      username: "@angela1234",
-      albumName: "ajshdfkaa",
-    },
-    {
-      key: "7",
-      src: "https://images.unsplash.com/photo-1494403687614-8ca3e13f154f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8d2hpdGUlMjBwaWN0dXJlJTIwY292ZXJ8ZW58MHx8MHx8fDA%3D",
-      alt: "slika3",
-      username: "@angela1234",
-      albumName: "ajshdfkaa",
-    },
-    {
-      key: "8",
-      src: "https://images.unsplash.com/photo-1489769002049-ccd828976a6c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHdoaXRlJTIwcGljdHVyZSUyMGNvdmVyfGVufDB8fDB8fHww",
-      alt: "slika4",
-      username: "@angela1234",
-      albumName: "ajshdfkaa",
-    },
-    {
-      key: "4",
-      src: "https://images.unsplash.com/photo-1504051771394-dd2e66b2e08f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fHdoaXRlJTIwcGljdHVyZSUyMGNvdmVyfGVufDB8fDB8fHww",
-      alt: "slika5",
-      username: "@angela1234",
-      albumName: "ajshdfkaa",
-    },
-    {
-      key: "5",
-      src: "https://images.unsplash.com/reserve/LJIZlzHgQ7WPSh5KVTCB_Typewriter.jpg?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8d2hpdGUlMjBwaWN0dXJlJTIwY292ZXJ8ZW58MHx8MHx8fDA%3D",
-      alt: "slika1",
-      username: "@angela1234",
-      albumName: "ajshdfkaa",
-    },
-  ];
+const AlbumsInEventSection = ({ picEWidth, picEHeight, eventId }) => {
+  //tuka da get album i kje gi imam site
+  const [error, setError] = useState([]);
+  const [albums, setAlbums] = useState([]);
+  const navigate = useNavigate();
+
+  const fetchAlbumsInEvent = async () => {
+    //const {eventId}= useParams;
+    try {
+      const res = await axios
+        .get(
+          `https://captureit.azurewebsites.net/api/album?createdAt=2024-05-11&eventId=${eventId}`,
+          {
+            headers: {
+              Authorization:
+                "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMCIsImV4cCI6MTcxNzAwMjM2MX0.BTHXpMZXwgbNjqYnBfrafF0_Iap8Vt66c-2DkNXCVT0",
+            },
+          }
+        )
+        .then((res) => {
+          setAlbums(res.data);
+          console.log(res.data);
+        });
+    } catch (error) {
+      setError(error);
+      <h1>error</h1>;
+      console.error("error fetching data: ", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAlbumsInEvent();
+  }, []);
+
+  const handleAlbumClick = (albumId) => {
+    navigate(`/album/${albumId}`);
+  };
 
   return (
     <>
-      <AlbumCoverCardInEvent
-        imageUrl={albumCoverPhotos.src}
-        altText={albumCoverPhotos.alt}
-        picWidth={picEWidth}
-        picHeight={picEHeight}
-        username={albumCoverPhotos.username}
-        albumName={albumCoverPhotos.albumName}
-      />
+      {albums.map((album) => (
+        <AlbumCoverCardInEvent
+          //imageUrl={album.src}
+          altText={album.alt}
+          picWidth={picEWidth}
+          picHeight={picEHeight}
+          username={album.creator.username}
+          profilePic={album.creator.profilePicture}
+          albumName={album.albumName}
+          onClick={() => {handleAlbumClick(album.albumId)}}
+        />
+      ))}
     </>
   );
 };
 
 export default AlbumsInEventSection;
-/* ovde samo se povikva durgata komponenta za da se prikazat mapiranite sliki */
+/* ovde samo se povikva durgata komponenta za da se prikazat albumite */

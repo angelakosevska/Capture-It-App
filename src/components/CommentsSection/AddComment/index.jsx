@@ -8,7 +8,7 @@ import CommentItem from "./CommentItem";
 
 const dummyComments = [];
 
-const AddComment = (onAddComment) => {
+const AddComment = (onAddComment, {maxHeight}) => {
   const [comments, setComments] = useState(dummyComments);
   let commentCount = 0;
   const onComment = (newComment) => {
@@ -20,7 +20,7 @@ const AddComment = (onAddComment) => {
 
   return (
     <>
-      <div className="all-comments">
+      <div className="all-comments" >
         {comments.map((comment) => (
           <CommentItem key={comment.id} comment={comment} />
         ))}

@@ -2,17 +2,18 @@
 import PictureAndUsername from "../../PictureAndUsername";
 import "./style.css";
 const AlbumCoverCardInEvent = ({
-  imageUrl,
+ imageUrl,
   altText,
   picWidth,
   picHeight,
   username,
   albumName,
-  profilePic
+  profilePic,
+  onClick
 }) => {
   return (
     <>
-      <div className="container" style={{ width: picWidth, height: picHeight }}>
+      <div className="container" style={{ width: picWidth, height: picHeight }} onClick={onClick}>
         <img src={imageUrl} alt={altText} className="image" />
         <div className="overlay">
           <div className="PandU">
@@ -20,7 +21,7 @@ const AlbumCoverCardInEvent = ({
               textColor={"rgb(168, 166, 166)"}
               ppDimension={"30px"}
               username={username}
-              imageUrl={profilePic}
+              profilePic={profilePic}
             />
             <div className="album-name">{albumName}</div>
           </div>

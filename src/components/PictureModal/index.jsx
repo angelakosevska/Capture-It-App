@@ -20,13 +20,10 @@ const customStyles = {
   },
 };
 
-const Modalche = ({imageUrl, onClose}) => {
-
-
+const Modalche = ({ imageUrl, picDescription, commCount, onClose }) => {
   return (
     <>
       <div>
-     
         <Modal
           isOpen={!!imageUrl}
           onRequestClose={onClose}
@@ -41,21 +38,17 @@ const Modalche = ({imageUrl, onClose}) => {
             </div>
             <div className="Modalche">
               <div className="picture-modal">
-                <PictureContainer imageUrl={imageUrl}/>
+                <PictureContainer imageUrl={imageUrl} />
               </div>
               <div className="comments-modal">
-                <div> Picture descriptin</div>
+                <div className="picDescription">{picDescription}</div>
                 <div className="modal-buttons">
                   <SecondaryButton
                     buttonHeight={"40px"}
-                    buttonWidth={"40%"}
+                    buttonWidth={"50%"}
                     buttonText={"like"}
                   />
-                  <SecondaryButton
-                    buttonHeight={"40px"}
-                    buttonWidth={"40%"}
-                    buttonText={"addcomment"}
-                  />
+                  <div className="comment-count">{commCount} comments</div>
                 </div>
                 <CommentsSection />
               </div>

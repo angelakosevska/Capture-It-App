@@ -1,0 +1,59 @@
+.close-modal-button {
+  display: flex;
+  justify-content: right;
+  margin-bottom: 5px;
+}
+
+.modal-content {
+  width: 100%;
+  height: 90%;
+}
+.Modalche {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+.picDescription {
+  border-left: 2px solid var(--primaryColor);
+  /* border-right:2px solid var(--primaryColor) ; */
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+  height: 50px;
+  box-shadow: var(--shadow);
+}
+.picture-modal {
+  width: 60%;
+  align-content: center;
+}
+.comments-modal {
+
+  width: 40%;
+  height: 100%;
+  margin-left: 10px;
+}
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+}
+/* ova e za modalot */
+.ReactModal__Content {
+  width: 80%;
+  height: 95%;
+  justify-content: right;
+}
+.ReactModal__Content--after-open {
+}
+.comment-count {
+  color: #ff7e4f;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  border: 2px solid #ff7e4f;
+  background: none;
+  margin: 0 2px;
+  width: 50%;
+}

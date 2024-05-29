@@ -6,18 +6,18 @@ import axios from "axios";
 const PicturesInAlbumSection = ({
   picEWidth,
   picEHeight,
-  slikaA,
-  imageUrl,
+  picture,
+  profilePic,
   username,
   onClick
 }) => {
   return (
     <>
       <PictureCoverCardInAlbum
-        slika={slikaA}
+        picture={picture}
         picWidth={picEWidth}
         picHeight={picEHeight}
-        imageUrl={imageUrl}
+        profilePic={profilePic}
         username={username}
         onClick={onClick}
       />

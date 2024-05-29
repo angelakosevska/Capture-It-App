@@ -10,6 +10,6 @@
   align-items: center;
 }
 .icon-button:hover {
-  color: #ffffff;
- background-color: var(--primaryColor);
+  color: var(--secondaryColor);
+ /* background-color: var(--primaryColor); */
 }

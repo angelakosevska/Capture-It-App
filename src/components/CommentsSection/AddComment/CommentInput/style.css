@@ -6,17 +6,16 @@
   outline: none;
   background: #ffffff;
   color: #000000;
-  border: 2px solid #e4e4ff;
-  border-radius: 20px;
+  border: 1px solid var(--primaryColor);
+  border-radius: 10px;
   box-shadow: 3px 3px 2px 0px #e2e2e2;
   transition: 0.3s ease;
-  margin-right: 5px;
-  margin-bottom: 5px;
+ margin: 5px;
 }
 .input-comment:focus {
   background: #f0f0ff;
-  border: 1px solid var(--primaryColor);
-  border-radius: 20px;
+  border: 2px solid var(--primaryColor);
+  border-radius: 10px;
   height: 40px;
 }
 

@@ -25,8 +25,8 @@ const Routing = () => {
       <Route path="/" element={<Layout />}>
         <Route path="/captureIt" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/event/:id" element={<Event />} />
-        <Route path="/album/:id" element={<Album />} />
+        <Route path="/event/:eventId" element={<Event />} />
+        <Route path="/album/:albumId" element={<Album />} />
       </Route>
     </Routes>
     </>

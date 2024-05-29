@@ -9,14 +9,46 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export function Event() {
+  const { eventId } = useParams();
+  const {albumId} =useParams;
+  const [eventData, setEventData] = useState([]);
+  const [error, setError] = useState([]);
+
+  const fetchEventData = async () => {
+    try {
+      const res = await axios
+        .get(`https://captureit.azurewebsites.net/api/event/${eventId}`, {
+          headers: {
+            Authorization:
+              "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMCIsImV4cCI6MTcxNzAwMjM2MX0.BTHXpMZXwgbNjqYnBfrafF0_Iap8Vt66c-2DkNXCVT0",
+          },
+        })
+        .then((res) => {
+          setEventData(res.data);
+        });
+    } catch (error) {
+      setError(error);
+      <h1>error </h1>;
+      console.error("error fetching data: ", error);
+    }
+  };
+  useEffect(() => {
+    fetchEventData();
+  }, [eventId]);
   return (
     <>
       <div className="all-in-events">
         <main className="name-and-albums">
           <div className="eventHeader">
-            <EventHeader />
+            <EventHeader
+              location={eventData.location}
+             // profilePicture={eventData.owner.profilePicture}
+              //username={eventData.owner.username}
+              eventName={eventData.eventName}
+            />
             <PrimaryButton
               buttonWidth={"150px"}
               buttonHeight={"40px"}
@@ -34,7 +66,13 @@ export function Event() {
             />
           </div>
           <div className="containerForAlbums">
-            <AlbumsInEventSection picEHeight={"225px"} picEWidth={"225px"} />
+          
+            <AlbumsInEventSection
+              picEHeight={"225px"}
+              picEWidth={"225px"}
+              eventId={eventId}
+            />
+         
           </div>
         </main>
 

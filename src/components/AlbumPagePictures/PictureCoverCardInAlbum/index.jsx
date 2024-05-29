@@ -4,8 +4,8 @@ import PictureAndUsername from "../../PictureAndUsername";
 import "./style.css";
 
 const PictureCoverCardInAlbum = ({
-  slika,
-  imageUrl,
+  picture,
+  profilePic,
   username,
   altText,
   picWidth,
@@ -18,10 +18,10 @@ const PictureCoverCardInAlbum = ({
         className="container-pic"
         style={{ width: picWidth, height: picHeight }}
       >
-        <img src={slika} alt={altText} className="picture" />
+        <img src={picture} alt={altText} className="picture" />
         <div className="overlay-pic" onClick={onClick}>
           <div className="PandU-pic">
-            <PictureAndUsername textColor={"black"} ppDimension={"30px"} username={username} imageUrl={imageUrl}/>
+            <PictureAndUsername textColor={"black"} ppDimension={"30px"} username={username} profilePic={profilePic}/>
           </div>
         </div>
       </div>

@@ -1,9 +1,6 @@
-.pic-container{
-    width: 600px;
-    height: 600px;
-
-    margin: 10px;
+.pic-container {
+  margin: 10px;
 }
-.pic-fit{
-    object-fit: contain;
+.pic-fit {
+  object-fit: contain;
 }

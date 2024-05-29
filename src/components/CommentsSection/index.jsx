@@ -4,7 +4,7 @@ import "./style.css";
 const CommentsSection = () => {
   return (
     <>
-      <AddComment />
+      <AddComment/>
     </>
   );
 };

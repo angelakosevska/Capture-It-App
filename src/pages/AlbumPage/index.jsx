@@ -4,22 +4,30 @@ import PicturesInAlbumSection from "../../components/AlbumPagePictures/PicturesI
 import PrimaryButton from "../../components/Buttons/PrimaryButton/index.jsx";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Modalche from "../../components/Modal/index.jsx";
+import Modalche from "../../components/PictureModal/index.jsx";
 import Modal from "react-modal";
+import token from "../../components/token/index.jsx";
+import { useParams } from "react-router-dom";
 
 export function Album() {
   const [pictures, setPictures] = useState([]);
-  const [korisnici, setKorisnici] = useState([]);
-  const [mergedData, setMergedData] = useState([]);
   const [error, setError] = useState(null);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [selectedPicture, setSelectedPicture] = useState(null);
-
+  const { albumId } = useParams();
   //vo album/id kje se site sliki
   const fetchPictureInAlbum = async () => {
     try {
       const res = await axios
-        .get(`https://example-data.draftbit.com/books?_limit=10`)
+        .get(
+          `https://captureit.azurewebsites.net/api/picture?createdAt=2024-05-10&albumId=${albumId}`,
+          {
+            headers: {
+              Authorization:
+                "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMCIsImV4cCI6MTcxNzAwMjM2MX0.BTHXpMZXwgbNjqYnBfrafF0_Iap8Vt66c-2DkNXCVT0",
+            },
+          }
+        )
         .then((res) => {
           setPictures(res.data);
           console.log(res.data);
@@ -31,42 +39,12 @@ export function Album() {
     }
   };
 
-  const fetchUsername = async () => {
-    try {
-      const result = await axios
-        .get(`https://example-data.draftbit.com/users?_limit=10`)
-        .then((result) => {
-          setKorisnici(result.data);
-          // console.log(result.data);
-        });
-    } catch (error) {
-      setError(error);
-      <h1>error </h1>;
-      console.error("error fetching data: ", error);
-    }
-  };
-
-  const mergeData = (pictures, korisnici) => {
-    return pictures.map((picture) => {
-      const korisnik = korisnici.find((korisnik) => korisnik.id === picture.id);
-      return korisnik ? { ...picture, username: korisnik.username } : picture;
-    });
-  };
-
-  useEffect(() => {
-    const merged = mergeData(pictures, korisnici);
-    setMergedData(merged);
-    console.log(merged);
-  }, [pictures, korisnici]);
   useEffect(() => {
     fetchPictureInAlbum();
-  }, []);
-  useEffect(() => {
-    fetchUsername();
-  }, []);
+  }, [albumId]);
 
-  const openModal = (pic) => {
-    setSelectedPicture(pic);
+  const openModal = (item) => {
+    setSelectedPicture(item);
     setIsOpen(true);
   };
 
@@ -93,25 +71,57 @@ export function Album() {
 
       <div className="all-in-albums">
         <div className="containerForPictures">
-          {mergedData.map((item) => (
+          {pictures.map((item) => (
             <PicturesInAlbumSection
               picEHeight={"300px"}
               picEWidth={"225px"}
-              slikaA={item.image_url}
-              username={item.username}
-              imageUrl={item.avatar}
-              onClick={() => openModal(item.image_url)}
+              picture={item.imageUrl}
+              username={item.author.username}
+              profilePic={item.author.profilePicture}
+              onClick={() => openModal(item)}
             />
           ))}
         </div>
       </div>
       {modalIsOpen && (
-        <Modalche imageUrl={selectedPicture} onClose={closeModal} />
+        <Modalche
+          imageUrl={selectedPicture.imageUrl}
+          picDescription={selectedPicture.description}
+          onClose={closeModal}
+          commCount={selectedPicture.commentCount}
+        />
       )}
     </>
   );
 }
 export default Album;
+// const fetchUsername = async () => {
+//   try {
+//     const result = await axios
+//       .get(`https://example-data.draftbit.com/users?_limit=10`)
+//       .then((result) => {
+//         setKorisnici(result.data);
+//         // console.log(result.data);
+//       });
+//   } catch (error) {
+//     setError(error);
+//     <h1>error </h1>;
+//     console.error("error fetching data: ", error);
+//   }
+// };
+
+// const mergeData = (pictures, korisnici) => {
+//   return pictures.map((picture) => {
+//     const korisnik = korisnici.find((korisnik) => korisnik.id === picture.id);
+//     return korisnik ? { ...picture, username: korisnik.username } : picture;
+//   });
+// };
+
+// useEffect(() => {
+//   const merged = mergeData(pictures, korisnici);
+//   setMergedData(merged);
+//   console.log(merged);
+// }, [pictures, korisnici]);
 //od slikite se ukluchva slika so komentarite
 /*
 ,
