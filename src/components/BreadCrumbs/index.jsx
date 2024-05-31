@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import "./style.css";
 import PictureAndUsername from "../PictureAndUsername";
 
-const BreadCrumbs = () => {
+const BreadCrumbs = ({eventName}) => {
   const location = useLocation();
 
   return (
@@ -16,7 +16,7 @@ const BreadCrumbs = () => {
               : "breadcrumb-not-active"
           }
         >
-          Event name
+         EventName
         </Link>
       </div>
       <div className="breadcrumb-div">

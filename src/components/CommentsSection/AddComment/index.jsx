@@ -8,15 +8,16 @@ import CommentItem from "./CommentItem";
 
 const dummyComments = [];
 
-const AddComment = (onAddComment, {maxHeight}) => {
+const AddComment = (onAddComment, {maxHeight, userId, pictureId}) => {
   const [comments, setComments] = useState(dummyComments);
-  let commentCount = 0;
+
   const onComment = (newComment) => {
-    if (newComment.body.trim()) {
+    if (newComment.comment1.trim()) {
       setComments((prev) => [ ...prev,newComment]);
-      commentCount++;
     } else{return};
   };
+
+
 
   return (
     <>
@@ -31,7 +32,9 @@ const AddComment = (onAddComment, {maxHeight}) => {
         buttonWidth={"40px"}
         buttonIcon={<SendIcon/>}
         placeholderInput="Add a comment"
-        onComment={onComment} />
+        onComment={onComment}
+        userId={userId}
+        pictureId={pictureId} />
       </div>
     </>
   );

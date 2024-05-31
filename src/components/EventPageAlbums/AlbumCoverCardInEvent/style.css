@@ -9,7 +9,7 @@ img {
   width: 225px;
   height: 225px;
   margin: 5px;
-
+  border-radius: 20px;
 }
 
 .overlay {
@@ -20,22 +20,23 @@ img {
   right: 0;
   height: 100%;
   width: 100%;
-  opacity: 0;
+  opacity: 1;
   transition: 0.5s ease;
   background: linear-gradient(
     to bottom,
 
-    #ffffff00 40%,
-    #5F5D9C66 60%,
-    #5F5D9Cb3 80%,
-    #5F5D9Ccc 100%
+    #5f5d9ccc 0%,
+    #5f5d9c66 50%,
+    #5f5d9ccc 100%
   );
+  border-radius: 20px;
 }
 .container:hover .overlay {
-  opacity: 1;
+  opacity: 0.75;
+ 
+
 }
 .PandU {
-  display: none;
   position: absolute;
   bottom: 5px;
   left: 10px;
@@ -45,17 +46,17 @@ img {
 }
 .container:hover .PandU {
   display: block;
+
 }
 
 .image:hover + .imageShadow {
   display: block;
 }
 
-.position{
- margin: 0
-
+.position {
+  margin: 0;
 }
-.album-name{
+.album-name {
   text-align: left;
   color: white;
   padding: 0px;

@@ -2,12 +2,12 @@
 
 import "./style.css"
 
-const EventDescription =()=>{
+const EventDescription =({eventDescription})=>{
 
 
 return (
     <>
-            <div className="description">Best birthday ever 💗I had so much fun thank you everyone!</div>
+            <div className="description">{eventDescription}</div>
 
     </>
 )

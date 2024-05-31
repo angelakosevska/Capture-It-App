@@ -8,29 +8,30 @@ import { useNavigate, useParams } from "react-router-dom";
 const AlbumsInEventSection = ({ picEWidth, picEHeight, eventId }) => {
   //tuka da get album i kje gi imam site
   const [error, setError] = useState([]);
-  const [albums, setAlbums] = useState([]);
+  const [albums, setAlbums] = useState({
+    data: [],
+    pageNumber: 0,
+    pageSize: 0,
+    totalRecords: 0,
+  });
   const navigate = useNavigate();
 
   const fetchAlbumsInEvent = async () => {
     //const {eventId}= useParams;
     try {
-      const res = await axios
-        .get(
-          `https://captureit.azurewebsites.net/api/album?createdAt=2024-05-11&eventId=${eventId}`,
-          {
-            headers: {
-              Authorization:
-                "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMCIsImV4cCI6MTcxNzAwMjM2MX0.BTHXpMZXwgbNjqYnBfrafF0_Iap8Vt66c-2DkNXCVT0",
-            },
-          }
-        )
-        .then((res) => {
-          setAlbums(res.data);
-          console.log(res.data);
-        });
+      const result = await axios.get(
+        `https://captureit.azurewebsites.net/api/album?createdAt=2024-05-11&eventId=${eventId}`,
+        {
+          headers: {
+            Authorization:
+              "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMCIsImV4cCI6MTcxNzE2OTUxNX0.Hyy_n8jwKtgCkYkIXknXBqoMmE9MsOi_WQqJaWg6rQI",
+          },
+        }
+      );
+
+      setAlbums(result.data);
     } catch (error) {
       setError(error);
-      <h1>error</h1>;
       console.error("error fetching data: ", error);
     }
   };
@@ -45,7 +46,7 @@ const AlbumsInEventSection = ({ picEWidth, picEHeight, eventId }) => {
 
   return (
     <>
-      {albums.map((album) => (
+      {albums.data.map((album) => (
         <AlbumCoverCardInEvent
           //imageUrl={album.src}
           altText={album.alt}
@@ -54,7 +55,9 @@ const AlbumsInEventSection = ({ picEWidth, picEHeight, eventId }) => {
           username={album.creator.username}
           profilePic={album.creator.profilePicture}
           albumName={album.albumName}
-          onClick={() => {handleAlbumClick(album.albumId)}}
+          onClick={() => {
+            handleAlbumClick(album.albumId);
+          }}
         />
       ))}
     </>

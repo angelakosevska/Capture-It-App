@@ -7,6 +7,8 @@ import NoBgButton from "../Buttons/NoBGButton";
 import CloseIcon from "@mui/icons-material/Close";
 import PrimaryButton from "../Buttons/PrimaryButton";
 import SecondaryButton from "../Buttons/SecondaryButton";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 
 Modal.setAppElement("#root");
 const customStyles = {
@@ -20,7 +22,14 @@ const customStyles = {
   },
 };
 
-const Modalche = ({ imageUrl, picDescription, commCount, onClose }) => {
+const Modalche = ({
+  imageUrl,
+  picDescription,
+  commCount,
+  onClose,
+  onNext,
+  onPrev,
+}) => {
   return (
     <>
       <div>
@@ -28,15 +37,20 @@ const Modalche = ({ imageUrl, picDescription, commCount, onClose }) => {
           isOpen={!!imageUrl}
           onRequestClose={onClose}
           style={customStyles}
-          contentLabel="Example Modal"
+          contentLabel="Picture Modal"
         >
-          <div className="modal-content">
-            <div className="close-modal-button">
-              <NoBgButton onClick={onClose} buttonIcon={<CloseIcon />}>
-                close
-              </NoBgButton>
-            </div>
-            <div className="Modalche">
+          <div className="close-modal-button">
+            <NoBgButton onClick={onClose} buttonIcon={<CloseIcon />}>
+              close
+            </NoBgButton>
+          </div>
+          <div className="arrows-and-main">
+            <NoBgButton
+              buttonIcon={<NavigateBeforeIcon />}
+              onClick={onPrev}
+            ></NoBgButton>
+
+            <div className="picture-and-comments">
               <div className="picture-modal">
                 <PictureContainer imageUrl={imageUrl} />
               </div>
@@ -53,6 +67,11 @@ const Modalche = ({ imageUrl, picDescription, commCount, onClose }) => {
                 <CommentsSection />
               </div>
             </div>
+
+            <NoBgButton
+              buttonIcon={<NavigateNextIcon />}
+              onClick={onNext}
+            ></NoBgButton>
           </div>
         </Modal>
       </div>

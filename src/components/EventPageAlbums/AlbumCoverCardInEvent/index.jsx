@@ -14,11 +14,11 @@ const AlbumCoverCardInEvent = ({
   return (
     <>
       <div className="container" style={{ width: picWidth, height: picHeight }} onClick={onClick}>
-        <img src={imageUrl} alt={altText} className="image" />
+       
         <div className="overlay">
           <div className="PandU">
             <PictureAndUsername
-              textColor={"rgb(168, 166, 166)"}
+              textColor={"var(--secondaryColor)"}
               ppDimension={"30px"}
               username={username}
               profilePic={profilePic}

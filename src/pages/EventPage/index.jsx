@@ -13,31 +13,35 @@ import { Link } from "react-router-dom";
 
 export function Event() {
   const { eventId } = useParams();
-  const {albumId} =useParams;
-  const [eventData, setEventData] = useState([]);
+  const [eventData, setEventData] = useState({
+    data: [],
+    pageNumber: 0,
+    pageSize: 0,
+    totalRecords: 0,
+  });
   const [error, setError] = useState([]);
 
   const fetchEventData = async () => {
     try {
-      const res = await axios
-        .get(`https://captureit.azurewebsites.net/api/event/${eventId}`, {
+      const result = await axios.get(
+        `https://captureit.azurewebsites.net/api/event/${eventId}`,
+        {
           headers: {
             Authorization:
-              "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMCIsImV4cCI6MTcxNzAwMjM2MX0.BTHXpMZXwgbNjqYnBfrafF0_Iap8Vt66c-2DkNXCVT0",
+            " eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMCIsImV4cCI6MTcxNzE2OTUxNX0.Hyy_n8jwKtgCkYkIXknXBqoMmE9MsOi_WQqJaWg6rQI",
           },
-        })
-        .then((res) => {
-          setEventData(res.data);
-        });
+        }
+      );
+
+      setEventData(result.data);
     } catch (error) {
       setError(error);
-      <h1>error </h1>;
       console.error("error fetching data: ", error);
     }
   };
   useEffect(() => {
     fetchEventData();
-  }, [eventId]);
+  }, []);
   return (
     <>
       <div className="all-in-events">
@@ -45,8 +49,8 @@ export function Event() {
           <div className="eventHeader">
             <EventHeader
               location={eventData.location}
-             // profilePicture={eventData.owner.profilePicture}
-              //username={eventData.owner.username}
+             //profilePicture={eventData.profilePicture}
+             // username={eventData.owner.username}
               eventName={eventData.eventName}
             />
             <PrimaryButton
@@ -66,22 +70,20 @@ export function Event() {
             />
           </div>
           <div className="containerForAlbums">
-          
             <AlbumsInEventSection
-              picEHeight={"225px"}
+              picEHeight={"100px"}
               picEWidth={"225px"}
               eventId={eventId}
             />
-         
           </div>
         </main>
 
         <aside className="likes-comments-description">
           <div className="event-description">
-            <EventDescription />
+            <EventDescription eventDescription={eventData.description} />
           </div>
           <div className="counters-inEvent">
-            <div className="like-counter counter-event"> 22 likes</div>
+            <div className="like-counter counter-event">0 likes</div>
             <div className="comment-counter counter-event">15 comments</div>
           </div>
           <div className="containerForCommentSection">
