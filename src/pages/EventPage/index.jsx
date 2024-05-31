@@ -9,7 +9,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import IconButton from "../../components/Buttons/IconButton/index.jsx";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 export function Event() {
   const { eventId } = useParams();
@@ -28,7 +29,7 @@ export function Event() {
         {
           headers: {
             Authorization:
-            " eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMCIsImV4cCI6MTcxNzE2OTUxNX0.Hyy_n8jwKtgCkYkIXknXBqoMmE9MsOi_WQqJaWg6rQI",
+              "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMCIsImV4cCI6MTcxNzE5OTMxOX0.zpUur2oz9_YcelDUWHRpaKPAgtd3Vx4lQMSUuEjj6DA",
           },
         }
       );
@@ -49,8 +50,8 @@ export function Event() {
           <div className="eventHeader">
             <EventHeader
               location={eventData.location}
-             //profilePicture={eventData.profilePicture}
-             // username={eventData.owner.username}
+              //profilePicture={eventData.profilePicture}
+              // username={eventData.owner.username}
               eventName={eventData.eventName}
             />
             <PrimaryButton
@@ -63,11 +64,12 @@ export function Event() {
               buttonHeight={"40px"}
               buttonText={"Create Album"}
             />
-            <SecondaryButton
+            <IconButton
               buttonHeight={"40px"}
               buttonWidth={"40px"}
               buttonIcon={<SearchIcon />}
             />
+            <IconButton buttonIcon={<DeleteIcon />} buttonHeight={"40px"} />
           </div>
           <div className="containerForAlbums">
             <AlbumsInEventSection

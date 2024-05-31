@@ -1,15 +1,16 @@
 .secondary-button {
-    color: #FF7E4F;
-    font-size: 14px;
-   
-    border-radius: 5px;
-    border: 2px solid #FF7E4F;
-    background: none;
-    margin: 0 2px;
-    align-items: center;
-  }
-  .secondary-button:hover {
-    border: 0px;
-    color: #ffffff;
-    background: linear-gradient(to top, #FF7E4F, #ffc3ad);
-  }
+  color: var(--primaryColor);
+  font-size: 14px;
+
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: 2px solid var(--primaryColor);
+  background: transparent;
+  margin: 0 5px;
+  align-items: center;
+}
+.secondary-button:hover {
+  color: var(--secondaryColor);
+  background: transparent;
+  border: 2px solid var(--secondaryColor);
+}

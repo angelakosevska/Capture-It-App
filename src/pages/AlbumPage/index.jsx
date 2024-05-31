@@ -5,9 +5,11 @@ import PrimaryButton from "../../components/Buttons/PrimaryButton/index.jsx";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Modalche from "../../components/PictureModal/index.jsx";
-import Modal from "react-modal";
-
+import DeleteIcon from "@mui/icons-material/Delete";
 import { useParams } from "react-router-dom";
+import SecondaryButton from "../../components/Buttons/SecondaryButton/index.jsx";
+import IconButton from "../../components/Buttons/IconButton/index.jsx";
+import AddPhotoModal from "../../components/AddPhotoModal/index.jsx";
 
 export function Album() {
   const [pictures, setPictures] = useState({
@@ -18,9 +20,8 @@ export function Album() {
   });
   const [error, setError] = useState("");
   const [modalIsOpen, setIsOpen] = useState(false);
-  const [selectedPicture, setSelectedPicture] = useState("");
   const [selectedPictureIndex, setSelectedPictureIndex] = useState("");
-
+  const [addPhotoM, setAddPhotoM] =useState(false);
   const { albumId } = useParams();
   console.log("albumid", albumId);
   //vo album/id kje se site sliki
@@ -28,11 +29,11 @@ export function Album() {
     //gi zemame site sliki od getpicture
     try {
       const result = await axios.get(
-        `https://captureit.azurewebsites.net/api/picture?createdAt=2024-05-05&albumId=${albumId}&pageNumber=1&pageSize=2`,
+        `https://captureit.azurewebsites.net/api/picture?&albumId=${albumId}&pageNumber=1&pageSize=100`,
         {
           headers: {
             Authorization:
-              "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMCIsImV4cCI6MTcxNzE2OTUxNX0.Hyy_n8jwKtgCkYkIXknXBqoMmE9MsOi_WQqJaWg6rQI",
+              "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMCIsImV4cCI6MTcxNzE5OTMxOX0.zpUur2oz9_YcelDUWHRpaKPAgtd3Vx4lQMSUuEjj6DA",
           },
         }
       );
@@ -60,6 +61,13 @@ export function Album() {
     setIsOpen(false);
   };
 
+  const addPhoto = () =>{
+    setAddPhotoM(true);
+  }
+  const addedPhoto = () =>{
+    setAddPhotoM(false);
+  }
+
   const handleNext = () => {
     setSelectedPictureIndex(
       (prevIndex) => (prevIndex + 1) % pictures.data.length
@@ -79,13 +87,9 @@ export function Album() {
           <Breadcrumbs />
         </div>
 
-        <div>
-          <PrimaryButton
-            buttonWidth={"150px"}
-            buttonHeight={"40px"}
-            buttonText={"Invite People"}
-          />
-        </div>
+        <SecondaryButton onClick={addPhoto} buttonHeight={"40px"} buttonText={"Add photo" } />
+
+        <IconButton buttonIcon={<DeleteIcon />} buttonHeight={"40px"} />
       </div>
 
       <div className="all-in-albums">
@@ -102,6 +106,9 @@ export function Album() {
           ))}
         </div>
       </div>
+{addPhotoM && <AddPhotoModal onClose={addedPhoto}/>}
+
+
       {modalIsOpen && selectedPictureIndex !== null && (
         <Modalche
           // imageUrl={selectedPicture.imageUrl}

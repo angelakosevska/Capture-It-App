@@ -1,21 +1,21 @@
-import { Link } from "react-router-dom";
-import {Layout} from "../UI/Layout";
-import Routing from "../components/Routing";
-import axios from "axios";
+import IconButton from "../components/Buttons/IconButton";
+import NoBgButton from "../components/Buttons/NoBGButton";
+import PrimaryButton from "../components/Buttons/PrimaryButton";
+import SecondaryButton from "../components/Buttons/SecondaryButton";
 
 export function Profile() {
-
+  //go ima icon kaj komentarite
+  //nobg i ova vo modalot i kom
 
   return (
     <>
+      <IconButton buttonText={"iconbutton"} /> 
+      
+      <NoBgButton buttonText={"nobg buuton"}/>
 
+      <PrimaryButton buttonText={"primarno"}/>
 
-      <div>Profile Picture</div>
-      <br />
-      <h1>Profile page</h1>
-      <Link to="/event">Event 1</Link>
-      <Link to="/album">ALbum</Link>
-   
+      <SecondaryButton buttonText={"sekundarno"}/>
     </>
   );
 }

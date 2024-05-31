@@ -4,11 +4,11 @@
 
   padding: 10px 20px;
   border-radius: 5px;
-  border: 0px solid #3866a3;
+  border: 2px solid var(--primaryColor);
   background: var(--primaryColor);
-  margin: 0 2px;
+  margin: 0 5px;
 }
 .primary-button:hover {
-  color: #ffffff;
-  background: linear-gradient(to top, var(--primaryColor), #9d9aee);
+  color: white;
+  opacity: 0.75;
 }

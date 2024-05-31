@@ -9,7 +9,6 @@ img {
   width: 225px;
   height: 225px;
   margin: 5px;
-  border-radius: 20px;
 }
 
 .overlay {
@@ -30,11 +29,13 @@ img {
     #5f5d9ccc 100%
   );
   border-radius: 20px;
+  border-top-right-radius: 50px;
+  box-shadow: var(--shadow);
+  /*clip-path: polygon(0 0, calc(100% - 40px) 0, 100% 40px, 100% 100%, 0 100%);*/
 }
 .container:hover .overlay {
   opacity: 0.75;
  
-
 }
 .PandU {
   position: absolute;

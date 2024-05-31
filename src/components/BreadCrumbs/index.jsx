@@ -35,7 +35,7 @@ const BreadCrumbs = ({eventName}) => {
         <Link
           to="/profile"
           className={
-            location.pathname === "/profile"
+            location.pathname === "/profile/${userId}"
               ? "breadcrumb-active"
               : "breadcrumb-not-active"
           }
