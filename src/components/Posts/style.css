@@ -1,0 +1,126 @@
+.feed {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+}
+
+.post {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: calc(50% - 20px);
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.profile img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.profile span {
+    font-weight: bold;
+}
+
+.event-name {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.description {
+    margin-bottom: 10px;
+}
+
+.photos {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+    height: 400px;
+    margin-bottom: -100px;
+}
+
+.photo-wrapper {
+    position: relative;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.photo-wrapper:nth-child(1) {
+    grid-column: 1 / 3;
+    grid-row: 1 / 3;
+}
+
+.photo-wrapper:nth-child(2),
+.photo-wrapper:nth-child(3) {
+    grid-column: 3 / 4;
+}
+
+.photo-wrapper:nth-child(4),
+.photo-wrapper:nth-child(5) {
+    grid-column: 4 / 5;
+}
+
+.photo-wrapper:nth-child(3),
+.photo-wrapper:nth-child(5) {
+    grid-row: 2 / 3;
+}
+
+.photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.view-more {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.photo-wrapper:hover .view-more {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.actions {
+    margin-top: 10px;
+}
+
+.actions button {
+    margin-right: 10px;
+    padding: 5px 10px;
+    background-color: #6a5294;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.actions button:hover {
+    background-color: #553b7b;
+}
+
+  
+  
+  

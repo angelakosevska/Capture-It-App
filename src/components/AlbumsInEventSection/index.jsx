@@ -1,5 +1,5 @@
 import AlbumCoverCardInEvent from "../AlbumCoverCardInEvent";
-import PhotoAlbum from "react-photo-album";
+/* import PhotoAlbum from "react-photo-album"; */
 import "./style.css";
 
 const AlbumsInEventSection = () => {
