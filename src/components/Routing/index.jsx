@@ -6,6 +6,7 @@ import { Event } from "../../pages/EventPage/index.jsx";
 import Footer from "../Footer/index.jsx";
 import Header from "../Header/index.jsx";
 import { useParams } from "react-router-dom";
+import Login from "../../pages/LogInPage/index.jsx";
 
 
 const Routing = () => {
@@ -19,15 +20,25 @@ const Routing = () => {
     );
   };
 
+  const NoLayout = () => {
+    return (
+      <>
+        <Outlet />
+      </>
+    );
+  };
   return (
     <>
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route path="/captureIt" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/event/:eventId" element={<Event />} />
         <Route path="/album/:albumId" element={<Album />} />
       </Route>
+      <Route path="/Login" element={<NoLayout />}>
+          <Route path="/Login" element={<Login />} />
+        </Route>
     </Routes>
     </>
   );
