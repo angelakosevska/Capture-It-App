@@ -1,0 +1,65 @@
+.picture {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.container-pic {
+  position: relative;
+  width: 225px;
+  height: 225px;
+  margin: 5px;
+  box-shadow: var(--shadow);
+  border-radius: 20px;
+}
+
+.overlay-pic {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: 0.5s ease;
+  background: linear-gradient(
+    to bottom,
+
+    #ff7e4f00 40%,
+    #ff7e4f66 60%,
+    #ff7e4fb3 80%,
+    #ff7e4fcc 100%
+  );
+  border-radius: 20px;
+}
+.container-pic:hover .overlay-pic {
+  opacity: 0.8;
+}
+.PandU-pic {
+  display: none;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  font-size: 18px;
+  align-items: center;
+}
+.container-pic:hover .PandU-pic {
+  display: block;
+}
+
+.picture:hover + .imageShadow {
+  display: block;
+}
+
+.position {
+  margin: 0;
+}
+.album-name {
+  text-align: left;
+  color: white;
+  padding: 0px;
+  margin-bottom: 10px;
+  font-size: 14px;
+}

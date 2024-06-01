@@ -1,0 +1,62 @@
+.closeModalButton {
+  display: flex;
+  justify-content: right;
+  margin-bottom: 5px;
+}
+.arrowsAndMain {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+}
+.pictureAndComments {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+.picDescription {
+  border-left: 2px solid var(--primaryColor);
+  /* border-right:2px solid var(--primaryColor) ; */
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+  height: 50px;
+  box-shadow: var(--shadow);
+}
+.pictureModal {
+  width: 60%;
+  align-content: center;
+}
+.commentsModal {
+  width: 40%;
+  height: 100%;
+  margin-left: 10px;
+}
+.modalButtons {
+  display: flex;
+  justify-content: center;
+}
+/* ova e za modalot */
+.ReactModal__Content {
+ max-width: 90%;
+  max-height: 95%;
+  display: flex;
+  flex-direction: column;
+}
+.ReactModal__Content--after-open {
+  width: 90%;
+  height: 95%;
+}
+.commentCount {
+  color: #ff7e4f;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  border: 2px solid #ff7e4f;
+  background: none;
+  margin: 0 2px;
+  width: 50%;
+}

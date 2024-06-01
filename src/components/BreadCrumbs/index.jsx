@@ -2,24 +2,11 @@ import { Link, useLocation } from "react-router-dom";
 import "./style.css";
 import PictureAndUsername from "../PictureAndUsername";
 
-const BreadCrumbs = () => {
+const BreadCrumbs = ({eventName}) => {
   const location = useLocation();
 
   return (
-    <div className="container">
-      {/*<div className="breadcrumb-div">
-        <Link
-          to="/"
-          className={
-            location.pathname === "/"
-              ? "breadcrumb-active"
-              : "breadcrumb-not-active"
-          }
-        >
-          Home
-        </Link>
-      </div> */}
-      
+    <div className="breadCrumbsContainer">
       <div className="breadcrumb-div">
         <Link
           to="/event"
@@ -29,7 +16,7 @@ const BreadCrumbs = () => {
               : "breadcrumb-not-active"
           }
         >
-          Event name
+         EventName
         </Link>
       </div>
       <div className="breadcrumb-div">
@@ -48,16 +35,16 @@ const BreadCrumbs = () => {
         <Link
           to="/profile"
           className={
-            location.pathname === "/profile"
+            location.pathname === "/profile/${userId}"
               ? "breadcrumb-active"
               : "breadcrumb-not-active"
           }
         >
-          <PictureAndUsername/>
+          <PictureAndUsername ppDimension={"30px"} username={"@angela234"} />
         </Link>
       </div>
     </div>
   );
-}
+};
 
 export default BreadCrumbs;

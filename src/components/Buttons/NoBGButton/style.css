@@ -1,0 +1,16 @@
+.noBg-button {
+  color: var(--primaryColor);
+  font-size: 14px;
+font-weight: 300;
+  padding: 5px 10px;
+  border-radius: 15px;
+  border: 0px solid #3866a3;
+  margin: 0 5px;
+  background-color: rgba(255, 255, 255, 0) ;
+  align-items: center;
+}
+.noBg-button:hover {
+  color: var(--secondaryColor);
+ 
+
+}

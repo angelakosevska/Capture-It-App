@@ -1,0 +1,9 @@
+.eventHeader-flex {
+  width: 60%;
+  margin: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 70px;
+  font-size: large;
+}

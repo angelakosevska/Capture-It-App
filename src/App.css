@@ -1,3 +1,24 @@
-*{
-    box-sizing: border-box;
+* {
+  box-sizing: border-box;
+  @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap");
+  font-family: "Urbanist", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  margin: 0 auto;
+  background-color: var(--bodyColor);
+}
+
+:root{
+
+ --primaryColor: #5F5D9C;
+ --secondaryColor: #FF7E4F;
+ --bodyColor: #f5faff;
+ --errrorColor: #bc3939;
+ --greenColor: #439643;
+ --shadow: 3px 3px 6px  #5f5d9cac, -5px -5px 10px #ffffff;
+ --token: eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMCIsImV4cCI6MTcxNzE2OTUxNX0.Hyy_n8jwKtgCkYkIXknXBqoMmE9MsOi_WQqJaWg6rQI;
 }

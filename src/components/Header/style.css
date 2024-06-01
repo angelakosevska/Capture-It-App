@@ -13,7 +13,7 @@ header {
   z-index: 2;
   height: 56px;
   max-width: 100%;
-  background-color: #e4e4ff;
+  background-color: var(--primaryColor);
   display: flex;
   justify-content: left;
   align-items: center;
@@ -29,20 +29,18 @@ header {
   margin-left: 10px;
   margin-right: 10px;
   align-content: center;
-
-
 }
 h1 {
   margin: 0;
 }
-a{
+a {
   text-decoration: none;
-color: black;
+  color: rgb(255, 255, 255) 1;
 }
 
 @media only screen and (max-width: 1912px) {
   .Navbar {
-    width: 1580px;
+    width: 100%;
   }
 }
 
@@ -64,4 +62,273 @@ color: black;
   .navButton {
     width: 40px;
   }
+}
+.Logo {
+  display: flex;
+  align-items: center;
+}
+
+.Logo img {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.menuAndItem {
+  width: 100%;
+}
+
+.SearchBar {
+  margin: auto;
+  width: 45%;
+}
+
+.SearchBar input {
+  width: 100%;
+  height: 36px;
+  padding: 0 10px;
+  border: 1px solid #a72828;
+  border-radius: 4px;
+}
+
+.DropdownMenu {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid #ccc;
+
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 2px 5px rgba(247, 238, 238, 0.1);
+  z-index: 1;
+}
+
+.DropdownItem {
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.DropdownItem:hover {
+  background-color: #bd1d1d;
+}
+
+header {
+  display: grid;
+  box-shadow: 2px 3px 5px 1px rgba(95, 93, 156, 0.51);
+  -webkit-box-shadow: 2px 3px 5px 1px rgba(95, 93, 156, 0.51);
+  -moz-box-shadow: 2px 3px 5px 1px rgba(95, 93, 156, 0.51);
+  z-index: 2;
+  height: 56px;
+  max-width: 100%;
+  background-color: #6a5294;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.navButton {
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 80px;
+  height: 56px;
+  padding: 10px;
+  text-align: center;
+  align-content: center;
+}
+
+h1 {
+  margin: 0;
+}
+a {
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+}
+.Logo {
+  display: flex;
+  align-items: center;
+}
+
+.Logo img {
+  width: 50px;
+  height: 50px;
+  margin-right: 20px;
+}
+
+.Logo a {
+  color: #ffffff;
+  font-family: "Lobster", sans-serif;
+  font-size: 2.2rem;
+  position: absolute;
+  display: flex;
+}
+
+.LogoText {
+  color: #ffffff;
+  font-family: "Lobster", sans-serif;
+  font-size: 2.2rem;
+  position: top center;
+  margin: 50px;
+  margin-top: 5px;
+  display: flex;
+}
+
+.SearchBar{
+  margin: auto;
+  width: 30%;
+  position: center;
+  display: flex;
+}
+
+.SearchBar input {
+  width: 100%;
+  height: 36px;
+  padding: 0 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.menuAndItem {
+  width: 100%;
+}
+
+.SearchDropdownMenu {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 28%;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid #ccc;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 2px 5px rgba(247, 238, 238, 0.1);
+  z-index: 1;
+}
+
+.SearchDropdownItem {
+  padding: 8px 10px;
+  cursor: pointer;
+  font-family: "Urbanist", sans-serif;
+  color: rgb(22, 22, 22);
+  font-size: 0.rem;
+}
+
+.SearchDropdownItem:hover {
+  background-color: #f5f5f5;
+}
+
+header {
+  display: grid;
+  box-shadow: 2px 3px 5px 1px rgba(95, 93, 156, 0.51);
+  -webkit-box-shadow: 2px 3px 5px 1px rgba(95, 93, 156, 0.51);
+  -moz-box-shadow: 2px 3px 5px 1px rgba(95, 93, 156, 0.51);
+  z-index: 2;
+  height: 56px;
+  max-width: 100%;
+  background-color: #6a5294;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  align-items: center;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.navButton {
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 80px;
+  height: 56px;
+  padding: 10px;
+  text-align: center;
+  align-content: center;
+}
+
+.CreateEvent{
+  margin-right: 10px;
+}
+
+.CreateEvent a {
+  text-decoration: none;
+  font-size: 2rem;
+  color: #fff;
+  display: flex;
+  align-items: center;
+}
+
+.ProfileLink {
+  margin-left: 10px;
+}
+
+.ProfileLink a {
+  text-decoration: none;
+  font-size: 2rem;
+  color: #fff;
+  display: flex;
+  align-items: center;
+}
+
+.profile-picture {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #007bff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-picture i {
+  font-size: 1.5rem;
+  color: #fff;
+}
+
+.ProfileLink {
+  position: relative;
+  cursor: pointer;
+}
+
+.ProfileLink .bi-person-circle {
+  font-size: 2rem;
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.ProfileLink:hover .bi-person-circle {
+  color: #007bff;
+}
+
+.ProfileDropdownMenu {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+
+  min-width: 150px;
+}
+
+.ProfileDropdownMenu .ProfileDropdownItem {
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.ProfileDropdownMenu .ProfileDropdownItem:hover {
+  background: #f8f9fa;
+}
+
+.ProfileDropdownMenu .ProfileDropdownItem {
+  display: block;
+}
+
+h1 {
+  margin: 0;
+}
+a {
+  text-decoration: none;
+  color:rgb(255, 255, 255);
 }

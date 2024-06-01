@@ -1,0 +1,29 @@
+.comment-input {
+  display: flex;
+  align-items: center;
+  position: relative;
+  max-width: 100%;
+}
+
+.comment-show {
+  display: flex;
+  flex-direction: column;
+  overflow-wrap: break-word;
+  height: auto;
+  border-left: 1px solid var(--primaryColor);
+  margin: 5px;
+  border-radius: 5px;
+  padding: 5px;
+  box-shadow: var(--shadow);
+}
+.who-what-when {
+  display: flex;
+  flex-direction: row;
+}
+.all-comments {
+  margin: 5px 0px;
+  border-radius: 5px;
+  max-height: 435px;
+  overflow-y: auto;
+  width: 100%;
+}

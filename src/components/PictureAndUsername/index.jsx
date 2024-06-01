@@ -1,18 +1,37 @@
 import "./style.css";
-const PictureAndUsername = () => {
+
+const PictureAndUsername = ({
+  textColor,
+  ppDimension,
+  profilePic,
+  username,
+}) => {
   return (
     <>
       <div className="userInfo">
-        <div className="profilePic">
-          <img
-            src="https://png.pngtree.com/thumb_back/fh260/background/20230612/pngtree-man-wearing-glasses-is-wearing-colorful-background-image_2905240.jpg"
-            alt="@user added this photo to the album"
-            id="profPic"
-          />
+        <div
+          className="profilePic"
+          style={{ width: ppDimension, height: ppDimension }}
+        >
+          <img src={profilePic} alt="x" />
         </div>
-        <div className="username">@angela123</div>
+        <div className="username" style={{ color: textColor }}>
+          {username}
+        </div>
       </div>
     </>
   );
-}
+};
 export default PictureAndUsername;
+/*
+ <div className="userInfo">
+        <div className="profilePic">
+          <img
+            src={profilePicUrl}
+            alt={altText}
+            id="profPic"
+          />
+        </div>
+        <div className="username">@{userName}</div>
+      </div>
+      */

@@ -1,0 +1,13 @@
+.description {
+  display: flex;
+  flex-direction: column;
+background-color: #fafafb;
+  overflow-wrap: break-word;
+  border-top: 1px solid var(--primaryColor);
+  border-bottom: 1px solid var(--primaryColor);
+  
+  height: 70px;
+  padding: 10px;
+  margin: 5px 1px 5px 0px;
+  border-radius: 5px;
+}

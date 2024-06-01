@@ -1,0 +1,161 @@
+.eventCover {
+    background-color: antiquewhite;
+}
+.albumPic{
+    background-color: rgb(132, 141, 228);
+}
+
+.hero-section img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    object-position: top top;
+  }
+
+  .hero-section {
+    position: relative;
+    height: 400px;
+    }
+    
+    .hero-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 1;
+      padding: 0 20px;
+    }
+  
+    .hero-content::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 20px;
+      background-color: rgba(0, 0, 0, 0); /*Go chuvam za sekoj sluchaj*/
+      z-index: -1;
+    }
+    
+    .hero-content h1 {
+      font-size: 5rem;
+      margin-top: 10px;
+      margin-bottom: 5px;
+      font-family: "Lobster", sans-serif;
+      font-weight: 100;
+      color: white;
+    }
+    
+    .hero-content p {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      margin-top: 20px;
+      font-family: "Urbanist", sans-serif;
+      color: white;
+    }
+    
+    .hero-content button {
+      padding: 15px 25px;
+      background-color: #5D4C7B;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    
+    .hero-content button:hover {
+      background-color: #4d3f65;
+    }
+
+
+    /*OVDE ZA SLAJDERITE*/
+
+    .auto-play {
+      margin-top: 20px;
+      position: relative;
+      z-index: 0;
+  }
+  
+  .event-box {
+      background-color: #f5f5f5;
+      padding: 20px;
+      margin: 0 10px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .event-box h3 {
+      text-align: center;
+      font-size: 2rem;
+  }
+
+  .green-box {
+    height: 200px;
+    background-color: #6a5294;
+    padding: 10px;
+    margin: 1px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+  }
+
+  .slick-track {
+    display: flex;
+    align-items: center;
+  }
+  
+.slick-slider {
+  overflow: hidden;
+}
+
+ .slick-prev:before,
+.slick-next:before {
+  content: '\2190';
+  font-size: 20px;
+  display: none;
+}
+
+.slick-next:before {
+  content: '\2192';
+}
+
+.slick-prev {
+  left: 10px;
+  font-size: 0px;
+  line-height: 1;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background-color: #c9383800;
+  color: #fff;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: 130px;
+  transform: translateY(0);
+  z-index: 1;
+  cursor: pointer;
+}
+
+.slick-next {
+  right: -1430px;
+  font-size: 0px;
+  line-height: 1;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background-color: #c9383800;
+  color: #fff;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: -112px;
+  transform: translateY(0);
+  z-index: 1;
+  cursor: pointer;
+} 
