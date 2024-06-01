@@ -2,7 +2,7 @@ import { useState } from "react";
 import Modal from "react-modal";
 import CommentsSection from "../CommentsSection/index";
 import PictureContainer from "../PictureContainer/index";
-import "./style.css";
+import styles from "./style.module.css";
 import NoBgButton from "../Buttons/NoBGButton";
 import CloseIcon from "@mui/icons-material/Close";
 import PrimaryButton from "../Buttons/PrimaryButton";
@@ -39,30 +39,30 @@ const Modalche = ({
           style={customStyles}
           contentLabel="Picture Modal"
         >
-          <div className="close-modal-button">
+          <div className={styles.closeModalButton}>
             <NoBgButton onClick={onClose} buttonIcon={<CloseIcon />}>
               close
             </NoBgButton>
           </div>
-          <div className="arrows-and-main">
+          <div className={styles.arrowsAndMain}>
             <NoBgButton
               buttonIcon={<NavigateBeforeIcon />}
               onClick={onPrev}
             ></NoBgButton>
 
-            <div className="picture-and-comments">
-              <div className="picture-modal">
+            <div className={styles.pictureAndComments}>
+              <div className={styles.pictureModal}>
                 <PictureContainer imageUrl={imageUrl} />
               </div>
-              <div className="comments-modal">
-                <div className="picDescription">{picDescription}</div>
-                <div className="modal-buttons">
+              <div className={styles.commentsModal}>
+                <div className={styles.picDescription}>{picDescription}</div>
+                <div className={styles.modalButtons}>
                   <SecondaryButton
                     buttonHeight={"40px"}
                     buttonWidth={"50%"}
                     buttonText={"like"}
                   />
-                  <div className="comment-count">{commCount} comments</div>
+                  <div className={styles.commentCount}>{commCount} comments</div>
                 </div>
                 <CommentsSection />
               </div>

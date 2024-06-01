@@ -19,6 +19,6 @@ body {
  --bodyColor: #f5faff;
  --errrorColor: #bc3939;
  --greenColor: #439643;
- --shadow: 3px 3px 2px 0px #f8ac9065;
+ --shadow: 3px 3px 6px  #5f5d9cac, -5px -5px 10px #ffffff;
  --token: eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMCIsImV4cCI6MTcxNzE2OTUxNX0.Hyy_n8jwKtgCkYkIXknXBqoMmE9MsOi_WQqJaWg6rQI;
 }

@@ -2,6 +2,7 @@ import IconButton from "../components/Buttons/IconButton";
 import NoBgButton from "../components/Buttons/NoBGButton";
 import PrimaryButton from "../components/Buttons/PrimaryButton";
 import SecondaryButton from "../components/Buttons/SecondaryButton";
+import CoverAlbum from "../components/CoverAlbum";
 
 export function Profile() {
   //go ima icon kaj komentarite
@@ -9,13 +10,13 @@ export function Profile() {
 
   return (
     <>
-      <IconButton buttonText={"iconbutton"} /> 
-      
-      <NoBgButton buttonText={"nobg buuton"}/>
+      <IconButton buttonText={"iconbutton"} />
 
-      <PrimaryButton buttonText={"primarno"}/>
+      <NoBgButton buttonText={"nobg buuton"} />
 
-      <SecondaryButton buttonText={"sekundarno"}/>
+      <PrimaryButton buttonText={"primarno"} />
+
+      <SecondaryButton buttonText={"sekundarno"} />
     </>
   );
 }

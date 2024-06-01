@@ -1,15 +1,15 @@
-.close-modal-button {
+.closeModalButton {
   display: flex;
   justify-content: right;
   margin-bottom: 5px;
 }
-.arrows-and-main {
+.arrowsAndMain {
   display: flex;
   width: 100%;
   height: 100%;
   justify-content: center;
 }
-.picture-and-comments {
+.pictureAndComments {
   width: 100%;
   height: 100%;
   display: flex;
@@ -24,29 +24,31 @@
   height: 50px;
   box-shadow: var(--shadow);
 }
-.picture-modal {
+.pictureModal {
   width: 60%;
   align-content: center;
 }
-.comments-modal {
+.commentsModal {
   width: 40%;
   height: 100%;
   margin-left: 10px;
 }
-.modal-buttons {
+.modalButtons {
   display: flex;
   justify-content: center;
 }
 /* ova e za modalot */
 .ReactModal__Content {
-  width: 90%;
-  height: 95%;
+ max-width: 90%;
+  max-height: 95%;
   display: flex;
   flex-direction: column;
 }
 .ReactModal__Content--after-open {
+  width: 90%;
+  height: 95%;
 }
-.comment-count {
+.commentCount {
   color: #ff7e4f;
   font-size: 14px;
   display: flex;

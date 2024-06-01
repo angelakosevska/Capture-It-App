@@ -21,7 +21,7 @@ export function Album() {
   const [error, setError] = useState("");
   const [modalIsOpen, setIsOpen] = useState(false);
   const [selectedPictureIndex, setSelectedPictureIndex] = useState("");
-  const [addPhotoM, setAddPhotoM] =useState(false);
+  const [addPhotoM, setAddPhotoM] = useState(false);
   const { albumId } = useParams();
   console.log("albumid", albumId);
   //vo album/id kje se site sliki
@@ -33,7 +33,7 @@ export function Album() {
         {
           headers: {
             Authorization:
-              "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMCIsImV4cCI6MTcxNzE5OTMxOX0.zpUur2oz9_YcelDUWHRpaKPAgtd3Vx4lQMSUuEjj6DA",
+              "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMCIsImV4cCI6MTcxNzI0OTk2NX0.V8KAfkJRWbLNrBTX_ufVZYgUriTTskxMgjuFbLfkfPk",
           },
         }
       );
@@ -61,12 +61,12 @@ export function Album() {
     setIsOpen(false);
   };
 
-  const addPhoto = () =>{
+  const addPhoto = () => {
     setAddPhotoM(true);
-  }
-  const addedPhoto = () =>{
+  };
+  const addedPhoto = () => {
     setAddPhotoM(false);
-  }
+  };
 
   const handleNext = () => {
     setSelectedPictureIndex(
@@ -87,7 +87,11 @@ export function Album() {
           <Breadcrumbs />
         </div>
 
-        <SecondaryButton onClick={addPhoto} buttonHeight={"40px"} buttonText={"Add photo" } />
+        <SecondaryButton
+          onClick={addPhoto}
+          buttonHeight={"40px"}
+          buttonText={"Add photo"}
+        />
 
         <IconButton buttonIcon={<DeleteIcon />} buttonHeight={"40px"} />
       </div>
@@ -106,8 +110,7 @@ export function Album() {
           ))}
         </div>
       </div>
-{addPhotoM && <AddPhotoModal onClose={addedPhoto}/>}
-
+      {addPhotoM && <AddPhotoModal onClose={addedPhoto} />}
 
       {modalIsOpen && selectedPictureIndex !== null && (
         <Modalche

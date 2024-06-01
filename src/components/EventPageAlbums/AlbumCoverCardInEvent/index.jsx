@@ -1,4 +1,5 @@
 //vo eventot ima povekje albumi site se javni, na hover mozi da izlegva overlay koj go kreira albumot i ime na albumot
+import CoverAlbum from "../../CoverAlbum";
 import PictureAndUsername from "../../PictureAndUsername";
 import "./style.css";
 const AlbumCoverCardInEvent = ({
@@ -17,13 +18,14 @@ const AlbumCoverCardInEvent = ({
        
         <div className="overlay">
           <div className="PandU">
+          <div className="album-name">{albumName}</div>
             <PictureAndUsername
               textColor={"var(--secondaryColor)"}
               ppDimension={"30px"}
               username={username}
               profilePic={profilePic}
             />
-            <div className="album-name">{albumName}</div>
+           
           </div>
         </div>
       </div>
