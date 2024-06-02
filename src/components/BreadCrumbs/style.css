@@ -1,9 +1,9 @@
 .breadcrumb-not-active {
-  color: #c9abe9;
+  color: #000000;
 }
 
 .breadcrumb-active {
-  color: #07110b;
+  color: #cea1ec;
 }
 
 .breadcrumb-arrow {
@@ -14,6 +14,7 @@
   display: flex;
   align-items: center;
   margin-left: 20px;
+  width: 50%;
 }
 
 .breadcrumb-div {

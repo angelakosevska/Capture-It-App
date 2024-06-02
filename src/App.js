@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import Routing from "./components/Routing/index.jsx";
 import Loading from "./components/Loading/index.jsx";
-import axios from "axios";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 function App() {
   const [loading, setLoading] = useState(true);

@@ -1,19 +1,24 @@
 import { useState } from "react";
 import Modal from "react-modal";
-import CommentsSection from "../CommentsSection/index";
-import PictureContainer from "../PictureContainer/index";
+import CommentsSection from "../../CommentsSection/index";
+import PictureContainer from "../../PictureContainer/index";
 import styles from "./style.module.css";
-import NoBgButton from "../Buttons/NoBGButton";
+import NoBgButton from "../../Buttons/NoBGButton";
 import CloseIcon from "@mui/icons-material/Close";
-import PrimaryButton from "../Buttons/PrimaryButton";
-import SecondaryButton from "../Buttons/SecondaryButton";
+import PrimaryButton from "../../Buttons/PrimaryButton";
+import SecondaryButton from "../../Buttons/SecondaryButton";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+import { Widgets } from "@mui/icons-material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import axios from "axios";
 
 Modal.setAppElement("#root");
 const customStyles = {
   content: {
-    top: "50%",
+    width: "90%",
+    height: "85%",
+    top: "52%",
     left: "50%",
     right: "auto",
     bottom: "auto",
@@ -29,7 +34,36 @@ const Modalche = ({
   onClose,
   onNext,
   onPrev,
+  pictureId,
+  onPictureDelete,
+  fetchPicture,
 }) => {
+  const [error, setError] = useState("");
+  const deletePicture = async () => {
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this picture?"
+    );
+    if (!isConfirmed) return;
+
+    try {
+      await axios.delete(
+        `https://captureit.azurewebsites.net/api/picture/${pictureId}`,
+        {
+          headers: {
+            Authorization:
+              " eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMCIsImV4cCI6MTcxNzM2MTUzMH0.cr6b-cujWm-4VrvNEzFvFzsyyE86S2FxSnKLhbHsZ3Y",
+          },
+        }
+      );
+      fetchPicture();
+    } catch (error) {
+      setError(error);
+      console.error("Error deleting album: ", error);
+    }
+    onClose();
+    //window.location.reload();
+  };
+
   return (
     <>
       <div>
@@ -40,6 +74,11 @@ const Modalche = ({
           contentLabel="Picture Modal"
         >
           <div className={styles.closeModalButton}>
+            <NoBgButton
+              buttonIcon={<DeleteIcon />}
+              buttonHeight={"40px"}
+              onClick={deletePicture}
+            />
             <NoBgButton onClick={onClose} buttonIcon={<CloseIcon />}>
               close
             </NoBgButton>
@@ -62,7 +101,9 @@ const Modalche = ({
                     buttonWidth={"50%"}
                     buttonText={"like"}
                   />
-                  <div className={styles.commentCount}>{commCount} comments</div>
+                  <div className={styles.commentCount}>
+                    {commCount} comments
+                  </div>
                 </div>
                 <CommentsSection />
               </div>

@@ -1,15 +1,18 @@
 import "./style.css";
 import Breadcrumbs from "../../components/BreadCrumbs/index.jsx";
 import PicturesInAlbumSection from "../../components/AlbumPagePictures/PicturesInAlbumSection/index.jsx";
-import PrimaryButton from "../../components/Buttons/PrimaryButton/index.jsx";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Modalche from "../../components/PictureModal/index.jsx";
+import Modalche from "../../components/Modals/PictureModal";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useParams } from "react-router-dom";
 import SecondaryButton from "../../components/Buttons/SecondaryButton/index.jsx";
-import IconButton from "../../components/Buttons/IconButton/index.jsx";
-import AddPhotoModal from "../../components/AddPhotoModal/index.jsx";
+import AddPhotoModal from "../../components//Modals/AddPhotoModal/index.jsx";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import NoBgButton from "../../components/Buttons/NoBGButton/index.jsx";
+import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
+import EditIcon from "@mui/icons-material/Edit";
+import EditAlbumModal from "../../components/Modals/EditAlbumModal/index.jsx";
 
 export function Album() {
   const [pictures, setPictures] = useState({
@@ -20,11 +23,11 @@ export function Album() {
   });
   const [error, setError] = useState("");
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [editAlbumIsOpen, setEditAlbumIsOpen] = useState(false);
   const [selectedPictureIndex, setSelectedPictureIndex] = useState("");
   const [addPhotoM, setAddPhotoM] = useState(false);
   const { albumId } = useParams();
-  console.log("albumid", albumId);
-  //vo album/id kje se site sliki
+
   const fetchPictureInAlbum = async () => {
     //gi zemame site sliki od getpicture
     try {
@@ -33,7 +36,7 @@ export function Album() {
         {
           headers: {
             Authorization:
-              "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMCIsImV4cCI6MTcxNzI0OTk2NX0.V8KAfkJRWbLNrBTX_ufVZYgUriTTskxMgjuFbLfkfPk",
+              "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMCIsImV4cCI6MTcxNzM2MTUzMH0.cr6b-cujWm-4VrvNEzFvFzsyyE86S2FxSnKLhbHsZ3Y",
           },
         }
       );
@@ -67,6 +70,12 @@ export function Album() {
   const addedPhoto = () => {
     setAddPhotoM(false);
   };
+  const editAlbum = () => {
+    setEditAlbumIsOpen(true);
+  };
+  const editedAlbum = () => {
+    setEditAlbumIsOpen(false);
+  };
 
   const handleNext = () => {
     setSelectedPictureIndex(
@@ -79,22 +88,63 @@ export function Album() {
         (prevIndex - 1 + pictures.data.length) % pictures.data.length
     );
   };
-  // console.log("TEST", pictures?.data);
+
+  const deleteAlbum = async () => {
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this album?"
+    );
+    if (!isConfirmed) return;
+
+    try {
+      await axios.delete(
+        `https://captureit.azurewebsites.net/api/album/${albumId}`,
+        {
+          headers: {
+            Authorization:
+              " eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMCIsImV4cCI6MTcxNzM2MTUzMH0.cr6b-cujWm-4VrvNEzFvFzsyyE86S2FxSnKLhbHsZ3Y",
+          },
+        }
+      );
+    } catch (error) {
+      setError(error);
+      console.error("Error deleting album: ", error);
+    }
+  };
+
   return (
     <>
       <div className="breadCrumbs-counters">
-        <div className="BreadC-position">
-          <Breadcrumbs />
+        <Breadcrumbs />
+        <div className="albumButtons">
+          <SecondaryButton
+            onClick={addPhoto}
+            buttonIcon={<AddAPhotoIcon />}
+            buttonHeight={"40px"}
+            buttonText={"Add photo"}
+          />
+
+          <div className="dropdown-more">
+            <NoBgButton
+              buttonIcon={<MoreVertIcon fontSize="large" />}
+              className="dropbtn"
+            />
+            <div className="dropdown-content-more">
+              <NoBgButton
+                buttonIcon={<DeleteIcon />}
+                buttonText={"Delete album"}
+                buttonHeight={"40px"}
+                onClick={deleteAlbum}
+              />
+              <NoBgButton
+                buttonText={"Edit album"}
+                buttonIcon={<EditIcon />}
+                onClick={editAlbum}
+              />
+            </div>
+          </div>
         </div>
-
-        <SecondaryButton
-          onClick={addPhoto}
-          buttonHeight={"40px"}
-          buttonText={"Add photo"}
-        />
-
-        <IconButton buttonIcon={<DeleteIcon />} buttonHeight={"40px"} />
       </div>
+      {editAlbumIsOpen && <EditAlbumModal onClose={editedAlbum} />}
 
       <div className="all-in-albums">
         <div className="containerForPictures">
@@ -114,16 +164,14 @@ export function Album() {
 
       {modalIsOpen && selectedPictureIndex !== null && (
         <Modalche
-          // imageUrl={selectedPicture.imageUrl}
-          // picDescription={selectedPicture.description}
-          // onClose={closeModal}
-          // commCount={selectedPicture.commentCount}
           imageUrl={pictures.data[selectedPictureIndex].imageUrl}
           picDescription={pictures.data[selectedPictureIndex].description}
           onClose={closeModal}
           commCount={pictures.data[selectedPictureIndex].commentCount}
           onNext={handleNext}
           onPrev={handlePrev}
+          pictureId={pictures.data[selectedPictureIndex].pictureId}
+          fetchPicture={fetchPictureInAlbum}
         />
       )}
     </>

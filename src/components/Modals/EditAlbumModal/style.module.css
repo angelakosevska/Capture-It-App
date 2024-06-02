@@ -1,0 +1,66 @@
+.closeModalButton {
+  display: flex;
+  justify-content: right;
+  margin-bottom: 5px;
+}
+
+/* ova e za modalot */
+.ReactModal__Content {
+  display: flex;
+  flex-direction: column;
+}
+.ReactModal__Content--after-open {
+  width: 60%;
+  height: 60%;
+}
+
+.addPhotoForm {
+  width: 100%;
+  height: 100%;
+}
+.inputContainer {
+ 
+  align-items: center;
+  margin-bottom: 15px;
+  background-color: none;
+  padding: 5px;
+}
+.h1style{
+  margin: 5px;
+}
+.pictureInput {
+  width: 100%;
+  height: 25px;
+  margin: 5px;
+  padding: 5px;
+  border: 2px solid var(--primaryColor);
+  border-radius: 5px;
+  align-self: center;
+}
+
+.pictureInput:focus {
+  border: 2px solid var(--secondaryColor);
+  outline: none;
+}
+
+.descriptionInput {
+  width: 100%;
+  height: 50px;
+  margin: 5px;
+  padding: 5px;
+  border: 2px solid var(--primaryColor);
+  border-radius: 5px;
+}
+.descriptionInput:focus{
+  border: 2px solid var(--secondaryColor);
+  outline: none;
+}
+
+.divider {
+  border: none;
+}
+
+.errorMessage {
+  color: #fe4f4f;
+  padding: 5px;
+}

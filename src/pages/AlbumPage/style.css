@@ -1,14 +1,22 @@
-.breadCrumbs-counters{
+.breadCrumbs-counters {
   display: flex;
   flex-direction: row;
   align-items: center;
+  width: 100%;
+  padding: 5px;
 }
-
-
 .BreadC-position {
-  width: 70%;
+  width: 100%;
   margin: 10px 0;
 }
+.albumButtons {
+  display: flex;
+  margin-left: auto;
+  margin-right: 10px;
+  gap: 5px;
+  align-items: center;
+}
+
 .counters {
   width: 30%;
   display: flex;
@@ -30,6 +38,33 @@
 .comment-counter {
   border-left: 0.5px solid var(--primaryColor);
 }
+
+.dropdown-more {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-content-more {
+  width: 180px;
+  display: none;
+  position: absolute;
+  right: 0;
+  z-index: 1;
+  background-color: var(--bodyColor);
+  box-shadow: var(--shadow2);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+.dropdown-more:hover .dropdown-content-more {
+  display: block;
+}
+.dropdown-more:hover {
+  background-color: var(--bodyColor);
+  box-shadow: var(--shadow2);
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
 .all-in-albums {
   background-color: rgba(188, 143, 143, 0);
   width: 100%;
@@ -62,9 +97,9 @@
   background-color: rgba(250, 235, 215, 0);
 }
 
-
-
-
+.PictureModal {
+  width: 60%;
+}
 
 @media only screen and (max-width: 600px) {
 }

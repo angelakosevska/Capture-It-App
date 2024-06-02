@@ -1,13 +1,13 @@
 .secondary-button {
   color: var(--primaryColor);
   font-size: 14px;
-
   padding: 10px 20px;
   border-radius: 5px;
   border: 2px solid var(--primaryColor);
   background: transparent;
-  margin: 0 5px;
+  display: flex;
   align-items: center;
+  gap: 5px;
 }
 .secondary-button:hover {
   color: var(--secondaryColor);
