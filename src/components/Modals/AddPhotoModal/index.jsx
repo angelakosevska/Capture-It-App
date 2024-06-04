@@ -45,8 +45,8 @@ const AddPhotoModal = ({ onClose }) => {
         //post picture
         "https://capture-it.azurewebsites.net/api/picture",
         {
-          albumId: 15,
-          authorId: 10,
+          albumId: 3,
+          authorId: 11,
           imageUrl, // Send the image URL directly
           createdAt: new Date().toISOString(),
           description,
@@ -54,7 +54,7 @@ const AddPhotoModal = ({ onClose }) => {
         {
           headers: {
             Authorization:
-              "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzUzNjEyN30.1hVj1bgyD8prHAI4tH6qRjXigL665sIKzqiXKGBUyJI",
+              "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzU0NDY3M30.eNBkE8cUYRtv-AUNPHNlaooEvKPm9OJaDI4_B-AtDFQ",
           },
         }
       );
