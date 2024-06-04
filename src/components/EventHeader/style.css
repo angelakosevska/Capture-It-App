@@ -3,6 +3,7 @@
   margin: 5px;
   display: flex;
   flex-direction: row;
+  gap: 5px;
   align-items: center;
   height: 70px;
   font-size: large;

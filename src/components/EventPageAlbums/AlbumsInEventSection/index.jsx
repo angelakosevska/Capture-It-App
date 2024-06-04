@@ -1,11 +1,16 @@
 import axios from "axios";
 import AlbumCoverCardInEvent from "../AlbumCoverCardInEvent";
-
 import "./style.css";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import SearchAlbums from "../../Search/SearchAlbum";
 
-const AlbumsInEventSection = ({ picEWidth, picEHeight, eventId }) => {
+const AlbumsInEventSection = ({
+  picEWidth,
+  picEHeight,
+  eventId,
+  searchTerm,
+}) => {
   //tuka da get album i kje gi imam site
   const [error, setError] = useState([]);
   const [albums, setAlbums] = useState({
@@ -17,14 +22,14 @@ const AlbumsInEventSection = ({ picEWidth, picEHeight, eventId }) => {
   const navigate = useNavigate();
 
   const fetchAlbumsInEvent = async () => {
-    //const {eventId}= useParams;
+    //get album?
     try {
       const result = await axios.get(
-        `https://captureit.azurewebsites.net/api/album?createdAt=2024-05-11&eventId=${eventId}&pageNumber=1&pageSize=2`,
+        `https://capture-it.azurewebsites.net/api/album?createdAt=2024-05-11&eventId=${eventId}&pageNumber=1&pageSize=10`,
         {
           headers: {
             Authorization:
-              "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMCIsImV4cCI6MTcxNzM2MTUzMH0.cr6b-cujWm-4VrvNEzFvFzsyyE86S2FxSnKLhbHsZ3Y",
+              "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzUzNjEyN30.1hVj1bgyD8prHAI4tH6qRjXigL665sIKzqiXKGBUyJI",
           },
         }
       );
@@ -45,11 +50,33 @@ const AlbumsInEventSection = ({ picEWidth, picEHeight, eventId }) => {
     navigate(`/album/${albumId}`);
   };
 
+  const filterAlbums = (searchTerm) => {
+    if (!searchTerm || searchTerm.trim() === " ") {
+      return albums.data; // No filtering if search term is empty
+    }
+    const searchTerms = searchTerm
+      .split(" ")
+      .filter((term) => term.trim() !== " ");
+    return albums.data.filter((album) => {
+      const albumNameLower = album.albumName?.toLowerCase();
+      const creatorLower = album.creator?.username?.toLowerCase();
+      return searchTerms.some(
+        (term) =>
+          (albumNameLower && albumNameLower.includes(term)) ||
+          (creatorLower && creatorLower.includes(term))
+      );
+    });
+  };
+
+  const filteredAlbums = filterAlbums(searchTerm);
+
+  // Pass filtered albums to parent for rendering (optional)
+
   return (
     <>
-      {albums.data.map((album) => (
+      {filteredAlbums.map((album) => (
         <AlbumCoverCardInEvent
-          //imageUrl={album.src}
+          key={album.albumId}
           altText={album.alt}
           picWidth={picEWidth}
           picHeight={picEHeight}

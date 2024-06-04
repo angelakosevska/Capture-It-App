@@ -3,7 +3,12 @@
   justify-content: space-between;
   margin-bottom: 5px;
 }
-
+.deleteIcon{
+  display: block;
+}
+.deleteIconText{
+  display: none;
+}
 .arrowsAndMain {
   display: flex;
   width: 100%;
@@ -16,7 +21,10 @@
   display: flex;
   justify-content: center;
 }
-.picDescription {
+.picDescription { 
+  display: flex ;
+  align-items: center;
+  gap: 5px;
   border-left: 2px solid var(--primaryColor);
   /* border-right:2px solid var(--primaryColor) ; */
   border-radius: 5px;
@@ -24,6 +32,9 @@
   margin: 5px;
   height: 50px;
   box-shadow: var(--shadow);
+}
+.description{
+  font-weight: 600;
 }
 .pictureModal {
   width: 60%;

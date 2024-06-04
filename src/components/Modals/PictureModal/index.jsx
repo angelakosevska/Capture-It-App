@@ -12,6 +12,7 @@ import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import { Widgets } from "@mui/icons-material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
+import PictureAndUsername from "../../PictureAndUsername";
 
 Modal.setAppElement("#root");
 const customStyles = {
@@ -35,8 +36,9 @@ const Modalche = ({
   onNext,
   onPrev,
   pictureId,
-  onPictureDelete,
   fetchPicture,
+  profilePicture,
+  username,
 }) => {
   const [error, setError] = useState("");
   const deletePicture = async () => {
@@ -47,11 +49,12 @@ const Modalche = ({
 
     try {
       await axios.delete(
-        `https://captureit.azurewebsites.net/api/picture/${pictureId}`,
+        //delete picture
+        `https://capture-it.azurewebsites.net/api/picture/${pictureId}`,
         {
           headers: {
             Authorization:
-              " eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMCIsImV4cCI6MTcxNzM2MTUzMH0.cr6b-cujWm-4VrvNEzFvFzsyyE86S2FxSnKLhbHsZ3Y",
+              " eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzUzNjEyN30.1hVj1bgyD8prHAI4tH6qRjXigL665sIKzqiXKGBUyJI",
           },
         }
       );
@@ -78,7 +81,9 @@ const Modalche = ({
               buttonIcon={<DeleteIcon />}
               buttonHeight={"40px"}
               onClick={deletePicture}
+              className={styles.deleteIcon}
             />
+
             <NoBgButton onClick={onClose} buttonIcon={<CloseIcon />}>
               close
             </NoBgButton>
@@ -94,7 +99,14 @@ const Modalche = ({
                 <PictureContainer imageUrl={imageUrl} />
               </div>
               <div className={styles.commentsModal}>
-                <div className={styles.picDescription}>{picDescription}</div>
+                <div className={styles.picDescription}>
+                  <PictureAndUsername
+                    profilePic={profilePicture}
+                    username={username}
+                    ppDimension={"25px"}
+                  />
+                  <p className={styles.description}>{picDescription} </p>
+                </div>
                 <div className={styles.modalButtons}>
                   <SecondaryButton
                     buttonHeight={"40px"}

@@ -2,5 +2,5 @@
   margin: 10px;
 }
 .pic-fit {
-  object-fit: contain;
+  object-fit: fit ;
 }

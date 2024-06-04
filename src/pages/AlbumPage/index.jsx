@@ -32,11 +32,11 @@ export function Album() {
     //gi zemame site sliki od getpicture
     try {
       const result = await axios.get(
-        `https://captureit.azurewebsites.net/api/picture?&albumId=${albumId}&pageNumber=1&pageSize=100`,
+        `https://capture-it.azurewebsites.net/api/picture?createdAt=2024-05-05&albumId=${albumId}&pageNumber=1&pageSize=100`,
         {
           headers: {
             Authorization:
-              "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMCIsImV4cCI6MTcxNzM2MTUzMH0.cr6b-cujWm-4VrvNEzFvFzsyyE86S2FxSnKLhbHsZ3Y",
+              "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzUzNjEyN30.1hVj1bgyD8prHAI4tH6qRjXigL665sIKzqiXKGBUyJI",
           },
         }
       );
@@ -97,11 +97,12 @@ export function Album() {
 
     try {
       await axios.delete(
-        `https://captureit.azurewebsites.net/api/album/${albumId}`,
+        //delete album
+        `https://capture-it.azurewebsites.net/api/album/${albumId}`,
         {
           headers: {
             Authorization:
-              " eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMCIsImV4cCI6MTcxNzM2MTUzMH0.cr6b-cujWm-4VrvNEzFvFzsyyE86S2FxSnKLhbHsZ3Y",
+              " eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzUzNjEyN30.1hVj1bgyD8prHAI4tH6qRjXigL665sIKzqiXKGBUyJI",
           },
         }
       );
@@ -114,7 +115,7 @@ export function Album() {
   return (
     <>
       <div className="breadCrumbs-counters">
-        <Breadcrumbs />
+        <Breadcrumbs albumId={albumId} />
         <div className="albumButtons">
           <SecondaryButton
             onClick={addPhoto}
@@ -172,6 +173,10 @@ export function Album() {
           onPrev={handlePrev}
           pictureId={pictures.data[selectedPictureIndex].pictureId}
           fetchPicture={fetchPictureInAlbum}
+          profilePicture={
+            pictures.data[selectedPictureIndex].author.profilePicture
+          }
+          username={pictures.data[selectedPictureIndex].author.username}
         />
       )}
     </>

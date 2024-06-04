@@ -1,7 +1,7 @@
 .breadcrumb-not-active {
   color: #000000;
 }
-
+/*ne se koristi ova*/
 .breadcrumb-active {
   color: #cea1ec;
 }
@@ -20,4 +20,8 @@
 .breadcrumb-div {
   display: inline-block;
   margin-right: 10px;
+  pointer-events: painted;
+}
+.breadcrumb-div:hover {
+color:var(--seconadryColor)
 }

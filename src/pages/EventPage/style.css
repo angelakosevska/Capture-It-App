@@ -10,13 +10,14 @@
   align-content: flex-start;
 }
 
-.name-and-albums {
-  width: 75%;
+.name-and-search {
+  width: 100%;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   background-color: rgba(127, 255, 212, 0);
   margin: 0px;
+
 }
 
 .eventHeader {
@@ -27,26 +28,35 @@
   flex-wrap: wrap;
   background-color: rgba(250, 235, 215, 0);
   align-items: center;
-  margin: 5px;
+  padding: 5px;
   margin-right: 0px;
+  gap: 2px;
 }
-.containerForAlbums {
+.albumsAndAside {
   width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 5px;
+}
+
+.containerForAlbums {
+  width: 69%;
   max-height: 510px;
   overflow-y: auto;
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
-  margin: 5px;
+  flex-wrap: nowrap;
+  margin: 0px;
   padding: 5px;
   background-color: white;
-  
 }
 
 /* desno>>*/
 .likes-comments-description {
   background-color: rgba(95, 158, 160, 0);
-  width: 25%;
+  width: 30%;
   padding-right: 5px;
 }
 .event-description {
