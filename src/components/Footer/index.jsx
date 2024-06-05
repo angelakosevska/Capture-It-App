@@ -1,18 +1,32 @@
 import "./style.css";
-import { Link } from "react-router-dom";
-const Footer=()=> {
+import InstagramIcon from "@mui/icons-material/Instagram";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import XIcon from "@mui/icons-material/X";
+import CopyrightIcon from "@mui/icons-material/Copyright";
+
+const Footer = () => {
   return (
     <>
-      <footer>
-        <div className="container-f">
-          <div className="Footer">
-            Links
-            <Link to="/event/:id">Event </Link>
-            <Link to="/album/:id">Album</Link>
-          </div>
+      <footer className="footer-wrapper">
+        <div className="container-footer">
+          <a href="#" class="icon">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          <a href="#" class="icon">
+            <i class="fa-brands fa-linkedin-in"></i>
+          </a>
+          <a href="#" class="icon">
+            <i class="fa-brands fa-youtube"></i>
+          </a>
+          <a href="#" class="icon">
+            <i class="fa-brands fa-x-twitter"></i>
+          </a>
+          <a href="#" class="icon">
+            <i class="fa-brands fa-github"></i>
+          </a>
         </div>
       </footer>
     </>
   );
-}
+};
 export default Footer;

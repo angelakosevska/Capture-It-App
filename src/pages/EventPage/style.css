@@ -1,5 +1,5 @@
 .all-in-events {
-  background-color: rgba(188, 143, 143, 0);
+
   width: 100%;
   height: 100%;
   display: flex;
@@ -8,6 +8,7 @@
   padding: 5px;
   justify-content: center;
   align-content: flex-start;
+  flex-grow: 2;
 }
 
 .name-and-search {

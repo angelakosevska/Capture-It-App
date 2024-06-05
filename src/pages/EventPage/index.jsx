@@ -12,6 +12,7 @@ import axios from "axios";
 import IconButton from "../../components/Buttons/IconButton/index.jsx";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SearchAlbums from "../../components/Search/SearchAlbum/index.jsx";
+import CreateAlbumModal from "../../components/Modals/CreateAlbum/index.jsx";
 
 export function Event() {
   const { eventId } = useParams();
@@ -23,7 +24,14 @@ export function Event() {
   });
   const [error, setError] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [createAlbum, setCreateAlbum] = useState(false);
 
+  const postAlbum = () => {
+    setCreateAlbum(true);
+  };
+  const postedAlbum = () => {
+    setCreateAlbum(false);
+  };
   const fetchEventData = async () => {
     try {
       const result = await axios.get(
@@ -32,7 +40,7 @@ export function Event() {
         {
           headers: {
             Authorization:
-              " eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzU0NDY3M30.eNBkE8cUYRtv-AUNPHNlaooEvKPm9OJaDI4_B-AtDFQ",
+              " eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzU1MjEzOX0.Pr0jMb8u_cJvLuszwu3gxmIP3CWBPToKf2y0lH5PM5I",
           },
         }
       );
@@ -67,6 +75,7 @@ export function Event() {
               buttonWidth={"auto"}
               buttonHeight={"40px"}
               buttonText={"Create Album"}
+              onClick={postAlbum}
             />
             <IconButton
               buttonIcon={<DeleteIcon />}
@@ -99,6 +108,9 @@ export function Event() {
           </aside>
         </main>
       </div>
+      {createAlbum && (
+        <CreateAlbumModal eventId={eventId} onClose={postedAlbum} />
+      )}
     </>
   );
 }

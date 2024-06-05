@@ -20,34 +20,28 @@ const customStyles = {
   },
 };
 
-const AddPhotoModal = ({ onClose, albumId }) => {
-  const [imageUrl, setImageUrl] = useState("");
-  const [description, setDescription] = useState("");
+const CreateAlbumModal = ({ onClose, eventId }) => {
+  const [newAlbumName, setNewAlbumName] = useState("");
   const [error, setError] = useState("");
 
-  const handleImageChange = (e) => {
-    setImageUrl(e.target.value);
-  };
-
-  const handleDescriptionChange = (e) => {
-    setDescription(e.target.value);
+  const handleAlbumNameChange = (e) => {
+    setNewAlbumName(e.target.value);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!imageUrl || !description) {
+    if (!newAlbumName) {
       setError("Please fill in all fields");
       return;
     }
 
     try {
       const response = await axios.post(
-        //post picture
-        "https://capture-it.azurewebsites.net/api/picture",
+        //post album
+        "https://capture-it.azurewebsites.net/api/album",
         {
-          albumId: albumId,
-          imageUrl, // Send the image URL directly
-          description,
+          eventId: eventId,
+          albumName: { newAlbumName },
         },
         {
           headers: {
@@ -57,14 +51,12 @@ const AddPhotoModal = ({ onClose, albumId }) => {
         }
       );
 
-      console.log("Picture uploaded successfully:", response.data);
+      console.log("Album created successfully:", response.data);
       onClose(); // Close the modal after successful submission
     } catch (error) {
-      setError("Error uploading picture: " + error.message);
-      console.error("Error uploading picture:", error);
+      setError("Error creating album: " + error.message);
+      console.error("Error creating album:", error);
     }
-
-    window.location.reload();
   };
 
   return (
@@ -73,35 +65,25 @@ const AddPhotoModal = ({ onClose, albumId }) => {
         isOpen={true}
         onRequestClose={onClose}
         style={customStyles}
-        contentLabel="Add Photo Modal"
+        contentLabel="Create Album Modal"
       >
         <div className={styles.closeModalButton}>
           <NoBgButton onClick={onClose} buttonIcon={<CloseIcon />} />
         </div>
-        <h1 className={styles.h1style}>Add your pictures</h1>
+        <h1 className={styles.h1style}>Create new Album</h1>
         <form onSubmit={handleSubmit} className={styles.addPhotoForm}>
           <div className={styles.inputContainer}>
             <label>
-              Image URL:
+              Album name:
               <input
                 className={styles.pictureInput}
                 type="text"
-                value={imageUrl}
-                onChange={handleImageChange}
+                value={newAlbumName}
+                onChange={handleAlbumNameChange}
               />
             </label>
           </div>
-          <div className={styles.inputContainer}>
-            <label>
-              Describe your picture:
-              <textarea
-                className={styles.descriptionInput}
-                value={description}
-                onChange={handleDescriptionChange}
-                rows="4"
-              />
-            </label>
-          </div>
+
           {error && <p className={styles.errorMessage}>{error}</p>}
           <hr className={styles.divider} />
           <PrimaryButton
@@ -116,4 +98,4 @@ const AddPhotoModal = ({ onClose, albumId }) => {
   );
 };
 
-export default AddPhotoModal;
+export default CreateAlbumModal;
