@@ -26,12 +26,18 @@
   height: fit-content;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   flex-wrap: wrap;
   background-color: rgba(250, 235, 215, 0);
   align-items: center;
   padding: 5px;
   margin-right: 0px;
   gap: 2px;
+}
+.eventActions{
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 .albumsAndAside {
   width: 100%;
@@ -65,25 +71,11 @@
   height: auto;
 }
 
-.counters-inEvent {
-  display: flex;
-  height: 40px;
-  border-top: 1px solid var(--primaryColor);
-  border-bottom: 1px solid var(--primaryColor);
+.buttonsEvent{
+  box-shadow: var(--shadow);
   border-radius: 5px;
-  margin: 5px 0px;
-}
-.counter-event {
-  width: 50%;
-  height: 100%;
-  text-align: center;
-  padding: 10px 10px;
-}
-.like-counter {
-  border-right: 0.5px solid var(--primaryColor);
-}
-.comment-counter {
-  border-left: 0.5px solid var(--primaryColor);
+  display: flex;
+ /* border: 1px solid var(--primaryColor);*/
 }
 
 .containerForCommentSection {
@@ -93,80 +85,15 @@
   width: 100%;
   margin-top: 5px;
 }
-/* Extra small devices (phones, 600px and down) */ /*
-@media only screen and (max-width: 600px) {
-  .albumContainer {
-    background-color: red;
-    grid-template-columns: 1fr;
-  }
-  .pageContainer,
-  .albumContainer {
-    width: 550px;
-  }
-  .albumContainer > div,
-  img {
-    width: 550px;
-  }
-}*/
 
-/* Small devices (portrait tablets and large phones, 600px and up) */ /*
-@media only screen and (min-width: 600px) {
-  .albumContainer {
-    background-color: green;
-    grid-template-columns: 1fr 1fr;
-  }
-  .pageContainer,
-  .albumContainer {
-    width: 580px;
-  }
-  .albumContainer > div,
-  img {
-    width: 580px;
-  }
-}*/
-
-/* Medium devices (landscape tablets, 768px and up) */ /*
-@media only screen and (min-width: 768px) {
-  .albumContainer {
-    background-color: blue;
-    grid-template-columns: 1fr 1fr;
-  }
-  .pageContainer,
-  .albumContainer {
-    width: 760px;
-  }
-  .albumContainer > div,
-  img {
-    width: 760px;
-  }
+@media only screen and (max-width: 1000px) {
+ .eventHeader{
+  justify-items: center;
+ }
+ .containerForAlbums{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+ }
 }
-*/
-/* Large devices (laptops/desktops, 992px and up) */ /*
-@media only screen and (min-width: 992px) {
-  .albumContainer {
-    background-color: orange;
-  }
-  .pageContainer,
-  .albumContainer {
-    width: 900px;
-  }
-  .albumContainer > div,
-  img {
-    width: 900px;
-  }
-}
-*/
-/* Extra large devices (large laptops and desktops, 1200px and up) */ /*
-@media only screen and (min-width: 1200px) {
-  .albumContainer {
-    background-color: pink;
-  }
-  .pageContainer,
-  .albumContainer {
-    width: 1100px;
-  }
-  .albumContainer > div,
-  img {
-    width: 396px;
-  }
-}*/

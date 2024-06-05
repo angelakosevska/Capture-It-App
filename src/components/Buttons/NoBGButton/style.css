@@ -9,6 +9,7 @@
   align-items: center;
   display: flex;
   gap:5px;
+  justify-content: center;
 }
 .noBg-button:hover {
   color: var(--secondaryColor);

@@ -26,7 +26,7 @@ const SearchAlbums = ({ onSearch }) => {
             onChange={handleSearchChange}
             className="input-search"
           />
-          <NoBgButton buttonIcon={<SearchIcon />} />
+        
         </div>
       </div>
     </>

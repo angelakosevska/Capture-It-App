@@ -1,11 +1,11 @@
 .description {
   display: flex;
   flex-direction: column;
-background-color: #fafafb;
+  background-color: rgb(252, 248, 243);
   overflow-wrap: break-word;
-  border-top: 1px solid var(--primaryColor);
-  border-bottom: 1px solid var(--primaryColor);
-  
+ /* border: 1px solid var(--primaryColor);*/
+
+  box-shadow: var(--shadow);
   height: 70px;
   padding: 10px;
   margin: 5px 1px 5px 0px;
