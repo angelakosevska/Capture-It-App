@@ -1,4 +1,4 @@
-.primary-button {
+.primaryButton {
   color: #ffffff;
   font-size: 14px;
 
@@ -8,7 +8,7 @@
   background: var(--primaryColor);
   margin: 0 5px;
 }
-.primary-button:hover {
+.primaryButton:hover {
   color: white;
-  opacity: 0.75;
+  opacity: 0.5;
 }

@@ -7,7 +7,7 @@ import CopyrightIcon from "@mui/icons-material/Copyright";
 const Footer = () => {
   return (
     <>
-      <footer className="footer-wrapper">
+      <footer className="footer-wrapper bg-animation gradient-animation">
         <div className="container-footer">
           <a href="#" class="icon">
             <i class="fa-brands fa-instagram"></i>
@@ -24,6 +24,10 @@ const Footer = () => {
           <a href="#" class="icon">
             <i class="fa-brands fa-github"></i>
           </a>
+        </div>
+        <div className="copy">
+          <CopyrightIcon /> 2024
+    
         </div>
       </footer>
     </>

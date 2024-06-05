@@ -3,14 +3,33 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: hsl(214, 20%, 85%);
 }
 .footer-wrapper {
   width: 100%;
-  background-color: #2b74bd;
+  height: 120px;
+  background-color: #ef5f5c;
   padding: 1rem 0;
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+}
+.copy{
+  color: white;
+  font-size: small;
+  align-items: center;
+  display: flex;
+  gap: 5px;
+
+
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
 }
 .container-footer {
   display: flex;
@@ -20,14 +39,37 @@ body {
   gap: 10px;
 }
 
+.bg-animation {
+  background: linear-gradient(
+    -45deg,
+    #7e19a5,
+    #cc4117,
+    var(--secondaryColor),
+    var(--primaryColor),
+    #7e19a5
+  );
+  background-size: 400% 400%;
+  animation: gradient-animation 10s ease infinite;
+}
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
 
 .icon {
   text-decoration: none;
   width: 50px;
   height: 50px;
-  border-radius: 14px;
+  border-radius: 5px;
   /* background-color: hsla(209 20% 70% / 20%); */ /* For dark theme */
-  background-color: #fff;
+  background-color: #ffffff4b;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -38,7 +80,7 @@ body {
 }
 
 .icon > i {
-  color: #2dd4bf;
+  color: #fb5252;
   font-size: 1.5rem;
   transition: all 0.2s;
 }
@@ -90,4 +132,3 @@ body {
 .icon:has(.fa-github) {
   --color: #333;
 }
-
