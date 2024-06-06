@@ -26,7 +26,7 @@ export function Event() {
   const [error, setError] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [createAlbum, setCreateAlbum] = useState(false);
-const [isNavOpen, setIsNavOpen]=useState(false);
+  const [isNavOpen, setIsNavOpen] = useState(false);
 
   const postAlbum = () => {
     setCreateAlbum(true);
@@ -34,9 +34,9 @@ const [isNavOpen, setIsNavOpen]=useState(false);
   const postedAlbum = () => {
     setCreateAlbum(false);
   };
-  const toggleNav=()=>{
+  const toggleNav = () => {
     setIsNavOpen(!isNavOpen);
-  }
+  };
   const fetchEventData = async () => {
     try {
       const result = await axios.get(
@@ -45,7 +45,7 @@ const [isNavOpen, setIsNavOpen]=useState(false);
         {
           headers: {
             Authorization:
-              " eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzYyODEwOH0.RBe6-6V6Avi8aLzoz0GuLzrqBJK_oL7ZzSvTSuZhovo",
+              " eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzY3NTczMH0.MEPXqGZ9SquOWePUY8n3h53R_YQ6OoPAVg3Gkzc5USg",
           },
         }
       );
@@ -106,8 +106,16 @@ const [isNavOpen, setIsNavOpen]=useState(false);
               <EventDescription eventDescription={eventData.description} />
             </div>
             <div className="buttonsEvent">
-              <NoBgButton  buttonText={"likes"} buttonHeight={"40px"} buttonWidth={"50%"}/>
-              <NoBgButton buttonText={` comments`} buttonHeight={"40px"} buttonWidth={"50%"}/>
+              <NoBgButton
+                buttonText={"likes"}
+                buttonHeight={"40px"}
+                buttonWidth={"50%"}
+              />
+              <NoBgButton
+                buttonText={` comments`}
+                buttonHeight={"40px"}
+                buttonWidth={"50%"}
+              />
             </div>
             <div className="containerForCommentSection">
               <CommentsSection />
@@ -118,7 +126,6 @@ const [isNavOpen, setIsNavOpen]=useState(false);
       {createAlbum && (
         <CreateAlbumModal eventId={eventId} onClose={postedAlbum} />
       )}
-       
     </>
   );
 }

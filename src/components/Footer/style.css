@@ -27,10 +27,7 @@ body {
 
 }
 
-footer {
-  position: absolute;
-  bottom: 0;
-}
+
 .container-footer {
   display: flex;
   justify-content: center;
