@@ -1,0 +1,206 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body, html {
+    height: 100%;
+}
+
+.register-container {
+    background-image: url('../../components/gallery/dancing-people-club.jpg'); 
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+.register-box {
+    background: rgba(255, 255, 255, 0.264);
+    backdrop-filter: blur(10px);
+    padding: 30px; /* Adjusted padding */
+    border-radius: 10px;
+    text-align: center;
+    width: 450px; /* Adjusted width */
+}
+
+.logo {
+    max-width: 80px; /* Smaller width */
+    max-height: 80px; /* Smaller height */
+    margin-bottom: 20px;
+}
+
+.input-group {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.half-width {
+    width: 48%;
+}
+
+.input-field {
+    width: 100%;
+    padding: 8px; /* Adjusted padding */
+    margin: 8px 0; /* Adjusted margin */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 0.9em; /* Adjusted font size */
+}
+
+.register-button {
+    -webkit-tap-highlight-color: transparent;
+    background-color: #000;
+    color: #fff;
+    cursor: pointer;
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+        Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    font-size: 0.9em; /* Adjusted font size */
+    font-weight: 900;
+    line-height: 1.5;
+    margin: 10px 0;
+    padding: 0.5rem 1.5rem; /* Adjusted padding */
+    text-transform: uppercase;
+    border-radius: 5px;
+    border: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.register-button:hover {
+    background-color: #333;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.line {
+    flex: 1;
+    border: none;
+    height: 1px;
+    background: #727272;
+}
+
+.divider-text {
+    margin: 0 10px;
+    color: #3a3a3a;
+    font-size: 0.9em; /* Adjusted font size */
+}
+
+.social-register {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.social-button-reg{
+    background-color: transparent;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+    font-weight: 900;
+    line-height: 1.5;
+    margin: 10px 0;
+    padding: 0.5rem 1.5rem; 
+    border-radius: 5px;
+    border: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.social-register-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 1.5rem; /* Adjust icon size */
+    color: #555;
+    transition: transform 0.3s ease;
+    background-color: transparent;
+}
+
+.social-register-button:hover {
+    transform: scale(1.1);
+    background-color: transparent;
+}
+
+.facebook-reg {
+    color: #3b5998;
+    font-size: 40px;
+}
+
+.facebook-reg:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: background-color 1s ease, box-shadow 1s ease;
+    color: #223256;
+}
+
+.google-reg {
+    color: white;
+    font-size: 38px;
+}
+
+.google-reg:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: background-color 1s ease, box-shadow 1s ease;
+    color: #727272;
+}
+
+.apple-reg {
+    color: #000;
+    font-size: 40px;
+}
+
+.apple-reg:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: background-color 1s ease, box-shadow 1s ease;
+    color: #333;
+}
+
+.login-text {
+    margin-top: 20px;
+}
+
+.login-text a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.login-text a:hover {
+    text-decoration: underline;
+}
+
+.input-field {
+    position: relative;
+    width: 100%;
+    padding: 8px; /* Adjusted padding */
+    margin: 8px 0; /* Adjusted margin */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 0.9em; /* Adjusted font size */
+}
+
+.input-field.error::after {
+    content: '*';
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: red;
+    font-size: 0.8em;
+}
+

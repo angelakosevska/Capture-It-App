@@ -63,7 +63,7 @@
   cursor: pointer;
   font-family: "Urbanist", sans-serif;
   color: rgb(22, 22, 22);
-  font-size: 0.rem;
+  font-size: 1rem;
 }
 
 .SearchDropdownItem:hover {

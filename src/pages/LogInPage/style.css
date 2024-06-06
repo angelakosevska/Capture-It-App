@@ -21,8 +21,8 @@ body, html {
 }
 
 .login-box {
-    background: rgba(255, 255, 255, 0.21);
-    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.264);
+    backdrop-filter: blur(50px);
     padding: 30px;
     border-radius: 10px;
     text-align: center;

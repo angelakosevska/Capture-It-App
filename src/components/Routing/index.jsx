@@ -4,6 +4,7 @@ import { Profile } from "../../pages/profile.jsx";
 import { Album } from "../../pages/AlbumPage/index.jsx";
 import { Event } from "../../pages/EventPage/index.jsx";
 import Login from "../../pages/LogInPage/index.jsx";
+import Register from "../../pages/RegisterPage/index.jsx"
 import Footer from "../Footer/index.jsx";
 import Header from "../Header/index.jsx";
 
@@ -38,10 +39,10 @@ const Routing = () => {
         <Route path="/login" element={<NoLayout />}>
           <Route path="/login" element={<Login />} />
         </Route>
-        {/* Add register route if needed */}
-        {/* <Route path="/register" element={<NoLayout />}>
-          <Route path="/register" element={<Register />} />
-        </Route> */}
+        <Route path="/register" element={<NoLayout />}>
+          <Route path="/register" element={<Register />}>
+          </Route>
+        </Route>
       </Routes>
     </>
   );
