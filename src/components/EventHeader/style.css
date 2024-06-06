@@ -5,7 +5,7 @@
   flex-direction: row;
   gap: 5px;
   align-items: center;
-  height: 70px;
+  height: 50px;
   font-size: large;
 }
 @media only screen and (max-width: 1000px) {

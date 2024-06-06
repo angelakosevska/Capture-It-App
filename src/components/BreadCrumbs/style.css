@@ -15,13 +15,13 @@
   align-items: center;
   margin-left: 20px;
   width: 50%;
+  gap: 5px;
 }
 
 .breadcrumb-div {
   display: inline-block;
-  margin-right: 10px;
-  pointer-events: painted;
+  cursor: pointer;
 }
 .breadcrumb-div:hover {
-color:var(--seconadryColor)
+  color: var(--secondaryColor);
 }

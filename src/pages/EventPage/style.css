@@ -1,7 +1,6 @@
 .all-in-events {
-
   width: 100%;
-  height: 100%;
+ 
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -10,7 +9,16 @@
   align-content: flex-start;
   flex-grow: 2;
 }
-
+@media only screen and (max-width: 1400px){
+  .all-in-events{
+    min-height: 510px;
+  }
+}
+@media only screen and (min-width: 1400px){
+  .all-in-events{
+    min-height: 90vh;
+  }
+}
 .name-and-search {
   width: 100%;
   display: flex;
