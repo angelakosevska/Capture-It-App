@@ -36,7 +36,7 @@ export function Album() {
         {
           headers: {
             Authorization:
-              "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzU0NDY3M30.eNBkE8cUYRtv-AUNPHNlaooEvKPm9OJaDI4_B-AtDFQ",
+              "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzY3NTczMH0.MEPXqGZ9SquOWePUY8n3h53R_YQ6OoPAVg3Gkzc5USg",
           },
         }
       );
@@ -102,7 +102,7 @@ export function Album() {
         {
           headers: {
             Authorization:
-              " eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzU0NDY3M30.eNBkE8cUYRtv-AUNPHNlaooEvKPm9OJaDI4_B-AtDFQ",
+              " eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzY3NTczMH0.MEPXqGZ9SquOWePUY8n3h53R_YQ6OoPAVg3Gkzc5USg",
           },
         }
       );
@@ -117,19 +117,18 @@ export function Album() {
       <div className="breadCrumbs-counters">
         <Breadcrumbs albumId={albumId} />
         <div className="albumButtons">
-          <SecondaryButton
-            onClick={addPhoto}
-            buttonIcon={<AddAPhotoIcon />}
-            buttonHeight={"40px"}
-            buttonText={"Add photo"}
-          />
-
           <div className="dropdown-more">
             <NoBgButton
               buttonIcon={<MoreVertIcon fontSize="large" />}
               className="dropbtn"
             />
             <div className="dropdown-content-more">
+              <NoBgButton
+                onClick={addPhoto}
+                buttonIcon={<AddAPhotoIcon />}
+                buttonHeight={"40px"}
+                buttonText={"Add photo"}
+              />
               <NoBgButton
                 buttonIcon={<DeleteIcon />}
                 buttonText={"Delete album"}
@@ -161,7 +160,7 @@ export function Album() {
           ))}
         </div>
       </div>
-      {addPhotoM && <AddPhotoModal onClose={addedPhoto} />}
+      {addPhotoM && <AddPhotoModal onClose={addedPhoto} albumId={albumId} />}
 
       {modalIsOpen && selectedPictureIndex !== null && (
         <Modalche

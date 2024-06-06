@@ -12,6 +12,8 @@ import axios from "axios";
 import IconButton from "../../components/Buttons/IconButton/index.jsx";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SearchAlbums from "../../components/Search/SearchAlbum/index.jsx";
+import CreateAlbumModal from "../../components/Modals/CreateAlbum/index.jsx";
+import NoBgButton from "../../components/Buttons/NoBGButton/index.jsx";
 
 export function Event() {
   const { eventId } = useParams();
@@ -23,7 +25,18 @@ export function Event() {
   });
   const [error, setError] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [createAlbum, setCreateAlbum] = useState(false);
+  const [isNavOpen, setIsNavOpen] = useState(false);
 
+  const postAlbum = () => {
+    setCreateAlbum(true);
+  };
+  const postedAlbum = () => {
+    setCreateAlbum(false);
+  };
+  const toggleNav = () => {
+    setIsNavOpen(!isNavOpen);
+  };
   const fetchEventData = async () => {
     try {
       const result = await axios.get(
@@ -32,7 +45,7 @@ export function Event() {
         {
           headers: {
             Authorization:
-              " eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzU0NDY3M30.eNBkE8cUYRtv-AUNPHNlaooEvKPm9OJaDI4_B-AtDFQ",
+              " eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzY3NTczMH0.MEPXqGZ9SquOWePUY8n3h53R_YQ6OoPAVg3Gkzc5USg",
           },
         }
       );
@@ -58,22 +71,25 @@ export function Event() {
               username={eventData?.owner?.username}
               eventName={eventData.eventName}
             />
-            <PrimaryButton
-              buttonWidth={"auto"}
-              buttonHeight={"40px"}
-              buttonText={"Invite People"}
-            />
-            <SecondaryButton
-              buttonWidth={"auto"}
-              buttonHeight={"40px"}
-              buttonText={"Create Album"}
-            />
-            <IconButton
-              buttonIcon={<DeleteIcon />}
-              buttonHeight={"40px"}
-              buttonWidth={"40px"}
-            />
-            <SearchAlbums onSearch={setSearchTerm} />
+            <div className="eventActions">
+              <PrimaryButton
+                buttonWidth={"auto"}
+                buttonHeight={"40px"}
+                buttonText={"Invite People"}
+              />
+              <SecondaryButton
+                buttonWidth={"auto"}
+                buttonHeight={"40px"}
+                buttonText={"Create Album"}
+                onClick={postAlbum}
+              />
+              <IconButton
+                buttonIcon={<DeleteIcon />}
+                buttonHeight={"40px"}
+                buttonWidth={"40px"}
+              />
+              <SearchAlbums onSearch={setSearchTerm} />
+            </div>
           </div>
         </div>
         <main className="albumsAndAside">
@@ -89,9 +105,17 @@ export function Event() {
             <div className="event-description">
               <EventDescription eventDescription={eventData.description} />
             </div>
-            <div className="counters-inEvent">
-              <div className="like-counter counter-event">0 likes</div>
-              <div className="comment-counter counter-event">15 comments</div>
+            <div className="buttonsEvent">
+              <NoBgButton
+                buttonText={"likes"}
+                buttonHeight={"40px"}
+                buttonWidth={"50%"}
+              />
+              <NoBgButton
+                buttonText={` comments`}
+                buttonHeight={"40px"}
+                buttonWidth={"50%"}
+              />
             </div>
             <div className="containerForCommentSection">
               <CommentsSection />
@@ -99,6 +123,9 @@ export function Event() {
           </aside>
         </main>
       </div>
+      {createAlbum && (
+        <CreateAlbumModal eventId={eventId} onClose={postedAlbum} />
+      )}
     </>
   );
 }

@@ -8,3 +8,8 @@
   height: 70px;
   font-size: large;
 }
+@media only screen and (max-width: 1000px) {
+  .eventHeader-flex {
+    width: 90%;
+  }
+}

@@ -60,15 +60,10 @@
   width: 90%;
   height: 95%;
 }
-.commentCount {
-  color: #ff7e4f;
-  font-size: 14px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 5px;
-  border: 2px solid #ff7e4f;
-  background: none;
-  margin: 0 2px;
-  width: 50%;
+.primaryButton{
+  background-color: orange;
+}
+
+.primaryButton:hover{
+opacity: 1;
 }
