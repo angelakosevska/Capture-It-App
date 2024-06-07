@@ -6,6 +6,7 @@ import axios from "axios";
 import Modalche from "../../components/Modals/PictureModal";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useNavigate, useParams } from "react-router-dom";
+import { redirect } from "react-router-dom";
 import AddPhotoModal from "../../components//Modals/AddPhotoModal/index.jsx";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import NoBgButton from "../../components/Buttons/NoBGButton/index.jsx";
@@ -35,7 +36,7 @@ export function Album() {
         {
           headers: {
             Authorization:
-              "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzc5NDcyOH0.TfhBgWoAPtWWN8h49ml-N_9Vt1VEMV5FMofHM7FOvNo",
+              "Bearer  eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzc5ODM1OH0.zSyPcsIZcL9NFBinzhvC1sZNMtN24FAMYpQGTXdFR1k",
           },
         }
       );
@@ -50,8 +51,10 @@ export function Album() {
 
   useEffect(() => {
     console.log("fetchPictureInAlbum");
-    fetchPictureInAlbum();
-  }, [albumId]);
+    
+      fetchPictureInAlbum();
+    
+  }, [albumId, pictures.totalRecords]);
 
   const openModal = (index) => {
     setSelectedPictureIndex(index);
@@ -101,7 +104,7 @@ export function Album() {
         {
           headers: {
             Authorization:
-              " Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzc5NDcyOH0.TfhBgWoAPtWWN8h49ml-N_9Vt1VEMV5FMofHM7FOvNo",
+              " Bearer  eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzc5ODM1OH0.zSyPcsIZcL9NFBinzhvC1sZNMtN24FAMYpQGTXdFR1k",
           },
         }
       );

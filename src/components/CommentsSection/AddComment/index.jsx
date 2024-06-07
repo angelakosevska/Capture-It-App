@@ -7,12 +7,11 @@ import CommentItem from "./CommentItem";
 
 const AddComment = ({ onAddComment, maxHeight, userId, pictureId }) => {
   const [comments, setComments] = useState(
-    /*{
-    totalRecords: 0,
+   { totalRecords: 0,
     pageNumber: 0,
     pageSize: 0,
     data: [],
-  }*/ []
+   }
   );
   const [error, setError] = useState([]);
   const onComment = (newComment) => {
@@ -36,8 +35,8 @@ const AddComment = ({ onAddComment, maxHeight, userId, pictureId }) => {
         }
       );
 
-      setComments(result?.data.data);
-      console?.log("comments data", result.data?.data);
+      setComments(result?.data);
+      console?.log("comments data", result.data);
     } catch (error) {
       setError(error);
       console.error("error fetching comment data: ", error);

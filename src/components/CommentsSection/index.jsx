@@ -1,10 +1,10 @@
 import AddComment from "../CommentsSection/AddComment";
 import "./style.css";
 
-const CommentsSection = ({pictureId}) => {
+const CommentsSection = ({pictureId, onCommentAdded, }) => {
   return (
     <>
-      <AddComment pictureId={pictureId}/>
+      <AddComment pictureId={pictureId} onCommentAdded={onCommentAdded}/>
     </>
   );
 };
