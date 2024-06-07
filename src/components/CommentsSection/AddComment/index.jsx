@@ -6,10 +6,8 @@ import CommentInput from "./CommentInput";
 import CommentItem from "./CommentItem";
 
 
-const dummyComments = [];
-
 const AddComment = (onAddComment, {maxHeight, userId, pictureId}) => {
-  const [comments, setComments] = useState(dummyComments);
+  const [comments, setComments] = useState("");
 
   const onComment = (newComment) => {
     if (newComment.comment1.trim()) {

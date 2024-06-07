@@ -62,7 +62,7 @@
   overflow-y: auto;
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   margin: 0px;
   padding: 5px;
   background-color: white;
