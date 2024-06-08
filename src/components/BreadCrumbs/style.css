@@ -1,23 +1,27 @@
 .breadcrumb-not-active {
-  color: #f20606;
+  color: #000000;
 }
-
+/*ne se koristi ova*/
 .breadcrumb-active {
-  color: #07110b;
+  color: #cea1ec;
 }
 
 .breadcrumb-arrow {
   margin-left: 10px;
   margin-right: 10px;
 }
-.breadCrumbsContainer{
- display: flex;
- align-items: center;
- margin-left: 20px;
+.breadCrumbsContainer {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+  width: 50%;
 }
 
 .breadcrumb-div {
- 
   display: inline-block;
   margin-right: 10px;
+  pointer-events: painted;
+}
+.breadcrumb-div:hover {
+color:var(--seconadryColor)
 }

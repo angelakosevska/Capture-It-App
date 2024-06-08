@@ -1,17 +1,18 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import Logo1 from "../Logo1";
+import Logo1 from "../../Logo";
 import "./style.css";
 
 const Header = ({ user }) => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [showDropdown, setShowDropdown] = useState(false);
+  const [showSearchDropdown, setShowSearchDropdown] = useState(false);
+  const [showProfileDropdown, setShowProfileDropdown] = useState(false);
 
   const suggestions = ["John Doe", "Jane Smith", "Event Name"];
 
   const handleProfileClick = () => {
-    setShowDropdown(!showDropdown);
+    setShowProfileDropdown(!showProfileDropdown);
   };
 
   return (
@@ -25,7 +26,7 @@ const Header = ({ user }) => {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            {/* SVG content */}
+            <Logo1 />
           </svg>
         </Link>
         <div className="LogoText">
@@ -40,12 +41,12 @@ const Header = ({ user }) => {
             value={searchTerm}
             onChange={(e) => {
               setSearchTerm(e.target.value);
-              setShowDropdown(true);
+              setShowSearchDropdown(true);
             }}
-            onFocus={() => setShowDropdown(true)}
-            onBlur={() => setShowDropdown(false)}
+            onFocus={() => setShowSearchDropdown(true)}
+            onBlur={() => setShowSearchDropdown(false)}
           /> 
-          {false && ( /*ova da se meni */
+          {showSearchDropdown && (
             <div className="SearchDropdownMenu">
               {suggestions
                 .filter((suggestion) =>
@@ -67,7 +68,7 @@ const Header = ({ user }) => {
       </div>
       <div className="ProfileLink" onClick={handleProfileClick}>
         <i className="bi bi-person-circle"></i>
-        {showDropdown && ( /* i ova */
+        {showProfileDropdown && (
           <div className="ProfileDropdownMenu">
             <div className="dropdown-item">{user?.firstName}</div>
             <div className="dropdown-item">{user?.lastName}</div>
@@ -84,4 +85,3 @@ const Header = ({ user }) => {
 };
 
 export default Header;
-

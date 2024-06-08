@@ -1,4 +1,3 @@
-import Layout from "../../UI/Layout";
 import "./style.css";
 import { Link } from "react-router-dom";
 import Routing from "../../components/Routing";

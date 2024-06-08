@@ -1,0 +1,69 @@
+.closeModalButton {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+.deleteIcon{
+  display: block;
+}
+.deleteIconText{
+  display: none;
+}
+.arrowsAndMain {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+}
+.pictureAndComments {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+.picDescription { 
+  display: flex ;
+  align-items: center;
+  gap: 5px;
+  border-left: 2px solid var(--primaryColor);
+  /* border-right:2px solid var(--primaryColor) ; */
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+  height: 50px;
+  box-shadow: var(--shadow);
+}
+.description{
+  font-weight: 600;
+}
+.pictureModal {
+  width: 60%;
+  align-content: center;
+}
+.commentsModal {
+  width: 40%;
+  height: 100%;
+  margin-left: 10px;
+}
+.modalButtons {
+  display: flex;
+  justify-content: center;
+}
+/* ova e za modalot */
+.ReactModal__Content {
+ max-width: 90%;
+  max-height: 95%;
+  display: flex;
+  flex-direction: column;
+}
+.ReactModal__Content--after-open {
+  width: 90%;
+  height: 95%;
+}
+.primaryButton{
+  background-color: orange;
+}
+
+.primaryButton:hover{
+opacity: 1;
+}
