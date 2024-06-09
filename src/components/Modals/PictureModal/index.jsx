@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Modal from "react-modal";
 import CommentsSection from "../../CommentsSection/index";
 import PictureContainer from "../../PictureContainer/index";
@@ -31,7 +31,6 @@ const customStyles = {
 const Modalche = ({
   imageUrl,
   picDescription,
-  commCount,
   onClose,
   onNext,
   onPrev,
@@ -39,9 +38,16 @@ const Modalche = ({
   fetchPicture,
   profilePicture,
   username,
+  albumId,
+  fetchPictureComments,
+  comments,
+  commentsCount,
+  fetchCommentsOnPicture,
+  fetchCommentCount,
+  commentCountPic
 }) => {
   const [error, setError] = useState("");
-  const [commentCount, setCommentCount]= useState(commCount);
+  // const [commentCountPicture, setCommentCountPic]=useState(commentCountPic);
   const deletePicture = async () => {
     const isConfirmed = window.confirm(
       "Are you sure you want to delete this picture?"
@@ -55,7 +61,7 @@ const Modalche = ({
         {
           headers: {
             Authorization:
-              " Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzg3NzI2MX0.zZ3eC5cpa3JL_Zu9uZ0UNKS3o6v5fRJcu8U4zxkVIaM",
+              " Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzkzMDU3NX0.d1Zjt72erpjY70vRq01FiaeY_tLcedLPFaDer0g6XX0",
           },
         }
       );
@@ -67,9 +73,8 @@ const Modalche = ({
     onClose();
     //window.location.reload();
   };
-const incrementCommentCount =()=> {
-  setCommentCount((prevCount)=> prevCount=1);
-}
+
+
   return (
     <>
       <div>
@@ -119,11 +124,21 @@ const incrementCommentCount =()=> {
                   <PrimaryButton
                     buttonHeight={"40px"}
                     buttonWidth={"50%"}
-                    buttonText={`${commCount} comments `}
+                    buttonText={`${commentsCount} comments `}
                     className={styles.primaryButtonComment}
                   />
                 </div>
-                <CommentsSection pictureId={pictureId} onComment={incrementCommentCount} />
+                <CommentsSection
+                  pictureId={pictureId}
+                  onPrev={onPrev}
+                  onNext={onNext}
+                  albumId={albumId}
+                  fetchCommentCount={fetchCommentCount}
+                  fetchPictureComments={fetchPictureComments}
+                  comments={comments}
+                  commentsCount={commentsCount}
+                  fetchCommentsOnPicture={fetchCommentsOnPicture}
+                />
               </div>
             </div>
 

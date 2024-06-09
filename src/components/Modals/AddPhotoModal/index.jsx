@@ -20,7 +20,7 @@ const customStyles = {
   },
 };
 
-const AddPhotoModal = ({ onClose, albumId }) => {
+const AddPhotoModal = ({ onClose, albumId, fetchPictureInAlbum }) => {
   const [imageUrl, setImageUrl] = useState("");
   const [description, setDescription] = useState("");
   const [error, setError] = useState("");
@@ -52,14 +52,14 @@ const AddPhotoModal = ({ onClose, albumId }) => {
         {
           headers: {
             Authorization:
-              "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzg3NzI2MX0.zZ3eC5cpa3JL_Zu9uZ0UNKS3o6v5fRJcu8U4zxkVIaM",
+              "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzkzMDU3NX0.d1Zjt72erpjY70vRq01FiaeY_tLcedLPFaDer0g6XX0",
           },
         }
       );
 
       console.log("Picture uploaded successfully:", response.data);
-      onClose();
-      window.location.reload(); // Close the modal after successful submission
+      onClose(); // Close the modal after successful submission
+      fetchPictureInAlbum();
     } catch (error) {
       setError("Error uploading picture: " + error.message);
       console.error("Error uploading picture:", error);

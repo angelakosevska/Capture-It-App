@@ -4,58 +4,33 @@ import SendIcon from "@mui/icons-material/Send";
 import axios from "axios";
 import CommentInput from "./CommentInput";
 import CommentItem from "./CommentItem";
+import { PagesOutlined } from "@mui/icons-material";
 
-const AddComment = ({ onComment, maxHeight, userId, pictureId }) => {
-  const [comments, setComments] = useState(
-    /*{
-    totalRecords: 0,
-    pageNumber: 0,
-    pageSize: 0,
-    data: [],
-  }*/ []
-  );
-  const [error, setError] = useState([]);
-
-  const handleComment = (newComment) => {
-    if (newComment.comment1.trim()) {
-      setComments((prev) => [...prev, newComment]);
-      onComment();
+const AddComment = ({
+  pictureId,
+  albumId,
+  fetchCommentCount,
+  comments,
+  commentsCount,
+  fetchCommentsOnPicture,
+}) => {
+  const [commentsGet, setCommentsGet] = useState(comments);
+  const [commentsCountGet, setCommentsCountGet] = useState(commentsCount);
+  const onComment = (newComment) => {
+    if (newComment.commentBody && newComment.commentBody.trim()) {
+      setCommentsGet((prev) => [...prev, newComment]);
     } else {
       return;
     }
   };
 
-  const fetchCommentsOnPicture = async () => {
-    try {
-      const result = await axios.get(
-        //get comments
-        `https://capture-it.azurewebsites.net/api/comment?createdAt=2024-05-11&pictureId=${pictureId}&pageNumber=1&pageSize=100`,
-        {
-          headers: {
-            Authorization:
-              " Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzg3NzI2MX0.zZ3eC5cpa3JL_Zu9uZ0UNKS3o6v5fRJcu8U4zxkVIaM",
-          },
-        }
-      );
-
-      setComments(result?.data.data);
-      console?.log("comments data", result.data?.data);
-    } catch (error) {
-      setError(error);
-      console.error("error fetching comment data: ", error);
-    }
-  };
-  useEffect(() => {
-    fetchCommentsOnPicture();
-  }, [pictureId]);
-
   return (
     <>
       <div className="all-comments">
-        {comments.length > 0 ? (
-          comments?.map((comment) => (
+        {commentsCount > 0 ? (
+          comments.map((comment) => (
             <CommentItem
-              key={comment.id}
+              key={comment.commentId}
               comment={comment.comment1}
               username={comment.user.username}
               profilePic={comment.user.profilePicture}
@@ -73,8 +48,11 @@ const AddComment = ({ onComment, maxHeight, userId, pictureId }) => {
           buttonIcon={<SendIcon />}
           placeholderInput="Add a comment"
           onComment={onComment}
-          userId={userId}
           pictureId={pictureId}
+          fetchCommentCount={fetchCommentCount}
+          albumId={albumId}
+          commentsCount={commentsCount}
+          fetchCommentsOnPicture={fetchCommentsOnPicture}
         />
       </div>
     </>
