@@ -22,6 +22,7 @@ export function Album() {
     totalRecords: 0,
   });
   const [commentsCount, setCommentsCount] = useState(0);
+  const [likesCount, setLikesCount] = useState(0);
   const [comments, setComments] = useState({
     totalRecords: 1,
     pageNumber: 1,
@@ -34,6 +35,9 @@ export function Album() {
   const [selectedPictureIndex, setSelectedPictureIndex] = useState("");
   const [addPhotoM, setAddPhotoM] = useState(false);
   const { albumId } = useParams();
+  const [likes, setLikes] = useState(0);
+  const [hasLiked, setHasLiked] = useState(false);
+  const [likeId, setLikeId] = useState(null);
 
   const fetchPictureInAlbum = async () => {
     //gi zemame site sliki od getpicture
@@ -43,7 +47,7 @@ export function Album() {
         {
           headers: {
             Authorization:
-              "Bearer  eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzkzNjU1N30.CZHI51ebhVDDWsilsKOnueb_NbNYg8_OVyfFsE8ReTs",
+              "Bearer  eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzk1OTE3Nn0.xA27ueveOcZUPtZ5zDdyCRj1fq4hP3dJ024QypGqcBE",
           },
         }
       );
@@ -70,7 +74,7 @@ export function Album() {
         {
           headers: {
             Authorization:
-              "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzkzNjU1N30.CZHI51ebhVDDWsilsKOnueb_NbNYg8_OVyfFsE8ReTs ",
+              "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzk1OTE3Nn0.xA27ueveOcZUPtZ5zDdyCRj1fq4hP3dJ024QypGqcBE ",
           },
         }
       );
@@ -84,6 +88,77 @@ export function Album() {
       console.error("error fetching comment get data ", error);
     }
   };
+  const fetchLikesOnPicture = async () => {
+    try {
+      const response = await axios.get(
+        `https://capture-it.azurewebsites.net/api/like?pictureId=${pictures?.data[selectedPictureIndex]?.pictureId}&pageNumber=1&pageSize=100`,
+        {
+          headers: {
+            Authorization:
+              "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzk1OTE3Nn0.xA27ueveOcZUPtZ5zDdyCRj1fq4hP3dJ024QypGqcBE",
+          },
+        }
+      );
+      setLikesCount(response.data.totalRecords);
+      const userLike = response.data.data.find(
+        (like) => like.user.username === "kosevskaa"
+      );
+      if (userLike) {
+        setHasLiked(true);
+        setLikeId(userLike.likeId);
+      } else {
+        setHasLiked(false);
+        setLikeId(null);
+      }
+    } catch (error) {
+      console.log("error fetching likes", error);
+    }
+  };
+  const deleteLike = async () => {
+    try {
+      if (!likeId) return;
+      await axios.delete(
+        `https://capture-it.azurewebsites.net/api/like/${likeId}`,
+        {
+          headers: {
+            Authorization:
+              "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzk1OTE3Nn0.xA27ueveOcZUPtZ5zDdyCRj1fq4hP3dJ024QypGqcBE",
+          },
+        }
+      );
+      setHasLiked(false);
+      setLikes((prevLikes) => prevLikes - 1);
+    } catch (error) {
+      console.error("error deleting like", error);
+    }
+  };
+  const postLike = async () => {
+    try {
+      const response = await axios.post(
+        `https://capture-it.azurewebsites.net/api/like`,
+        { pictureId: pictures.data[selectedPictureIndex].pictureId },
+        {
+          headers: {
+            Authorization:
+              "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzk1OTE3Nn0.xA27ueveOcZUPtZ5zDdyCRj1fq4hP3dJ024QypGqcBE",
+          },
+        }
+      );
+      setHasLiked(true);
+      setLikes((prevLikes) => prevLikes + 1);
+      fetchLikesOnPicture();
+
+    } catch (error) {
+      console.error("error posing like", error);
+      console.error("post like eror", error.response.data);
+    }
+  };
+  useEffect(() => {
+    if (selectedPictureIndex !== null) {
+      fetchLikesOnPicture();
+    }
+  }, [selectedPictureIndex]);
+
   useEffect(() => {
     fetchCommentsOnPicture();
   }, [selectedPictureIndex]);
@@ -92,7 +167,6 @@ export function Album() {
     setSelectedPictureIndex(index);
     setIsOpen(true);
   };
-
   const closeModal = () => {
     setSelectedPictureIndex(null);
     setIsOpen(false);
@@ -104,6 +178,7 @@ export function Album() {
   const addedPhoto = () => {
     setAddPhotoM(false);
   };
+
   const editAlbum = () => {
     setEditAlbumIsOpen(true);
   };
@@ -170,7 +245,7 @@ export function Album() {
         {
           headers: {
             Authorization:
-              " Bearer  eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzkzNjU1N30.CZHI51ebhVDDWsilsKOnueb_NbNYg8_OVyfFsE8ReTs",
+              " Bearer  eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzk1OTE3Nn0.xA27ueveOcZUPtZ5zDdyCRj1fq4hP3dJ024QypGqcBE",
           },
         }
       );
@@ -254,7 +329,11 @@ export function Album() {
           albumId={albumId}
           comments={comments}
           commentsCount={commentsCount}
+          likesCount={likesCount}
           fetchCommentsOnPicture={fetchCommentsOnPicture}
+          postLike={postLike}
+          deleteLike={deleteLike}
+          hasLiked={hasLiked}
         />
       )}
     </>

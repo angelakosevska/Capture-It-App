@@ -6,13 +6,13 @@ import styles from "./style.module.css";
 import NoBgButton from "../../Buttons/NoBGButton";
 import CloseIcon from "@mui/icons-material/Close";
 import PrimaryButton from "../../Buttons/PrimaryButton";
-import SecondaryButton from "../../Buttons/SecondaryButton";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
-import { Widgets } from "@mui/icons-material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 import PictureAndUsername from "../../PictureAndUsername";
+import FavoriteIcon from "@mui/icons-material/Favorite"; //liked
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined"; //like
 
 Modal.setAppElement("#root");
 const customStyles = {
@@ -42,11 +42,16 @@ const Modalche = ({
   fetchPictureComments,
   comments,
   commentsCount,
+  likesCount,
   fetchCommentsOnPicture,
   fetchCommentCount,
-  commentCountPic,
+  postLike,
+  deleteLike,
 }) => {
   const [error, setError] = useState("");
+  const [likes, setLikes] = useState(0);
+  const [hasLiked, setHasLiked] = useState(null);
+
   const deletePicture = async () => {
     const isConfirmed = window.confirm(
       "Are you sure you want to delete this picture?"
@@ -60,12 +65,11 @@ const Modalche = ({
         {
           headers: {
             Authorization:
-              "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzkzNjU1N30.CZHI51ebhVDDWsilsKOnueb_NbNYg8_OVyfFsE8ReTs",
+              "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzk1OTE3Nn0.xA27ueveOcZUPtZ5zDdyCRj1fq4hP3dJ024QypGqcBE",
           },
         }
       );
       fetchPicture([pictureId]);
-      
     } catch (error) {
       setError(error);
       console.error("Error deleting album: ", error);
@@ -115,11 +119,24 @@ const Modalche = ({
                   <p className={styles.description}>{picDescription} </p>
                 </div>
                 <div className={styles.modalButtons}>
-                  <PrimaryButton
-                    buttonHeight={"40px"}
-                    buttonWidth={"50%"}
-                    buttonText={`{} likes`}
-                  />
+                  {hasLiked ? (
+                    <PrimaryButton
+                      buttonHeight={"40px"}
+                      buttonWidth={"50%"}
+                      buttonText={`  ${likesCount} `}
+                      buttonIcon={<FavoriteIcon />}
+                      onClick={deleteLike}
+                    />
+                  ) : (
+                    <PrimaryButton
+                      buttonHeight={"40px"}
+                      buttonWidth={"50%"}
+                      buttonText={`${likesCount} `}
+                      buttonIcon={<FavoriteBorderOutlinedIcon />}
+                      onClick={postLike}
+                    />
+                  )}
+
                   <PrimaryButton
                     buttonHeight={"40px"}
                     buttonWidth={"50%"}
@@ -136,6 +153,7 @@ const Modalche = ({
                   fetchPictureComments={fetchPictureComments}
                   comments={comments}
                   commentsCount={commentsCount}
+                  likesCount={likesCount}
                   fetchCommentsOnPicture={fetchCommentsOnPicture}
                 />
               </div>
