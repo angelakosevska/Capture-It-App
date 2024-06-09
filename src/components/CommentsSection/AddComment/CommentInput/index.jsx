@@ -12,8 +12,10 @@ const CommentInput = ({
   buttonIcon,
   buttonWidth,
   buttonHeight,
-  userId,
   pictureId,
+  fetchCommentsOnPicture,
+  albumId,
+  fetchCommentCount,
 }) => {
   const [commentBody, setCommentBody] = useState("");
 
@@ -21,24 +23,25 @@ const CommentInput = ({
     if (commentBody.trim()) {
       try {
         const response = await axios.post(
-          "https://captureit.azurewebsites.net/api/comment",
+          "https://capture-it.azurewebsites.net/api/comment",
           {
-            userId: userId,
-            pictureId: pictureId,
+            pictureId,
             comment1: commentBody,
-            createdAt: new Date().toISOString(),
           },
+
           {
             headers: {
               Authorization:
-                "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMCIsImV4cCI6MTcxNzI3NjI2N30.DHmO6d7rz2X0iaFfYIA-d71t51W7V_eAFM4TmZpiHZ0k",
+                "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzg5NDcwM30.BQo93mli5Trtt0AJg1oBcx075kYYR4E4ZWRK1rAXnuo",
             },
           }
         );
-        console.log(response.data);
-        onComment(response.data);
+
+        onComment(commentBody);
+        console.log("comentdata", response.data);
         setCommentBody("");
-        window.location.reload(); //refresh the page
+        fetchCommentsOnPicture();
+        fetchCommentCount();
       } catch (error) {
         console.error("Error posting comment: ", error);
       }

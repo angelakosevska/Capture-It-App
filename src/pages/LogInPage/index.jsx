@@ -8,6 +8,7 @@ const Login = () => {
       <div className="login-container">
         <div className="login-box">
           <img src={Logo} alt="Logo" className="logo" />
+          <div className="LogoText">Welcome to Capture It</div>
           <form>
             <input type="text" placeholder="Username/Email/Phone" className="input-field" />
             <input type="password" placeholder="Password" className="input-field" />

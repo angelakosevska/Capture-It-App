@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Modal from "react-modal";
 import CommentsSection from "../../CommentsSection/index";
 import PictureContainer from "../../PictureContainer/index";
@@ -39,6 +39,8 @@ const Modalche = ({
   fetchPicture,
   profilePicture,
   username,
+  albumId,
+  comments
 }) => {
   const [error, setError] = useState("");
   const deletePicture = async () => {
@@ -54,7 +56,7 @@ const Modalche = ({
         {
           headers: {
             Authorization:
-              " eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzY3NTczMH0.MEPXqGZ9SquOWePUY8n3h53R_YQ6OoPAVg3Gkzc5USg",
+              " Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzg5NDcwM30.BQo93mli5Trtt0AJg1oBcx075kYYR4E4ZWRK1rAXnuo",
           },
         }
       );
@@ -66,6 +68,39 @@ const Modalche = ({
     onClose();
     //window.location.reload();
   };
+  const [commentCountPic, setCommentCountPic] = useState("");
+  const [likesCountPic, setLikesCountPic] = useState("");
+
+  const fetchCommentCount = async () => {
+    try {
+      const result = await axios.get(
+        `https://capture-it.azurewebsites.net/api/picture/${pictureId}`,
+        {
+          headers: {
+            Authorization:
+              "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzg5NDcwM30.BQo93mli5Trtt0AJg1oBcx075kYYR4E4ZWRK1rAXnuo",
+          },
+        }
+      );
+
+      setCommentCountPic(result?.data.commentCount);
+      setLikesCountPic(result.data.likeCount);
+      console.log(
+        " coment count",
+        result?.data.commentCount,
+        "likes",
+        result?.data.likeCount
+      );
+    } catch (error) {
+      setError(error);
+      console.error("error fetching comentcoutnpict: ", error);
+    }
+  };
+
+  useEffect(() => {
+    console.log("fetchPictureInAlbum");
+    fetchCommentCount();
+  }, []);
 
   return (
     <>
@@ -116,11 +151,17 @@ const Modalche = ({
                   <PrimaryButton
                     buttonHeight={"40px"}
                     buttonWidth={"50%"}
-                    buttonText={`${commCount} comments `}
+                    buttonText={`${commentCountPic} comments `}
                     className={styles.primaryButtonComment}
                   />
                 </div>
-                <CommentsSection />
+                <CommentsSection
+                  pictureId={pictureId}
+                  onPrev={onPrev}
+                  onNext={onNext}
+                  albumId={albumId}
+                  fetchCommentCount={fetchCommentCount}
+                />
               </div>
             </div>
 
