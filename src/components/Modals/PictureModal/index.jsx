@@ -31,7 +31,6 @@ const customStyles = {
 const Modalche = ({
   imageUrl,
   picDescription,
-  commCount,
   onClose,
   onNext,
   onPrev,
@@ -40,9 +39,15 @@ const Modalche = ({
   profilePicture,
   username,
   albumId,
-  comments
+  fetchPictureComments,
+  comments,
+  commentsCount,
+  fetchCommentsOnPicture,
+  fetchCommentCount,
+  commentCountPic
 }) => {
   const [error, setError] = useState("");
+  // const [commentCountPicture, setCommentCountPic]=useState(commentCountPic);
   const deletePicture = async () => {
     const isConfirmed = window.confirm(
       "Are you sure you want to delete this picture?"
@@ -56,7 +61,7 @@ const Modalche = ({
         {
           headers: {
             Authorization:
-              " Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzg5NDcwM30.BQo93mli5Trtt0AJg1oBcx075kYYR4E4ZWRK1rAXnuo",
+              " Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzkzMDU3NX0.d1Zjt72erpjY70vRq01FiaeY_tLcedLPFaDer0g6XX0",
           },
         }
       );
@@ -68,39 +73,7 @@ const Modalche = ({
     onClose();
     //window.location.reload();
   };
-  const [commentCountPic, setCommentCountPic] = useState("");
-  const [likesCountPic, setLikesCountPic] = useState("");
 
-  const fetchCommentCount = async () => {
-    try {
-      const result = await axios.get(
-        `https://capture-it.azurewebsites.net/api/picture/${pictureId}`,
-        {
-          headers: {
-            Authorization:
-              "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzg5NDcwM30.BQo93mli5Trtt0AJg1oBcx075kYYR4E4ZWRK1rAXnuo",
-          },
-        }
-      );
-
-      setCommentCountPic(result?.data.commentCount);
-      setLikesCountPic(result.data.likeCount);
-      console.log(
-        " coment count",
-        result?.data.commentCount,
-        "likes",
-        result?.data.likeCount
-      );
-    } catch (error) {
-      setError(error);
-      console.error("error fetching comentcoutnpict: ", error);
-    }
-  };
-
-  useEffect(() => {
-    console.log("fetchPictureInAlbum");
-    fetchCommentCount();
-  }, []);
 
   return (
     <>
@@ -151,7 +124,7 @@ const Modalche = ({
                   <PrimaryButton
                     buttonHeight={"40px"}
                     buttonWidth={"50%"}
-                    buttonText={`${commentCountPic} comments `}
+                    buttonText={`${commentsCount} comments `}
                     className={styles.primaryButtonComment}
                   />
                 </div>
@@ -161,6 +134,10 @@ const Modalche = ({
                   onNext={onNext}
                   albumId={albumId}
                   fetchCommentCount={fetchCommentCount}
+                  fetchPictureComments={fetchPictureComments}
+                  comments={comments}
+                  commentsCount={commentsCount}
+                  fetchCommentsOnPicture={fetchCommentsOnPicture}
                 />
               </div>
             </div>
