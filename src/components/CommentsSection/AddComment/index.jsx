@@ -4,6 +4,7 @@ import SendIcon from "@mui/icons-material/Send";
 import axios from "axios";
 import CommentInput from "./CommentInput";
 import CommentItem from "./CommentItem";
+
 import { PagesOutlined } from "@mui/icons-material";
 
 const AddComment = ({
@@ -19,10 +20,12 @@ const AddComment = ({
   const onComment = (newComment) => {
     if (newComment.commentBody && newComment.commentBody.trim()) {
       setCommentsGet((prev) => [...prev, newComment]);
+
     } else {
       return;
     }
   };
+
 
   return (
     <>
@@ -31,6 +34,8 @@ const AddComment = ({
           comments.map((comment) => (
             <CommentItem
               key={comment.commentId}
+
+
               comment={comment.comment1}
               username={comment.user.username}
               profilePic={comment.user.profilePicture}
@@ -48,11 +53,13 @@ const AddComment = ({
           buttonIcon={<SendIcon />}
           placeholderInput="Add a comment"
           onComment={onComment}
+
           pictureId={pictureId}
           fetchCommentCount={fetchCommentCount}
           albumId={albumId}
           commentsCount={commentsCount}
           fetchCommentsOnPicture={fetchCommentsOnPicture}
+
         />
       </div>
     </>

@@ -6,7 +6,6 @@
   border-radius: 5px;
   border: 2px solid var(--primaryColor);
   background: var(--primaryColor);
-  margin: 0 5px;
 }
 .primaryButton:hover {
   color: white;

@@ -1,6 +1,7 @@
 import AddComment from "../CommentsSection/AddComment";
 import "./style.css";
 
+
 const CommentsSection = ({
   pictureId,
   onPrev,
@@ -23,6 +24,7 @@ const CommentsSection = ({
         commentsCount={commentsCount}
         fetchCommentsOnPicture={fetchCommentsOnPicture}
       />
+
     </>
   );
 };

@@ -5,7 +5,6 @@ import CommentsSection from "../../components/CommentsSection/index.jsx";
 import EventDescription from "../../components/EventHeader/EventDescription/index.jsx";
 import PrimaryButton from "../../components/Buttons/PrimaryButton/index.jsx";
 import SecondaryButton from "../../components/Buttons/SecondaryButton/index.jsx";
-import SearchIcon from "@mui/icons-material/Search";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -26,7 +25,6 @@ export function Event() {
   const [error, setError] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [createAlbum, setCreateAlbum] = useState(false);
-  const [isNavOpen, setIsNavOpen] = useState(false);
 
   const postAlbum = () => {
     setCreateAlbum(true);
@@ -34,9 +32,7 @@ export function Event() {
   const postedAlbum = () => {
     setCreateAlbum(false);
   };
-  const toggleNav = () => {
-    setIsNavOpen(!isNavOpen);
-  };
+
   const fetchEventData = async () => {
     try {
       const result = await axios.get(
@@ -45,7 +41,9 @@ export function Event() {
         {
           headers: {
             Authorization:
-              " eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzkzNTExNH0.Q4YIY-3zIwtv8Q8HK2LTc8WgzSEgxnDnZPTbD9bIuhM",
+
+              " Bearer  eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzkzNTExNH0.Q4YIY-3zIwtv8Q8HK2LTc8WgzSEgxnDnZPTbD9bIuhM",
+
           },
         }
       );
@@ -59,7 +57,7 @@ export function Event() {
   };
   useEffect(() => {
     fetchEventData();
-  }, []);
+  }, [eventId]);
   return (
     <>
       <div className="all-in-events">
@@ -95,7 +93,7 @@ export function Event() {
         <main className="albumsAndAside">
           <div className="containerForAlbums">
             <AlbumsInEventSection
-              picEHeight={"100px"}
+              picEHeight={"225px"}
               picEWidth={"225px"}
               eventId={eventId}
               searchTerm={searchTerm}
@@ -117,9 +115,7 @@ export function Event() {
                 buttonWidth={"50%"}
               />
             </div>
-            <div className="containerForCommentSection">
-              <CommentsSection />
-            </div>
+            <div className="containerForCommentSection"></div>
           </aside>
         </main>
       </div>
