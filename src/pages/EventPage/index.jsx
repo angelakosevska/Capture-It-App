@@ -12,8 +12,8 @@ import IconButton from "../../components/Buttons/IconButton/index.jsx";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SearchAlbums from "../../components/Search/SearchAlbum/index.jsx";
 import CreateAlbumModal from "../../components/Modals/CreateAlbum/index.jsx";
-import NoBgButton from "../../components/Buttons/NoBGButton/index.jsx";
-
+import EditIcon from "@mui/icons-material/Edit";
+import EditEventModal from "../../components/Modals/EditEventModal/index.jsx";
 export function Event() {
   const { eventId } = useParams();
   const [eventData, setEventData] = useState({
@@ -32,7 +32,15 @@ export function Event() {
   const postedAlbum = () => {
     setCreateAlbum(false);
   };
+  const [editEventIsOpen, setEditEventIsopen] = useState(false);
 
+  const editEvent = () => {
+    setEditEventIsopen(true);
+  };
+
+  const editedEvent = () => {
+    setEditEventIsopen(false);
+  };
   const fetchEventData = async () => {
     try {
       const result = await axios.get(
@@ -41,7 +49,7 @@ export function Event() {
         {
           headers: {
             Authorization:
-              " Bearer  eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzk1OTE3Nn0.xA27ueveOcZUPtZ5zDdyCRj1fq4hP3dJ024QypGqcBE",
+              " Bearer  eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzk2NzY1N30.NtIVgd94JUmInKBvjkuOvda-GWCg1LbjLDXFPKYTm-Y",
           },
         }
       );
@@ -56,65 +64,79 @@ export function Event() {
   useEffect(() => {
     fetchEventData();
   }, [eventId]);
+
+  const deleteEvent = async () => {
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this event?"
+    );
+    if (!isConfirmed) return;
+
+    try {
+      await axios.delete(
+        //delete album
+        `https://capture-it.azurewebsites.net/api/event/${eventId}`,
+        {
+          headers: {
+            Authorization:
+              " Bearer  eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzk2NzY1N30.NtIVgd94JUmInKBvjkuOvda-GWCg1LbjLDXFPKYTm-Y",
+          },
+        }
+      );
+    } catch (error) {
+      setError(error);
+      console.error("Error deleting event: ", error);
+    }
+  };
+
   return (
     <>
       <div className="all-in-events">
-        <div className="name-and-search">
-          <div className="eventHeader">
-            <EventHeader
-              location={eventData.location}
-              profilePicture={eventData?.owner?.profilePicture}
-              username={eventData?.owner?.username}
-              eventName={eventData.eventName}
-            />
-            <div className="eventActions">
-              <PrimaryButton
-                buttonWidth={"auto"}
-                buttonHeight={"40px"}
-                buttonText={"Invite People"}
-              />
-              <SecondaryButton
-                buttonWidth={"auto"}
-                buttonHeight={"40px"}
-                buttonText={"Create Album"}
-                onClick={postAlbum}
-              />
-              <IconButton
-                buttonIcon={<DeleteIcon />}
-                buttonHeight={"40px"}
-                buttonWidth={"40px"}
-              />
-              <SearchAlbums onSearch={setSearchTerm} />
-            </div>
-          </div>
+        <div className="eventHeader">
+          <EventHeader
+            location={eventData.location}
+            profilePicture={eventData?.owner?.profilePicture}
+            username={eventData?.owner?.username}
+            eventName={eventData.eventName}
+          />
         </div>
-        <main className="albumsAndAside">
-          <div className="containerForAlbums">
-            <AlbumsInEventSection
-              picEHeight={"225px"}
-              picEWidth={"225px"}
-              eventId={eventId}
-              searchTerm={searchTerm}
-            />
-          </div>
-          <aside className="likes-comments-description">
-            <div className="event-description">
-              <EventDescription eventDescription={eventData.description} />
-            </div>
-            <div className="buttonsEvent">
-              <NoBgButton
-                buttonText={"likes"}
-                buttonHeight={"40px"}
-                buttonWidth={"50%"}
-              />
-              <NoBgButton
-                buttonText={` comments`}
-                buttonHeight={"40px"}
-                buttonWidth={"50%"}
-              />
-            </div>
-            <div className="containerForCommentSection"></div>
-          </aside>
+        <div className="eventActions">
+          <PrimaryButton
+            buttonWidth={"auto"}
+            buttonHeight={"40px"}
+            buttonText={"Invite People"}
+          />
+          <SecondaryButton
+            buttonWidth={"auto"}
+            buttonHeight={"40px"}
+            buttonText={"Create Album"}
+            onClick={postAlbum}
+          />
+          <IconButton
+            buttonIcon={<DeleteIcon />}
+            buttonHeight={"40px"}
+            buttonWidth={"40px"}
+            onClick={deleteEvent}
+          />
+          <SearchAlbums onSearch={setSearchTerm} />
+          <IconButton
+            buttonIcon={<EditIcon />}
+            buttonHeight={"40px"}
+            buttonWidth={"40px"}
+            onClick={editEvent}
+          />
+          {editEventIsOpen && <EditEventModal onClose={editedEvent} />}
+        </div>
+        <div className="event-description">
+          <EventDescription eventDescription={eventData.description} />
+        </div>
+
+        <main className="albumsInEvent">
+          <AlbumsInEventSection
+            picEHeight={"225px"}
+            picEWidth={"225px"}
+            eventId={eventId}
+            searchTerm={searchTerm}
+          />
         </main>
       </div>
       {createAlbum && (
