@@ -43,7 +43,7 @@ export function Album() {
         {
           headers: {
             Authorization:
-              "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzkzMDU3NX0.d1Zjt72erpjY70vRq01FiaeY_tLcedLPFaDer0g6XX0",
+              "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzkzNTExNH0.Q4YIY-3zIwtv8Q8HK2LTc8WgzSEgxnDnZPTbD9bIuhM",
           },
         }
       );
@@ -69,7 +69,7 @@ export function Album() {
         {
           headers: {
             Authorization:
-              "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzkzMDU3NX0.d1Zjt72erpjY70vRq01FiaeY_tLcedLPFaDer0g6XX0 ",
+              "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzkzNTExNH0.Q4YIY-3zIwtv8Q8HK2LTc8WgzSEgxnDnZPTbD9bIuhM ",
           },
         }
       );
@@ -111,47 +111,49 @@ export function Album() {
   };
 
   const handleNext = async () => {
-    const nextIndex = (selectedPictureIndex + 1 + pictures.data.length) % pictures.data.length;
-  setSelectedPictureIndex(nextIndex);
-  const nextPictureId = pictures.data[nextIndex].pictureId;
-  
-  // Check if the next picture has comments
-  const hasComments = pictures.data[nextIndex].commentCount > 0;
-  
-  if (hasComments) {
-    await fetchCommentsOnPicture(nextPictureId);
-  } else {
-    // Reset comments if there are no comments for the next picture
-    setCommentsCount(0);
-    setComments({
-      totalRecords: 0,
-      pageNumber: 1,
-      pageSize: 100,
-      data: [],
-    });
-  }
+    const nextIndex =
+      (selectedPictureIndex + 1 + pictures.data.length) % pictures.data.length;
+    setSelectedPictureIndex(nextIndex);
+    const nextPictureId = pictures.data[nextIndex].pictureId;
+
+    // Check if the next picture has comments
+    const hasComments = pictures.data[nextIndex].commentCount > 0;
+
+    if (hasComments) {
+      await fetchCommentsOnPicture(nextPictureId);
+    } else {
+      // Reset comments if there are no comments for the next picture
+      setCommentsCount(0);
+      setComments({
+        totalRecords: 0,
+        pageNumber: 1,
+        pageSize: 100,
+        data: [],
+      });
+    }
   };
 
   const handlePrev = async () => {
-    const prevIndex = (selectedPictureIndex - 1 + pictures.data.length) % pictures.data.length;
-  setSelectedPictureIndex(prevIndex);
-  const prevPictureId = pictures.data[prevIndex].pictureId;
-  
-  // Check if the previous picture has comments
-  const hasComments = pictures.data[prevIndex].commentCount > 0;
-  
-  if (hasComments) {
-    await fetchCommentsOnPicture(prevPictureId);
-  } else {
-    // Reset comments if there are no comments for the previous picture
-    setCommentsCount(0);
-    setComments({
-      totalRecords: 0,
-      pageNumber: 1,
-      pageSize: 100,
-      data: [],
-    });
-  }
+    const prevIndex =
+      (selectedPictureIndex - 1 + pictures.data.length) % pictures.data.length;
+    setSelectedPictureIndex(prevIndex);
+    const prevPictureId = pictures.data[prevIndex].pictureId;
+
+    // Check if the previous picture has comments
+    const hasComments = pictures.data[prevIndex].commentCount > 0;
+
+    if (hasComments) {
+      await fetchCommentsOnPicture(prevPictureId);
+    } else {
+      // Reset comments if there are no comments for the previous picture
+      setCommentsCount(0);
+      setComments({
+        totalRecords: 0,
+        pageNumber: 1,
+        pageSize: 100,
+        data: [],
+      });
+    }
   };
 
   const deleteAlbum = async () => {
@@ -167,7 +169,7 @@ export function Album() {
         {
           headers: {
             Authorization:
-              " Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzkyNjk1MX0.y0hQNwfRZNW2fd0zZg7ZAgy_DlvLK1L4VyKTy8ygNdc",
+              " Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzkzNTExNH0.Q4YIY-3zIwtv8Q8HK2LTc8WgzSEgxnDnZPTbD9bIuhM",
           },
         }
       );
