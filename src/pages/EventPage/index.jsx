@@ -14,6 +14,10 @@ import SearchAlbums from "../../components/Search/SearchAlbum/index.jsx";
 import CreateAlbumModal from "../../components/Modals/CreateAlbum/index.jsx";
 import EditIcon from "@mui/icons-material/Edit";
 import EditEventModal from "../../components/Modals/EditEventModal/index.jsx";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import NoBgButton from "../../components/Buttons/NoBGButton/index.jsx";
+import PhotoAlbumIcon from "@mui/icons-material/PhotoAlbum";
+
 export function Event() {
   const { eventId } = useParams();
   const [eventData, setEventData] = useState({
@@ -100,44 +104,61 @@ export function Event() {
           />
         </div>
         <div className="eventActions">
+          <SearchAlbums onSearch={setSearchTerm} />
           <PrimaryButton
             buttonWidth={"auto"}
             buttonHeight={"40px"}
             buttonText={"Invite People"}
           />
-          <SecondaryButton
-            buttonWidth={"auto"}
-            buttonHeight={"40px"}
-            buttonText={"Create Album"}
-            onClick={postAlbum}
-          />
-          <IconButton
-            buttonIcon={<DeleteIcon />}
-            buttonHeight={"40px"}
-            buttonWidth={"40px"}
-            onClick={deleteEvent}
-          />
-          <SearchAlbums onSearch={setSearchTerm} />
-          <IconButton
-            buttonIcon={<EditIcon />}
-            buttonHeight={"40px"}
-            buttonWidth={"40px"}
-            onClick={editEvent}
-          />
+
+          <div className="dropdown-more">
+            <NoBgButton
+              buttonIcon={<MoreVertIcon fontSize="large" />}
+              className="dropbtn"
+            />
+            <div className="dropdown-content-more">
+              <NoBgButton
+                buttonWidth={"auto"}
+                buttonHeight={"40px"}
+                buttonText={"Create Album"}
+                buttonIcon={<PhotoAlbumIcon />}
+                onClick={postAlbum}
+              />
+              <NoBgButton
+                buttonIcon={<DeleteIcon />}
+                buttonText={"Delete Event"}
+                buttonHeight={"40px"}
+                buttonWidth={"auto"}
+                onClick={deleteEvent}
+              />
+              <NoBgButton
+                buttonIcon={<EditIcon />}
+                buttonText={"Edit event info"}
+                buttonHeight={"40px"}
+                buttonWidth={"auto"}
+                onClick={editEvent}
+              />
+            </div>
+          </div>
+
           {editEventIsOpen && <EditEventModal onClose={editedEvent} />}
         </div>
-        <div className="event-description">
-          <EventDescription eventDescription={eventData.description} />
+        <div className="mainAndInvite">
+          <div className="descriptionAndEvent">
+            <div className="event-description">
+              <EventDescription eventDescription={eventData.description} />
+            </div>
+            <main className="albumsInEvent">
+              <AlbumsInEventSection
+                picEHeight={"225px"}
+                picEWidth={"225px"}
+                eventId={eventId}
+                searchTerm={searchTerm}
+              />
+            </main>
+          </div>
+          <div className="invitePeople"> </div>
         </div>
-
-        <main className="albumsInEvent">
-          <AlbumsInEventSection
-            picEHeight={"225px"}
-            picEWidth={"225px"}
-            eventId={eventId}
-            searchTerm={searchTerm}
-          />
-        </main>
       </div>
       {createAlbum && (
         <CreateAlbumModal eventId={eventId} onClose={postedAlbum} />
