@@ -10,12 +10,10 @@ const CommentItem = ({ comment, username, profilePic, createdAt }) => {
     <>
       <div className="comment-show">
         <div className="who-what-when">
-          <PictureAndUsername
-            ppDimension="30px"
-            username={username}
-            profilePic={profilePic}
-          />
-          &nbsp; {createdAt}
+
+          <PictureAndUsername ppDimension="30px" username={username} profilePic={profilePic}/>
+          &nbsp;{createdAt}{" "}
+
         </div>
         <span>{comment}</span>
       </div>
@@ -24,3 +22,6 @@ const CommentItem = ({ comment, username, profilePic, createdAt }) => {
 };
 
 export default CommentItem;
+
+/* ova se komentariteeee sho se prikazvat*/
+

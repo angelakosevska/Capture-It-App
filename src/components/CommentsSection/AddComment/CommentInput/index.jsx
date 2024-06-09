@@ -13,7 +13,12 @@ const CommentInput = ({
   buttonWidth,
   buttonHeight,
   pictureId,
-  onCommentAdded,
+
+  fetchCommentsOnPicture,
+  fetchCommentCount,
+  albumId,
+  commentsCount,
+
 }) => {
   const [commentBody, setCommentBody] = useState("");
 
@@ -26,18 +31,22 @@ const CommentInput = ({
             pictureId,
             comment1: commentBody,
           },
+
           {
             headers: {
               Authorization:
-                "Bearer  eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzkzNTExNH0.Q4YIY-3zIwtv8Q8HK2LTc8WgzSEgxnDnZPTbD9bIuhM",
+
+                "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzkzNTExNH0.Q4YIY-3zIwtv8Q8HK2LTc8WgzSEgxnDnZPTbD9bIuhM",
             },
           }
         );
 
-        onComment(response.data);
-        console.log(response.data);
+        onComment(commentBody);
+        console.log("comentdata", response.data);
         setCommentBody("");
-        onCommentAdded();
+        fetchCommentsOnPicture();
+        // fetchCommentCount();
+
       } catch (error) {
         console.error("Error posting comment: ", error);
       }
