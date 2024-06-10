@@ -9,13 +9,7 @@ export function Profile() {
 
   return (
     <>
-      <IconButton buttonText={"iconbutton"} />
-
-      <NoBgButton buttonText={"nobg buuton"} />
-
-      <PrimaryButton buttonText={"primarno"} />
-
-      <SecondaryButton buttonText={"sekundarno"} />
+    
     </>
   );
 }
