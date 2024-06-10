@@ -20,7 +20,7 @@
 }
 
 .eventHeader {
-  width: 50%;
+  width: 70%;
   height: fit-content;
   display: flex;
   flex-direction: row;
@@ -29,11 +29,10 @@
   background-color: rgba(250, 235, 215, 0);
   align-items: center;
   padding: 5px;
-  margin-right: 0px;
   gap: 2px;
 }
 .eventActions {
-  width: 50%;
+  width: 30%;
   display: flex;
   align-items: center;
   justify-content: end;
@@ -59,15 +58,20 @@
   display: flex;
   flex-direction: column;
   width: 20%;
-  gap: 1px;
+  height: max-content;
   max-height: 500px;
+  gap: 1px;
   overflow: hidden;
-}
-
-.participantMap {
-  padding: 10px;
   border: 2px solid var(--primaryColor);
   border-radius: 5px;
+}
+.labelInvitePeople {
+  padding: 10px;
+  font-weight: bold;
+}
+.participantMap {
+  padding: 10px;
+  border-bottom: 1px solid var(--primaryColor);
 }
 
 .event-description {

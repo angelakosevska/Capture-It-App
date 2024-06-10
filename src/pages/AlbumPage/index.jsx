@@ -46,12 +46,13 @@ export function Album() {
         {
           headers: {
             Authorization:
-              "Bearer  eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxODAzODMwN30.yQ4gIb9aTbUqsDzYr3nYlyCZsRaGqfvbjBYTtDorNRk",
+              "Bearer  eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZHVtbXkxIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMyIsImV4cCI6MTcxODA1NzcxNX0.kMFOld7JRK6dVZtaYBH37tgIPpDnq34zbKvyU7N1wXY",
           },
         }
       );
 
       setPictures(result?.data);
+      console.log("lajkoj ", result?.data?.data?.likeCount);
       console.log(" sliki", result.data);
     } catch (error) {
       setError(error);
@@ -73,7 +74,7 @@ export function Album() {
         {
           headers: {
             Authorization:
-              "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxODAzODMwN30.yQ4gIb9aTbUqsDzYr3nYlyCZsRaGqfvbjBYTtDorNRk ",
+              "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZHVtbXkxIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMyIsImV4cCI6MTcxODA1NzcxNX0.kMFOld7JRK6dVZtaYBH37tgIPpDnq34zbKvyU7N1wXY ",
           },
         }
       );
@@ -87,6 +88,7 @@ export function Album() {
       console.error("error fetching comment get data ", error);
     }
   };
+
   const fetchLikesOnPicture = async () => {
     try {
       const response = await axios.get(
@@ -94,25 +96,32 @@ export function Album() {
         {
           headers: {
             Authorization:
-              "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxODAzODMwN30.yQ4gIb9aTbUqsDzYr3nYlyCZsRaGqfvbjBYTtDorNRk",
+              "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZHVtbXkxIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMyIsImV4cCI6MTcxODA1NzcxNX0.kMFOld7JRK6dVZtaYBH37tgIPpDnq34zbKvyU7N1wXY",
           },
         }
       );
-      setLikesCount(response.data.totalRecords);
+
       const userLike = response.data.data.find(
         (like) => like.user.username === "kosevskaa"
       );
+
       if (userLike) {
         setHasLiked(true);
         setLikeId(userLike.likeId);
+        console.log("like id: ", userLike.likeId);
       } else {
-        setHasLiked(false);
         setLikeId(null);
       }
+
+      setLikesCount(response.data.totalRecords);
     } catch (error) {
       console.log("error fetching likes", error);
     }
   };
+  useEffect(() => {
+    fetchLikesOnPicture();
+  }, [selectedPictureIndex]);
+  /*
   const deleteLike = async () => {
     try {
       if (!likeId) return;
@@ -121,16 +130,47 @@ export function Album() {
         {
           headers: {
             Authorization:
-              "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxODAzODMwN30.yQ4gIb9aTbUqsDzYr3nYlyCZsRaGqfvbjBYTtDorNRk",
+              "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZHVtbXkxIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMyIsImV4cCI6MTcxODA1NzcxNX0.kMFOld7JRK6dVZtaYBH37tgIPpDnq34zbKvyU7N1wXY",
           },
         }
       );
       setHasLiked(false);
       setLikes((prevLikes) => prevLikes - 1);
+      fetchLikesOnPicture();
     } catch (error) {
       console.error("error deleting like", error);
     }
   };
+*/ /*
+  const postLike = async () => {
+    setLikes((prevLikes) => prevLikes + 1);
+    try {
+      const response = await axios.post(
+        `https://capture-it.azurewebsites.net/api/like`,
+        { pictureId: pictures.data[selectedPictureIndex].pictureId },
+        {
+          headers: {
+            Authorization:
+              "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZHVtbXkxIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMyIsImV4cCI6MTcxODA1NzcxNX0.kMFOld7JRK6dVZtaYBH37tgIPpDnq34zbKvyU7N1wXY",
+          },
+        }
+      );
+      setHasLiked(true);
+
+      //fetchLikesOnPicture();
+      console.log("Loke posted ", response.data);
+    } catch (error) {
+      setLikes((prevLikes) => prevLikes - 1);
+      console.error("error posing like", error);
+      console.error("post like eror", error.response.data);
+    }
+  }; */ /*
+  useEffect(() => {
+    if (selectedPictureIndex !== null) {
+      fetchLikesOnPicture();
+    }
+  }, [likesCount, selectedPictureIndex]);
+*/
   const postLike = async () => {
     try {
       const response = await axios.post(
@@ -139,23 +179,40 @@ export function Album() {
         {
           headers: {
             Authorization:
-              "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxODAzODMwN30.yQ4gIb9aTbUqsDzYr3nYlyCZsRaGqfvbjBYTtDorNRk",
+              "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZHVtbXkxIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMyIsImV4cCI6MTcxODA1NzcxNX0.kMFOld7JRK6dVZtaYBH37tgIPpDnq34zbKvyU7N1wXY",
           },
         }
       );
+
+      //fetchLikesOnPicture();
+      setLikesCount((prevCount) => prevCount + 1);
       setHasLiked(true);
-      setLikes((prevLikes) => prevLikes + 1);
-      fetchLikesOnPicture();
+      console.log("Like posted ", response.data);
     } catch (error) {
-      console.error("error posing like", error);
-      console.error("post like eror", error.response.data);
+      console.error("error posting like", error);
+      console.error("post like error", error.response.data);
     }
   };
-  useEffect(() => {
-    if (selectedPictureIndex !== null) {
-      fetchLikesOnPicture();
+  const deleteLike = async (likeId) => {
+    try {
+      if (!likeId) return;
+
+      await axios.delete(
+        `https://capture-it.azurewebsites.net/api/like/${likeId}`,
+        {
+          headers: {
+            Authorization:
+              "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZHVtbXkxIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMyIsImV4cCI6MTcxODA1NzcxNX0.kMFOld7JRK6dVZtaYBH37tgIPpDnq34zbKvyU7N1wXY",
+          },
+        }
+      );
+
+      setLikesCount((prevCount) => prevCount - 1);
+      setHasLiked(false);
+    } catch (error) {
+      console.error("Error deleting like:", error);
     }
-  }, [selectedPictureIndex]);
+  };
 
   useEffect(() => {
     fetchCommentsOnPicture();
@@ -243,7 +300,7 @@ export function Album() {
         {
           headers: {
             Authorization:
-              " Bearer  eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxODAzODMwN30.yQ4gIb9aTbUqsDzYr3nYlyCZsRaGqfvbjBYTtDorNRk",
+              " Bearer  eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZHVtbXkxIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMyIsImV4cCI6MTcxODA1NzcxNX0.kMFOld7JRK6dVZtaYBH37tgIPpDnq34zbKvyU7N1wXY",
           },
         }
       );
