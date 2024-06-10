@@ -8,17 +8,16 @@
   align-content: flex-start;
   flex-grow: 2;
 }
-@media only screen and (max-width: 1400px){
-  .all-in-events{
+@media only screen and (max-width: 1400px) {
+  .all-in-events {
     min-height: 510px;
   }
 }
-@media only screen and (min-width: 1400px){
-  .all-in-events{
+@media only screen and (min-width: 1400px) {
+  .all-in-events {
     min-height: 90vh;
   }
 }
-
 
 .eventHeader {
   width: 50%;
@@ -33,7 +32,7 @@
   margin-right: 0px;
   gap: 2px;
 }
-.eventActions{
+.eventActions {
   width: 50%;
   display: flex;
   align-items: center;
@@ -48,21 +47,28 @@
   gap: 5px;
   padding: 5px;
 }
-.descriptionAndEvent{
+.descriptionAndEvent {
   width: 78%;
 }
-.mainAndInvite{
+.mainAndInvite {
   width: 100%;
   display: flex;
   flex-direction: row;
 }
-.invitePeople{
+.invitePeople {
+  display: flex;
+  flex-direction: column;
   width: 20%;
-  background-color: aqua;
+  gap: 1px;
+  max-height: 500px;
+  overflow: hidden;
 }
 
-/* desno>>*/
-
+.participantMap {
+  padding: 10px;
+  border: 2px solid var(--primaryColor);
+  border-radius: 5px;
+}
 
 .event-description {
   display: flex;
@@ -70,7 +76,6 @@
   height: auto;
   min-height: 70px;
 }
-
 
 .containerForCommentSection {
   max-height: 600px;
@@ -81,10 +86,9 @@
 }
 
 @media only screen and (max-width: 1000px) {
- .eventHeader{
-  justify-items: center;
- }
-
+  .eventHeader {
+    justify-items: center;
+  }
 }
 
 /*

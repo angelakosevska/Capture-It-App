@@ -17,18 +17,24 @@ import EditEventModal from "../../components/Modals/EditEventModal/index.jsx";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import NoBgButton from "../../components/Buttons/NoBGButton/index.jsx";
 import PhotoAlbumIcon from "@mui/icons-material/PhotoAlbum";
+import InviteParticipantsModal from "../../components/Modals/InviteParticipantsModal/index.jsx";
+import PictureAndUsername from "../../components/PictureAndUsername/index.jsx";
 
 export function Event() {
   const { eventId } = useParams();
-  const [eventData, setEventData] = useState({
-    data: [],
-    pageNumber: 0,
-    pageSize: 0,
-    totalRecords: 0,
-  });
+  const [eventData, setEventData] = useState([]);
   const [error, setError] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [createAlbum, setCreateAlbum] = useState(false);
+  const [invitePeople, setInvitePeople] = useState(false);
+  const [eventParticipants, setEventParticipants] = useState([]);
+
+  const invitePeopleInEvent = () => {
+    setInvitePeople(true);
+  };
+  const invitedPeopleInEvent = () => {
+    setInvitePeople(false);
+  };
 
   const postAlbum = () => {
     setCreateAlbum(true);
@@ -53,7 +59,7 @@ export function Event() {
         {
           headers: {
             Authorization:
-              " Bearer  eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxODAyMTUxMX0.7blkroUPC58gXwouIxfGGpv1Be-aJucJ3a5AnNaY1aw",
+              " Bearer  eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxODAzODMwN30.yQ4gIb9aTbUqsDzYr3nYlyCZsRaGqfvbjBYTtDorNRk",
           },
         }
       );
@@ -69,6 +75,30 @@ export function Event() {
     fetchEventData();
   }, [eventId]);
 
+  const fetchParticipants = async () => {
+    try {
+      const result = await axios.get(
+        //get participants
+        `https://capture-it.azurewebsites.net/api/event/${eventId}/participants`,
+        {
+          headers: {
+            Authorization:
+              " Bearer  eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxODAzODMwN30.yQ4gIb9aTbUqsDzYr3nYlyCZsRaGqfvbjBYTtDorNRk",
+          },
+        }
+      );
+
+      setEventParticipants(result?.data.participants);
+      console?.log("event participants", result.data.participants);
+    } catch (error) {
+      setError(error);
+      console.error("error fetching participants: ", error);
+    }
+  };
+  useEffect(() => {
+    fetchParticipants();
+  }, [eventId]);
+
   const deleteEvent = async () => {
     const isConfirmed = window.confirm(
       "Are you sure you want to delete this event?"
@@ -82,7 +112,7 @@ export function Event() {
         {
           headers: {
             Authorization:
-              " Bearer  eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxODAyMTUxMX0.7blkroUPC58gXwouIxfGGpv1Be-aJucJ3a5AnNaY1aw",
+              " Bearer  eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxODAzODMwN30.yQ4gIb9aTbUqsDzYr3nYlyCZsRaGqfvbjBYTtDorNRk",
           },
         }
       );
@@ -105,10 +135,17 @@ export function Event() {
         </div>
         <div className="eventActions">
           <SearchAlbums onSearch={setSearchTerm} />
+          {invitePeople && (
+            <InviteParticipantsModal
+              onClose={invitedPeopleInEvent}
+              eventId={eventId}
+            />
+          )}
           <PrimaryButton
             buttonWidth={"auto"}
             buttonHeight={"40px"}
             buttonText={"Invite People"}
+            onClick={invitePeopleInEvent}
           />
 
           <div className="dropdown-more">
@@ -149,15 +186,29 @@ export function Event() {
               <EventDescription eventDescription={eventData.description} />
             </div>
             <main className="albumsInEvent">
-              <AlbumsInEventSection
-                picEHeight={"225px"}
-                picEWidth={"225px"}
-                eventId={eventId}
-                searchTerm={searchTerm}
-              />
+              {/* {eventData.isPrivate ? (
+                <h1 className="privateEventMessage">This event is private.</h1>
+              ) : (
+                <AlbumsInEventSection
+                  picEHeight={"225px"}
+                  picEWidth={"225px"}
+                  eventId={eventId}
+                  searchTerm={searchTerm}
+                />
+              )} */}
             </main>
           </div>
-          <div className="invitePeople"> </div>
+          <div className="invitePeople">
+            {eventParticipants.map((participant) => (
+              <div key={participant.userId} className="participantMap">
+                <PictureAndUsername
+                  profilePic={participant.profilePicture}
+                  username={participant.username}
+                  ppDimension={"25px"}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       {createAlbum && (
@@ -166,8 +217,7 @@ export function Event() {
     </>
   );
 }
-//soodvetna pateka do albumite
+
 export default Event;
 
-//search po ime
-//da se bira cover photo so tochno odredeni dimenzii
+

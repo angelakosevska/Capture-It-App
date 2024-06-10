@@ -20,43 +20,43 @@ const customStyles = {
   },
 };
 
-const CreateAlbumModal = ({ onClose, eventId }) => {
-  const [newAlbumName, setNewAlbumName] = useState("");
+const InviteParticipantsModal = ({ onClose, eventId }) => {
+  const [inviteUserName, setInviteUserName] = useState("");
   const [error, setError] = useState("");
 
-  const handleAlbumNameChange = (e) => {
-    setNewAlbumName(e.target.value);
+  const handleInvite = (e) => {
+    setInviteUserName(e.target.value);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!newAlbumName) {
-      setError("Please fill in all fields");
+    if (!inviteUserName) {
+      setError("Please add a username");
       return;
     }
 
     try {
       const response = await axios.post(
         //post album
-        "https://capture-it.azurewebsites.net/api/album",
+        "https://capture-it.azurewebsites.net/api/event/participants",
         {
           eventId: eventId,
-          albumName: newAlbumName,
+          username: inviteUserName,
         },
         {
           headers: {
             Authorization:
-              "Bearer  eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxODAyMTUxMX0.7blkroUPC58gXwouIxfGGpv1Be-aJucJ3a5AnNaY1aw",
+              "Bearer  eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxODAzODMwN30.yQ4gIb9aTbUqsDzYr3nYlyCZsRaGqfvbjBYTtDorNRk",
           },
         }
       );
-
-      console.log("Album created successfully:", response.data);
+      <p style={{ color: "blue" }}>Invited!</p>;
+      console.log("Participant invited successfully:", response.data);
       onClose();
-      window.location.reload(); // Close the modal after successful submission
+      //  window.location.reload();
     } catch (error) {
-      setError("Error creating album: " + error.message);
-      console.error("Error creating album:", error);
+      setError("Error inviting participant " + error.message);
+      console.error("Error inviting participant:", error);
     }
   };
 
@@ -66,21 +66,21 @@ const CreateAlbumModal = ({ onClose, eventId }) => {
         isOpen={true}
         onRequestClose={onClose}
         style={customStyles}
-        contentLabel="Create Album Modal"
+        contentLabel="Invite participant"
       >
         <div className={styles.closeModalButton}>
           <NoBgButton onClick={onClose} buttonIcon={<CloseIcon />} />
         </div>
-        <h1 className={styles.h1style}>Create new Album</h1>
+        <h1 className={styles.h1style}>Invite people to your event</h1>
         <form onSubmit={handleSubmit} className={styles.addPhotoForm}>
           <div className={styles.inputContainer}>
             <label>
-              Album name:
+              Username:
               <input
                 className={styles.pictureInput}
                 type="text"
-                value={newAlbumName}
-                onChange={handleAlbumNameChange}
+                value={inviteUserName}
+                onChange={handleInvite}
               />
             </label>
           </div>
@@ -99,4 +99,4 @@ const CreateAlbumModal = ({ onClose, eventId }) => {
   );
 };
 
-export default CreateAlbumModal;
+export default InviteParticipantsModal;
