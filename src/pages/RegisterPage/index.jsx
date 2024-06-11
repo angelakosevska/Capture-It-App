@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import './style.css';
+import './style1.css';
+import Logo1 from "../../Logo"; 
 
 const RegisterPage = () => {
     const [name, setName] = useState('');
@@ -10,11 +11,13 @@ const RegisterPage = () => {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [password, setPassword] = useState('');
     const [repeatPassword, setRepeatPassword] = useState('');
+    const [dateOfBirth, setDateOfBirth] = useState('');
+    const [gender, setGender] = useState('');
     const [error, setError] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (!name || !lastName || !username || !email || !password || !repeatPassword) {
+        if (!name || !lastName || !username || !email || !password || !repeatPassword || !dateOfBirth || !gender) {
             setError('Please fill out all required fields.');
         } else if (password !== repeatPassword) {
             setError('Passwords do not match.');
@@ -28,7 +31,18 @@ const RegisterPage = () => {
     return (
         <div className="register-container">
             <div className="register-box">
-                <img src="../../components/gallery/logo.png" alt="Logo" className="logo" />
+                <div className="Logo1">
+                    <svg
+                        width="40"
+                        height="40"
+                        viewBox="0 0 40 40"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <Logo1 />
+                    </svg>
+                    <div className="Logo1Text">Welcome to Capture It</div>
+                </div>
                 {error && <div className="error-message">{error}</div>}
                 <form onSubmit={handleSubmit}>
                     <div className="input-group">
@@ -69,6 +83,23 @@ const RegisterPage = () => {
                         onChange={(e) => setPhoneNumber(e.target.value)}
                     />
                     <input
+                        type="date"
+                        placeholder="Date of Birth"
+                        className={`input-field${!dateOfBirth ? ' error' : ''}`}
+                        value={dateOfBirth}
+                        onChange={(e) => setDateOfBirth(e.target.value)}
+                    />
+                    <select
+                        className={`input-field${!gender ? ' error' : ''}`}
+                        value={gender}
+                        onChange={(e) => setGender(e.target.value)}
+                    >
+                        <option value="">Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <input
                         type="password"
                         placeholder="Create Password"
                         className={`input-field${!password ? ' error' : ''}`}
@@ -82,24 +113,8 @@ const RegisterPage = () => {
                         value={repeatPassword}
                         onChange={(e) => setRepeatPassword(e.target.value)}
                     />
-                    <button type="submit" className="register-button">Register</button>
+                    <button type="submit" className="login-button">Register</button>
                 </form>
-                <div className="divider">
-                    <hr className="line" />
-                    <span className="divider-text">Or register with</span>
-                    <hr className="line" />
-                </div>
-                <div className="social-register">
-                    <button className="social-button-reg facebook-reg">
-                        <i className="bi bi-facebook"></i>
-                    </button>
-                    <button className="social-button-reg google-reg">
-                        <i className="bi bi-google"></i>
-                    </button>
-                    <button className="social-button-reg apple-reg">
-                        <i className="bi bi-apple"></i>
-                    </button>
-                </div>
                 <div className="login-text">
                     Already have an account? <a href="/login">Login</a>
                 </div>

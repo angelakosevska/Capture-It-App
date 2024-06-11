@@ -1,6 +1,6 @@
 import { Route, Routes, Outlet } from "react-router-dom";
 import { Home } from "../../pages/HomePage/index.jsx";
-import { Profile } from "../../pages/profile.jsx";
+import Profile from "../../pages/ProfilePage/index.jsx";
 import { Album } from "../../pages/AlbumPage/index.jsx";
 import { Event } from "../../pages/EventPage/index.jsx";
 import Login from "../../pages/LogInPage/index.jsx";

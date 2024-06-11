@@ -45,7 +45,7 @@ const Header = ({ user }) => {
             }}
             onFocus={() => setShowSearchDropdown(true)}
             onBlur={() => setShowSearchDropdown(false)}
-          /> 
+          />
           {showSearchDropdown && (
             <div className="SearchDropdownMenu">
               {suggestions
@@ -72,6 +72,9 @@ const Header = ({ user }) => {
           <div className="ProfileDropdownMenu">
             <div className="dropdown-item">{user?.firstName}</div>
             <div className="dropdown-item">{user?.lastName}</div>
+            <div className="dropdown-item">
+              <Link to="/ProfilePage">Profile</Link>
+            </div>
             <div className="dropdown-item">Settings</div>
             <hr />
             <div className="ProfileDropdownItem">

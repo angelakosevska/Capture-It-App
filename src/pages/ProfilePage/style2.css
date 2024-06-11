@@ -1,0 +1,19 @@
+.custom-shape-divider-bottom-1718119106 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.custom-shape-divider-bottom-1718119106 svg {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 120px; /* Adjust the height as needed */
+}
+
+.shape-fill {
+  transform: rotate(180deg); /* Optional: If you want the wave to appear inverted */
+}
