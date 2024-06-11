@@ -9,19 +9,19 @@ const Footer = () => {
     <>
       <footer className="footer-wrapper bg-animation gradient-animation">
         <div className="container-footer">
-          <a href="#" class="icon">
-            <i class="fa-brands fa-instagram"></i>
+          <a href="#" className="icon">
+            <i className="fa-brands fa-instagram"></i>
           </a>
-          <a href="#" class="icon">
+          <a href="#" className="icon">
             <i class="fa-brands fa-linkedin-in"></i>
           </a>
-          <a href="#" class="icon">
+          <a href="#" className="icon">
             <i class="fa-brands fa-youtube"></i>
           </a>
-          <a href="#" class="icon">
+          <a href="#" className="icon">
             <i class="fa-brands fa-x-twitter"></i>
           </a>
-          <a href="#" class="icon">
+          <a href="#" className="icon">
             <i class="fa-brands fa-github"></i>
           </a>
         </div>

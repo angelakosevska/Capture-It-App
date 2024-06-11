@@ -1,12 +1,16 @@
 import { createContext, useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [authToken, setAuthToken] = useState(null);
+  const [authToken, setAuthToken] = useState(
+    localStorage.getItem("authToken") || null
+  );
   const [userId, setUserId] = useState(null);
   const [username, setUsername] = useState(null);
+
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
@@ -36,6 +40,7 @@ const AuthProvider = ({ children }) => {
       localStorage.setItem("userId", userId);
       localStorage.setItem("username", returnedUsername);
     } catch (error) {
+      throw new Error ("Invalid Username or Password");
       console.error("Login failed", error);
     }
   };
@@ -48,10 +53,13 @@ const AuthProvider = ({ children }) => {
     localStorage.removeItem("authToken");
     localStorage.removeItem("userId");
     localStorage.removeItem("username");
+ 
   };
 
   return (
-    <AuthContext.Provider value={{ authToken, userId, username, login, logout }}>
+    <AuthContext.Provider
+      value={{ authToken, userId, username, login, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );

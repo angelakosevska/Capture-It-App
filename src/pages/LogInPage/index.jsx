@@ -18,7 +18,7 @@ const Login = () => {
       await login(username, password);
       navigate(`/`);
     } catch (error) {
-      setError("Invalid Username or Password. Please try again.");
+      setError("Invalid Username or Password.");
     }
   };
 
@@ -74,6 +74,7 @@ const Login = () => {
             <button type="submit" className="login-button" onClick={handleLoginSubmit}>
               Login
             </button>
+            {error && <p className="error-messageLogin">{error}</p>}
           </form>
 
           {/* <div className="social-login">
