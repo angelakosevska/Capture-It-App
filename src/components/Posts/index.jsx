@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from 'react';
 import './style.css';
 
 function shuffleArray(array) {
@@ -100,12 +100,45 @@ function Feed() {
                         ))}
                     </div>
                     <div className="actions">
-                        <button>Like</button>
-                        <button>Comment</button>
-                        <button>Share</button>
+                        <LikeButton />
+                        <CommentButton />
+                        <ShareButton />
                     </div>
                 </div>
             ))}
+        </div>
+    );
+}
+
+function LikeButton() {
+    const [liked, setLiked] = useState(false);
+    const [pulsing, setPulsing] = useState(false);
+
+    const toggleLike = () => {
+        setLiked(!liked);
+        setPulsing(true);
+        setTimeout(() => setPulsing(false), 200); // Remove pulsing class after animation duration
+    };
+
+    return (
+        <div className={`ui-like ${pulsing ? 'pulsing' : ''}`} onClick={toggleLike}>
+            <i className={liked ? 'bi bi-suit-heart-fill' : 'bi bi-suit-heart'}></i>
+        </div>
+    );
+}
+
+function CommentButton() {
+    return (
+        <div className="ui-comment">
+            <i className="bi bi-chat"></i>
+        </div>
+    );
+}
+
+function ShareButton() {
+    return (
+        <div className="ui-share">
+            <i className="bi bi-share"></i>
         </div>
     );
 }
