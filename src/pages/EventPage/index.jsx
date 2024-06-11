@@ -153,6 +153,9 @@ export function Event() {
       console.error("Error deleting event: ", error);
     }
   };
+  const userIsParticipant = eventParticipants.some(
+    (participant) => participant.userId === 11
+  );
 
   return (
     //logiraniot userId
@@ -174,21 +177,63 @@ export function Event() {
           </div>
           <div className="eventActions">
             <SearchAlbums onSearch={setSearchTerm} />
+            {user === creator ? (
+              <>
+                {invitePeople && (
+                  <InviteParticipantsModal
+                    onClose={invitedPeopleInEvent}
+                    eventId={eventId}
+                    fetchParticipants={fetchParticipants}
+                  />
+                )}
 
-            {eventIsPrivate && invitePeople && creator === user && (
-              <InviteParticipantsModal
-                onClose={invitedPeopleInEvent}
-                eventId={eventId}
-                fetchParticipants={fetchParticipants}
+                <PrimaryButton
+                  buttonWidth={"auto"}
+                  buttonHeight={"40px"}
+                  buttonText={"Invite People"}
+                  onClick={invitePeopleInEvent}
+                />
+                <div className="dropdown-more">
+                  <NoBgButton
+                    buttonIcon={<MoreVertIcon fontSize="large" />}
+                    className="dropbtn"
+                  />
+                  <div className="dropdown-content-more">
+                    <NoBgButton
+                      buttonWidth={"auto"}
+                      buttonHeight={"40px"}
+                      buttonText={"Create Album"}
+                      buttonIcon={<PhotoAlbumIcon />}
+                      onClick={postAlbum}
+                    />
+                    <NoBgButton
+                      buttonIcon={<DeleteIcon />}
+                      buttonText={"Delete Event"}
+                      buttonHeight={"40px"}
+                      buttonWidth={"auto"}
+                      onClick={deleteEvent}
+                    />
+                    <NoBgButton
+                      buttonIcon={<EditIcon />}
+                      buttonText={"Edit event info"}
+                      buttonHeight={"40px"}
+                      buttonWidth={"auto"}
+                      onClick={editEvent}
+                    />
+                  </div>
+                </div>
+              </>
+            ) : (
+              <SecondaryButton
+                buttonWidth={"auto"}
+                buttonHeight={"40px"}
+                buttonText={"Create Album"}
+                buttonIcon={<PhotoAlbumIcon />}
+                onClick={postAlbum}
               />
             )}
-            <PrimaryButton
-              buttonWidth={"auto"}
-              buttonHeight={"40px"}
-              buttonText={"Invite People"}
-              onClick={invitePeopleInEvent}
-            />
-            <div className="dropdown-more">
+
+            {/* <div className="dropdown-more">
               <NoBgButton
                 buttonIcon={<MoreVertIcon fontSize="large" />}
                 className="dropbtn"
@@ -201,22 +246,26 @@ export function Event() {
                   buttonIcon={<PhotoAlbumIcon />}
                   onClick={postAlbum}
                 />
-                <NoBgButton
-                  buttonIcon={<DeleteIcon />}
-                  buttonText={"Delete Event"}
-                  buttonHeight={"40px"}
-                  buttonWidth={"auto"}
-                  onClick={deleteEvent}
-                />
-                <NoBgButton
-                  buttonIcon={<EditIcon />}
-                  buttonText={"Edit event info"}
-                  buttonHeight={"40px"}
-                  buttonWidth={"auto"}
-                  onClick={editEvent}
-                />
+                {user === creator && (
+                  <NoBgButton
+                    buttonIcon={<DeleteIcon />}
+                    buttonText={"Delete Event"}
+                    buttonHeight={"40px"}
+                    buttonWidth={"auto"}
+                    onClick={deleteEvent}
+                  />
+                )}
+                {user === creator && (
+                  <NoBgButton
+                    buttonIcon={<EditIcon />}
+                    buttonText={"Edit event info"}
+                    buttonHeight={"40px"}
+                    buttonWidth={"auto"}
+                    onClick={editEvent}
+                  />
+                )}
               </div>
-            </div>
+            </div> */}
 
             {editEventIsOpen && <EditEventModal onClose={editedEvent} />}
           </div>
@@ -234,24 +283,22 @@ export function Event() {
                 />
               </main>
             </div>
-            {createAlbum && (
+            {createAlbum && userIsParticipant && (
               <CreateAlbumModal eventId={eventId} onClose={postedAlbum} />
             )}
 
-            {eventIsPrivate && (
-              <div className="invitePeople">
-                <div className="labelInvitePeople">People in this event:</div>
-                {eventParticipants.map((participant) => (
-                  <div key={participant.id} className="participantMap">
-                    <PictureAndUsername
-                      profilePic={participant?.profilePicture}
-                      username={participant.username}
-                      ppDimension={"25px"}
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
+            <div className="invitePeople">
+              <div className="labelInvitePeople">People in this event:</div>
+              {eventParticipants.map((participant) => (
+                <div key={participant.id} className="participantMap">
+                  <PictureAndUsername
+                    profilePic={participant?.profilePicture}
+                    username={participant.username}
+                    ppDimension={"25px"}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       )}
