@@ -8,7 +8,7 @@ import "slick-carousel/slick/slick-theme.css";
 function App() {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    setTimeout(() => setLoading(false), 3300);
+    setTimeout(() => setLoading(false), 1500);
   }, []);
   if (loading) {
     return (
@@ -19,8 +19,6 @@ function App() {
       </>
     );
   }
-
-
 
   return (
     <>

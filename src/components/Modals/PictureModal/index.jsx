@@ -52,22 +52,32 @@ const Modalche = ({
   const [error, setError] = useState("");
   // const [likes, setLikes] = useState(0);
   const [isLiked, setIsLiked] = useState(hasLiked);
+  //polnokjen obid
+  const [likeCount, setLikeCount] = useState(0);
 
-  const handleLike = async () => {
+  const fetchGetLike = async () => {
     try {
-      if (isLiked) {
-        await deleteLike();
-        likesCount = -1;
-        setIsLiked(false);
-      } else {
-        await postLike();
-        likesCount = +1;
-        setIsLiked(true);
-      }
+      const response = await axios.get(
+        `https://capture-it.azurewebsites.net/api/like?pictureId=${pictureId}`,
+        {
+          headers: {
+            Authorization:
+              " Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxODA2ODgxMH0.bA71w19D3B7X8NaPteHk0oNzAH2Xzt0dmgLx8xmekDY ",
+          },
+        }
+      );
+      setLikeCount(response.data.totalRecords);
+      console.log("like count 12: ".response.data.totalRecords);
     } catch (error) {
-      console.error("Error handling like:", error);
+      setError(error);
+      console.error(" error fetching like count data ", error);
     }
   };
+
+  useEffect(() => {
+    fetchGetLike();
+  }, [pictureId]);
+  // get like od slikata
 
   const deletePicture = async () => {
     const isConfirmed = window.confirm(
@@ -82,7 +92,7 @@ const Modalche = ({
         {
           headers: {
             Authorization:
-              "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZHVtbXkxIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMyIsImV4cCI6MTcxODA1NzcxNX0.kMFOld7JRK6dVZtaYBH37tgIPpDnq34zbKvyU7N1wXY",
+              "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxODA2ODgxMH0.bA71w19D3B7X8NaPteHk0oNzAH2Xzt0dmgLx8xmekDY",
           },
         }
       );
@@ -139,15 +149,9 @@ const Modalche = ({
                   <PrimaryButton
                     buttonHeight={"40px"}
                     buttonWidth={"50%"}
-                    buttonText={`  ${likesCount} `}
-                    buttonIcon={
-                      isLiked ? (
-                        <FavoriteIcon />
-                      ) : (
-                        <FavoriteBorderOutlinedIcon />
-                      )
-                    }
-                    onClick={handleLike}
+                    buttonText={`${likeCount}`}
+                    buttonIcon={<FavoriteIcon />}
+                    //  onClick={}
                   />
 
                   <PrimaryButton

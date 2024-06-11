@@ -14,3 +14,7 @@
   color: white;
   opacity: 0.5;
 }
+
+.primaryButtonDisabled{
+  opacity: 0.5;
+}

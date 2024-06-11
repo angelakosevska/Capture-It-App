@@ -19,7 +19,7 @@ const Header = ({ user }) => {
   return (
     <header>
       <div className="Logo">
-        <Link to="/Home">
+        <Link to="/">
           <svg
             width="40"
             height="40"

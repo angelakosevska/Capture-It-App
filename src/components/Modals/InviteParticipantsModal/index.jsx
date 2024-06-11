@@ -20,7 +20,7 @@ const customStyles = {
   },
 };
 
-const InviteParticipantsModal = ({ onClose, eventId , fetchParticipants}) => {
+const InviteParticipantsModal = ({ onClose, eventId, fetchParticipants }) => {
   const [inviteUserName, setInviteUserName] = useState("");
   const [error, setError] = useState("");
 
@@ -46,12 +46,12 @@ const InviteParticipantsModal = ({ onClose, eventId , fetchParticipants}) => {
         {
           headers: {
             Authorization:
-              "Bearer  eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZHVtbXkxIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMyIsImV4cCI6MTcxODA1NzcxNX0.kMFOld7JRK6dVZtaYBH37tgIPpDnq34zbKvyU7N1wXY",
+              "Bearer  eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxODA2ODgxMH0.bA71w19D3B7X8NaPteHk0oNzAH2Xzt0dmgLx8xmekDY",
           },
         }
       );
       fetchParticipants();
-     
+
       console.log("Participant invited successfully:", response.data);
       onClose();
       //  window.location.reload();

@@ -18,7 +18,14 @@
     min-height: 90vh;
   }
 }
-
+.eventPrivate {
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300%;
+  color: var(--primaryColor);
+}
 .eventHeader {
   width: 70%;
   height: fit-content;
