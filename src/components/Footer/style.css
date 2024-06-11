@@ -19,17 +19,13 @@ body {
   gap: 10px;
   padding: 10px;
 }
-.copy{
+.copy {
   color: white;
   font-size: small;
   align-items: center;
   display: flex;
   gap: 5px;
-
-
 }
-
-
 .container-footer {
   display: flex;
   justify-content: center;
@@ -37,19 +33,48 @@ body {
   width: 100%;
   gap: 10px;
 }
-
 .bg-animation {
   background: linear-gradient(
-    -45deg,
-    #7e19a5,
-    #cc4117,
-    var(--secondaryColor),
-    var(--primaryColor),
-    #7e19a5
+    -90deg,
+    #a0313c,
+    #e55356,
+    #b32c47,
+    #85244a,
+    #532d5c,
+    #633582,
+    #532d5c,
+    #85244a,
+    #b32c47,
+    #e55356
   );
   background-size: 400% 400%;
   animation: gradient-animation 10s ease infinite;
+ 
+  
 }
+/*
+ #a0313c70,
+    #e5535670,
+    #b32c4770,
+    #85244a70,
+    #532d5c70,
+    #63358270,
+    #532d5c70,
+    #85244a70,
+    #b32c4770,
+    #e5535670
+
+        #a0313c,
+    #e55356,
+    #b32c47,
+    #85244a,
+    #532d5c,
+    #633582,
+    #532d5c,
+    #85244a,
+    #b32c47,
+    #e55356
+    */
 @keyframes gradient-animation {
   0% {
     background-position: 0% 50%;
@@ -66,9 +91,9 @@ body {
   text-decoration: none;
   width: 50px;
   height: 50px;
-  border-radius: 5px;
+  border-radius: 8px;
   /* background-color: hsla(209 20% 70% / 20%); */ /* For dark theme */
-  background-color: #ffffff4b;
+  background-color: #ffffff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -76,6 +101,7 @@ body {
   position: relative;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
     rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+
 }
 
 .icon > i {

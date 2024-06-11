@@ -1,63 +1,34 @@
-
 import "./style.css";
-import { useState } from "react";
-import CommentInput from "../CommentInput";
-import SendIcon from "@mui/icons-material/Send";
-import NoBgButton from "../../../Buttons/NoBGButton";
+import ReactTimeAgo from "react-time-ago";
+import TimeAgo from "javascript-time-ago";
+import en from "javascript-time-ago/locale/en";
 import PictureAndUsername from "../../../PictureAndUsername";
+import { parseISO, format } from "date-fns";
+TimeAgo.addLocale(en);
 
-const CommentItem = ({ comment }) => {
-  const [isReplying, setIsReplying] = useState(false);
-  const [comments, setComments] = useState(comment.comments);
-
-  const onComment = (newComment) => {
-    if (newComment.body.trim()) {
-      setComments((prevReplies) => [...prevReplies, newComment])
-      setIsReplying(false);
-    } else {
-      return;
-    }
-  };
-
+const CommentItem = ({ comment, username, profilePic, createdAt }) => {
+ //const date= parseISO(createdAt);
+ const date = new Date(createdAt);
+ const localDate= date.toLocaleString();
   return (
     <>
       <div className="comment-show">
-        <div className="who-what-when"><PictureAndUsername ppDimension="30px"
-        username={"@angela124"}/>&nbsp;12:45PM </div>
-        <span>{comment.body}</span>
-      
-      {isReplying ? (
-        <NoBgButton
-          buttonText="Cancel"
-          buttonWidth="70px"
-          buttonHeight="auto"
-          onClick={() => setIsReplying(false)}
-        />
-      ) : (
-        <NoBgButton
-          buttonText="Reply"
-          buttonWidth="70px"
-          onClick={() => setIsReplying(true)}
-        />
-      )}
-
-      {isReplying && (
-        <CommentInput
-          buttonHeight={"35px"}
-          buttonWidth={"40px"}
-          placeholderInput="Reply"
-          buttonIcon={<SendIcon />}
-          onComment={onComment}
-        />
-      )}
-      {comments &&
-        comments.map((comment) => (
-          <CommentItem key={comment.id} comment={comment} />
-        ))}
+        <div className="who-what-when">
+          <PictureAndUsername
+            ppDimension="30px"
+            username={username}
+            profilePic={profilePic}
+          />
+          &nbsp;
+          <ReactTimeAgo date={localDate} locale="en-US" />
+          {createdAt}
         </div>
+        <span>{comment}</span>
+      </div>
     </>
   );
 };
 
 export default CommentItem;
-/* ova se komentariteeee*/
+
+/* ova se komentariteeee sho se prikazvat*/

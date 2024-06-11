@@ -13,9 +13,9 @@ const HeroSection = () => {
       <div className="hero-content">
         <h1>Welcome to CaptureIt</h1>
         <p>Share your best moments with your friends and family</p>
-        <Link to="/event">
+        {/* <Link to="/event">
           <button onClick={handleButtonClick}>Go to Events</button>
-        </Link>
+        </Link> */}
       </div>
     </div>
   );

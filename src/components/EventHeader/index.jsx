@@ -3,7 +3,14 @@ import EventLocation from "./EventLocation/index";
 
 import "./style.css";
 
-const EventHeader = ({ profilePicture, username, eventName, location }) => {
+const EventHeader = ({
+  profilePicture,
+  username,
+  eventName,
+  location,
+  startDate,
+  endDate,
+}) => {
   return (
     <>
       <div className="eventHeader-flex">
@@ -13,6 +20,8 @@ const EventHeader = ({ profilePicture, username, eventName, location }) => {
           eventName={eventName}
         />
         <EventLocation location={location} />
+        <div className="dateTime">{startDate} - {endDate}</div>
+        
       </div>
     </>
   );

@@ -8,7 +8,7 @@ img {
   position: relative;
   width: 225px;
   height: 225px;
-  margin: 5px;
+  
 }
 
 .overlay {
@@ -21,15 +21,19 @@ img {
   width: 100%;
   opacity: 1;
   transition: 0.5s ease;
-  background: #5f5d9ccc;
-  border-radius: 20px;
-  border-top-right-radius: 50px;
+  background: #9c805dcc;
+  border-radius: 5px;
+  border-top-right-radius: 20px;
   box-shadow: var(--shadow);
+
   /*clip-path: polygon(0 0, calc(100% - 40px) 0, 100% 40px, 100% 100%, 0 100%);*/
+}
+.coverImage{
+  border-radius: 5px;
+  border-top-right-radius: 20px;
 }
 .container:hover .overlay {
   opacity: 0.75;
- 
 }
 .PandU {
   position: absolute;
@@ -41,7 +45,6 @@ img {
 }
 .container:hover .PandU {
   display: block;
-
 }
 
 .image:hover + .imageShadow {
@@ -51,10 +54,12 @@ img {
 .position {
   margin: 0;
 }
-.album-name {
+.album-name-event {
   text-align: left;
   color: white;
-  padding: 0px;
-  margin-bottom: 10px;
-  font-size: 22px;
+  padding: 5px;
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

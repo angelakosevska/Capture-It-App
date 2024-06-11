@@ -8,7 +8,7 @@ import "slick-carousel/slick/slick-theme.css";
 function App() {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    setTimeout(() => setLoading(false), 3300);
+    setTimeout(() => setLoading(false), 1500);
   }, []);
   if (loading) {
     return (
@@ -20,8 +20,6 @@ function App() {
     );
   }
 
-
-
   return (
     <>
       <Routing />
@@ -30,12 +28,3 @@ function App() {
 }
 
 export default App;
-// actual ruti tuka kje gi definirame so path
-/*<>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/event" element={<Event />} />
-        <Route path="/album" element={<Album />} />
-    </Routes>
-    </>*/

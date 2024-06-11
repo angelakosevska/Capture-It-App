@@ -1,24 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import Logo1 from "../../Logo";
 import "./style.css";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/index";
+import NoBgButton from "../Buttons/NoBGButton";
+import CreateEventModal from "../Modals/CreateEventModal";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
 const Header = ({ user }) => {
+  const { logout } = useContext(AuthContext);
   const [searchTerm, setSearchTerm] = useState("");
   const [showSearchDropdown, setShowSearchDropdown] = useState(false);
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
+  const [createEvent, setCreateEvent] = useState(false);
+
+  const createNewEvent = () => {
+    setCreateEvent(true);
+  };
+  const createdNewEvent = () => {
+    setCreateEvent(false);
+  };
 
   const suggestions = ["John Doe", "Jane Smith", "Event Name"];
+  const navigate = useNavigate();
 
   const handleProfileClick = () => {
     setShowProfileDropdown(!showProfileDropdown);
   };
 
+  const handleLogout = () => {
+    logout();
+   navigate("/login");
+  };
   return (
     <header>
       <div className="Logo">
-        <Link to="/Home">
+        <Link to="/">
           <svg
             width="40"
             height="40"
@@ -62,9 +81,11 @@ const Header = ({ user }) => {
         </div>
       </div>
       <div className="CreateEvent">
-        <Link to="/event">
-          <i className="bi bi-plus-circle"></i>
-        </Link>
+        {createEvent && <CreateEventModal onClose={createdNewEvent} />}
+        <NoBgButton
+          buttonIcon={<AddCircleOutlineIcon />}
+          onClick={createNewEvent}
+        />
       </div>
       <div className="ProfileLink" onClick={handleProfileClick}>
         <i className="bi bi-person-circle"></i>
@@ -73,12 +94,12 @@ const Header = ({ user }) => {
             <div className="dropdown-item">{user?.firstName}</div>
             <div className="dropdown-item">{user?.lastName}</div>
             <div className="dropdown-item">
-              <Link to="/ProfilePage">Profile</Link>
+              <Link to="/profile">Profile</Link>
             </div>
             <div className="dropdown-item">Settings</div>
             <hr />
-            <div className="ProfileDropdownItem">
-              <Link to="/Login">Log Out</Link>
+            <div className="dropdown-item">
+              <NoBgButton onClick={handleLogout} buttonText={"Logout"} />
             </div>
           </div>
         )}
