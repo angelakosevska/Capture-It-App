@@ -1,14 +1,12 @@
 import "./style.css";
 import AlbumsInEventSection from "../../components/EventPageAlbums/AlbumsInEventSection/index.jsx";
 import EventHeader from "../../components/EventHeader/index.jsx";
-import CommentsSection from "../../components/CommentsSection/index.jsx";
 import EventDescription from "../../components/EventHeader/EventDescription/index.jsx";
 import PrimaryButton from "../../components/Buttons/PrimaryButton/index.jsx";
 import SecondaryButton from "../../components/Buttons/SecondaryButton/index.jsx";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import IconButton from "../../components/Buttons/IconButton/index.jsx";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SearchAlbums from "../../components/Search/SearchAlbum/index.jsx";
 import CreateAlbumModal from "../../components/Modals/CreateAlbum/index.jsx";
@@ -19,17 +17,22 @@ import NoBgButton from "../../components/Buttons/NoBGButton/index.jsx";
 import PhotoAlbumIcon from "@mui/icons-material/PhotoAlbum";
 import InviteParticipantsModal from "../../components/Modals/InviteParticipantsModal/index.jsx";
 import PictureAndUsername from "../../components/PictureAndUsername/index.jsx";
+import { AuthContext } from "../../context/index.jsx";
 
 export function Event() {
   const { eventId } = useParams();
-  const [eventData, setEventData] = useState([]);
+  //context
+  const { authToken, userId, username, login, logout } =
+    useContext(AuthContext);
+
+  const [eventData, setEventData] = useState({});
   const [error, setError] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [createAlbum, setCreateAlbum] = useState(false);
   const [invitePeople, setInvitePeople] = useState(false);
   const [eventParticipants, setEventParticipants] = useState([]);
   const [creator, setCreator] = useState("");
-  const [user, setUser] = useState("");
+  //const [user, setUser] = useState("");
   const [eventIsPrivate, setEventIsPrivate] = useState(true);
 
   const invitePeopleInEvent = () => {
@@ -55,29 +58,29 @@ export function Event() {
     setEditEventIsopen(false);
   };
 
-  const fetchUserById = async () => {
-    try {
-      const result = await axios.get(
-        //get user by id hardkodiram
-        `https://capture-it.azurewebsites.net/api/user/11`,
-        {
-          headers: {
-            Authorization:
-              " Bearer  eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxODA3MjUwOX0.IvJinZZTobJi7UvdvwHhg2rylOBhPOO2ZpJEFRAc8aE",
-          },
-        }
-      );
+  // const fetchUserById = async () => {
+  //   try {
+  //     const result = await axios.get(
+  //       //get user by id hardkodiram
+  //       `https://capture-it.azurewebsites.net/api/user/11`,
+  //       {
+  //         headers: {
+  //           Authorization:
+  //             " Bearer   ${authToken}",
+  //         },
+  //       }
+  //     );
 
-      setUser(result.data.username);
-      console?.log("logiran e userot: ", result.data.username);
-    } catch (error) {
-      setError(error);
-      console.error("error fetching username: ", error);
-    }
-  };
-  useEffect(() => {
-    fetchUserById();
-  }, []);
+  //     setUser(result.data.username);
+  //     console?.log("logiran e userot: ", result.data.username);
+  //   } catch (error) {
+  //     setError(error);
+  //     console.error("error fetching username: ", error);
+  //   }
+  // };
+  // useEffect(() => {
+  //   fetchUserById();
+  // }, []);
 
   const fetchEventData = async () => {
     try {
@@ -86,14 +89,13 @@ export function Event() {
         `https://capture-it.azurewebsites.net/api/event/${eventId}`,
         {
           headers: {
-            Authorization:
-              " Bearer  eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxODA3MjUwOX0.IvJinZZTobJi7UvdvwHhg2rylOBhPOO2ZpJEFRAc8aE",
+            Authorization: ` Bearer  ${authToken}`,
           },
         }
       );
 
       setEventIsPrivate(result.data.isPrivate);
-      setCreator(result.data.owner.username);
+      setCreator(result.data?.owner?.username);
       setEventData(result?.data);
       console?.log("event data", result.data);
       console.log(" event is ", result.data.isPrivate);
@@ -115,8 +117,7 @@ export function Event() {
         `https://capture-it.azurewebsites.net/api/event/${eventId}/participants`,
         {
           headers: {
-            Authorization:
-              " Bearer  eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxODA3MjUwOX0.IvJinZZTobJi7UvdvwHhg2rylOBhPOO2ZpJEFRAc8aE",
+            Authorization: ` Bearer  ${authToken}`,
           },
         }
       );
@@ -143,8 +144,7 @@ export function Event() {
         `https://capture-it.azurewebsites.net/api/event/${eventId}`,
         {
           headers: {
-            Authorization:
-              " Bearer  eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxODA3MjUwOX0.IvJinZZTobJi7UvdvwHhg2rylOBhPOO2ZpJEFRAc8aE",
+            Authorization: ` Bearer  ${authToken}`,
           },
         }
       );
@@ -153,15 +153,21 @@ export function Event() {
       console.error("Error deleting event: ", error);
     }
   };
-  const userIsParticipant = eventParticipants.some(
-    (participant) => participant.userId === 11
-  );
+  const userIsParticipant =
+    Array.isArray(eventParticipants) &&
+    eventParticipants.some((participant) => participant.userId === userId);
 
   return (
     //logiraniot userId
     <>
-      {eventIsPrivate &&
+      {/* {eventIsPrivate &&
       !eventParticipants.some((participant) => participant.userId === 11) ? (
+        <div className="eventPrivate">This event is private</div>
+      ) : ( */}
+      {eventIsPrivate &&
+      !eventParticipants.some(
+        (participant) => participant.userId === userId
+      ) ? (
         <div className="eventPrivate">This event is private</div>
       ) : (
         <div className="all-in-events">
@@ -177,7 +183,8 @@ export function Event() {
           </div>
           <div className="eventActions">
             <SearchAlbums onSearch={setSearchTerm} />
-            {user === creator ? (
+
+            {username === creator ? (
               <>
                 {invitePeople && (
                   <InviteParticipantsModal
@@ -186,7 +193,9 @@ export function Event() {
                     fetchParticipants={fetchParticipants}
                   />
                 )}
-
+                {createAlbum && (
+                  <CreateAlbumModal eventId={eventId} onClose={postedAlbum} />
+                )}
                 <PrimaryButton
                   buttonWidth={"auto"}
                   buttonHeight={"40px"}
@@ -206,6 +215,7 @@ export function Event() {
                       buttonIcon={<PhotoAlbumIcon />}
                       onClick={postAlbum}
                     />
+
                     <NoBgButton
                       buttonIcon={<DeleteIcon />}
                       buttonText={"Delete Event"}
@@ -224,48 +234,20 @@ export function Event() {
                 </div>
               </>
             ) : (
-              <SecondaryButton
-                buttonWidth={"auto"}
-                buttonHeight={"40px"}
-                buttonText={"Create Album"}
-                buttonIcon={<PhotoAlbumIcon />}
-                onClick={postAlbum}
-              />
-            )}
-
-            {/* <div className="dropdown-more">
-              <NoBgButton
-                buttonIcon={<MoreVertIcon fontSize="large" />}
-                className="dropbtn"
-              />
-              <div className="dropdown-content-more">
-                <NoBgButton
+              <>
+              {createAlbum && userIsParticipant && (
+                  <CreateAlbumModal eventId={eventId} onClose={postedAlbum} />
+                )}
+                <SecondaryButton
                   buttonWidth={"auto"}
                   buttonHeight={"40px"}
                   buttonText={"Create Album"}
                   buttonIcon={<PhotoAlbumIcon />}
                   onClick={postAlbum}
                 />
-                {user === creator && (
-                  <NoBgButton
-                    buttonIcon={<DeleteIcon />}
-                    buttonText={"Delete Event"}
-                    buttonHeight={"40px"}
-                    buttonWidth={"auto"}
-                    onClick={deleteEvent}
-                  />
-                )}
-                {user === creator && (
-                  <NoBgButton
-                    buttonIcon={<EditIcon />}
-                    buttonText={"Edit event info"}
-                    buttonHeight={"40px"}
-                    buttonWidth={"auto"}
-                    onClick={editEvent}
-                  />
-                )}
-              </div>
-            </div> */}
+              
+              </>
+            )}
 
             {editEventIsOpen && <EditEventModal onClose={editedEvent} />}
           </div>
@@ -283,21 +265,19 @@ export function Event() {
                 />
               </main>
             </div>
-            {createAlbum && userIsParticipant && (
-              <CreateAlbumModal eventId={eventId} onClose={postedAlbum} />
-            )}
 
             <div className="invitePeople">
               <div className="labelInvitePeople">People in this event:</div>
-              {eventParticipants.map((participant) => (
-                <div key={participant.id} className="participantMap">
-                  <PictureAndUsername
-                    profilePic={participant?.profilePicture}
-                    username={participant.username}
-                    ppDimension={"25px"}
-                  />
-                </div>
-              ))}
+              {Array.isArray(eventParticipants) &&
+                eventParticipants.map((participant) => (
+                  <div key={participant.id} className="participantMap">
+                    <PictureAndUsername
+                      profilePic={participant?.profilePicture}
+                      username={participant.username}
+                      ppDimension={"25px"}
+                    />
+                  </div>
+                ))}
             </div>
           </div>
         </div>

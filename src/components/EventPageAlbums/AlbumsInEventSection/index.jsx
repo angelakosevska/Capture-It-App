@@ -1,9 +1,10 @@
 import axios from "axios";
 import AlbumCoverCardInEvent from "../AlbumCoverCardInEvent";
 import "./style.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import SearchAlbums from "../../Search/SearchAlbum";
+import { AuthContext } from "../../../context";
 
 const AlbumsInEventSection = ({
   picEWidth,
@@ -11,6 +12,8 @@ const AlbumsInEventSection = ({
   eventId,
   searchTerm,
 }) => {
+  const { authToken, userId, username, login, logout } =
+    useContext(AuthContext);
   const [error, setError] = useState([]);
   const [albums, setAlbums] = useState({
     data: [],
@@ -27,8 +30,7 @@ const AlbumsInEventSection = ({
         `https://capture-it.azurewebsites.net/api/album?createdAt=2024-05-11&eventId=${eventId}&pageNumber=1&pageSize=100`,
         {
           headers: {
-            Authorization:
-              " Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxODA3MjUwOX0.IvJinZZTobJi7UvdvwHhg2rylOBhPOO2ZpJEFRAc8aE",
+            Authorization: ` Bearer  ${authToken}`,
           },
         }
       );
@@ -79,7 +81,7 @@ const AlbumsInEventSection = ({
           altText={album.alt}
           picWidth={picEWidth}
           picHeight={picEHeight}
-          username={album.creator.username}
+          usernameCreator={album.creator.username}
           profilePic={album.creator.profilePicture}
           albumName={album.albumName}
           onClick={() => {
