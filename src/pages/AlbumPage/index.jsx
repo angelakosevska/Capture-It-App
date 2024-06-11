@@ -404,7 +404,7 @@ export function Album() {
           profilePicture={
             pictures.data[selectedPictureIndex].author.profilePicture
           }
-          username={pictures.data[selectedPictureIndex].author.username}
+          usernameCreator={pictures.data[selectedPictureIndex].author.username}
           albumId={albumId}
           comments={comments}
           commentsCount={commentsCount}

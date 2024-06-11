@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Modal from "react-modal";
 import CommentsSection from "../../CommentsSection/index";
 import PictureContainer from "../../PictureContainer/index";
@@ -13,6 +13,7 @@ import axios from "axios";
 import PictureAndUsername from "../../PictureAndUsername";
 import FavoriteIcon from "@mui/icons-material/Favorite"; //liked
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined"; //like
+import { AuthContext } from "../../../context";
 
 Modal.setAppElement("#root");
 const customStyles = {
@@ -37,7 +38,7 @@ const Modalche = ({
   pictureId,
   fetchPicture,
   profilePicture,
-  username,
+  usernameCreator,
   albumId,
   fetchPictureComments,
   comments,
@@ -49,6 +50,8 @@ const Modalche = ({
   deleteLike,
   hasLiked,
 }) => {
+  const { authToken, userId, username, login, logout } =
+    useContext(AuthContext);
   const [error, setError] = useState("");
   // const [likes, setLikes] = useState(0);
   const [isLiked, setIsLiked] = useState(hasLiked);

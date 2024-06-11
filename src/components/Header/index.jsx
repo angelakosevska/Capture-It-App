@@ -83,7 +83,7 @@ const Header = ({ user }) => {
             <div className="dropdown-item">{user?.firstName}</div>
             <div className="dropdown-item">{user?.lastName}</div>
             <div className="dropdown-item">
-              <Link to="/ProfilePage">Profile</Link>
+              <Link to="/profile">Profile</Link>
             </div>
             <div className="dropdown-item">Settings</div>
             <hr />

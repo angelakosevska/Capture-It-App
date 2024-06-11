@@ -28,12 +28,3 @@ function App() {
 }
 
 export default App;
-// actual ruti tuka kje gi definirame so path
-/*<>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/event" element={<Event />} />
-        <Route path="/album" element={<Album />} />
-    </Routes>
-    </>*/

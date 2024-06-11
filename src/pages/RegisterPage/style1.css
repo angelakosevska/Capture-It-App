@@ -29,7 +29,7 @@ body, html {
     border-radius: 10px;
     text-align: center;
     width: 450px;
-    height: 650px;
+    height: 700px;
     position: relative; /* Added position relative */
 }
 
@@ -219,18 +219,20 @@ body, html {
 } */ */
 
 .login-text {
-    position: relative; 
-    left: 0;
-    right: 0;
+
     color: #ffffff; 
-    margin-bottom: 10px;
+  margin: 10px;
 }
 
 .login-text a {
     color: #00338a;
-    position: relative;
+
     text-decoration: none;
     margin-bottom: 10px;
+}
+.formAndtext{
+    display: flex;
+    gap: 10px;
 }
 
 .login-text a:hover {
