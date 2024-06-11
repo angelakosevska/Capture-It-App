@@ -34,7 +34,24 @@ body {
 .bg-animation {
   background: linear-gradient(
     -90deg,
-    #a0313c70,
+    #a0313c,
+    #e55356,
+    #b32c47,
+    #85244a,
+    #532d5c,
+    #633582,
+    #532d5c,
+    #85244a,
+    #b32c47,
+    #e55356
+  );
+  background-size: 400% 400%;
+  animation: gradient-animation 10s ease infinite;
+ 
+  
+}
+/*
+ #a0313c70,
     #e5535670,
     #b32c4770,
     #85244a70,
@@ -44,12 +61,18 @@ body {
     #85244a70,
     #b32c4770,
     #e5535670
-  );
-  background-size: 400% 400%;
-  animation: gradient-animation 10s ease infinite;
- 
-  
-}
+
+        #a0313c,
+    #e55356,
+    #b32c47,
+    #85244a,
+    #532d5c,
+    #633582,
+    #532d5c,
+    #85244a,
+    #b32c47,
+    #e55356
+    */
 @keyframes gradient-animation {
   0% {
     background-position: 0% 50%;
