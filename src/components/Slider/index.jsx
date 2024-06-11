@@ -25,6 +25,14 @@ function PrevArrow(props) {
 }
 
 const images = [
+  '/Photos/photo1.jpg',
+  '/Photos/photo2.jpg',
+  '/Photos/photo3.jpg',
+  '/Photos/photo4.jpg',
+  '/Photos/photo5.jpg',
+  '/Photos/photo6.jpg',
+  '/Photos/photo7.jpg',
+  '/Photos/photo8.jpg',
   'https://images.unsplash.com/photo-1497250681960-ef046c08a56e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDF8fHxlbnwwfHx8fHw%3D',
   'https://images.unsplash.com/photo-1681557225327-e4e23744d667?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fHw%3D',
   'https://images.unsplash.com/photo-1670407476189-bbd4e76b5216?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDV8fHxlbnwwfHx8fHw%3D',

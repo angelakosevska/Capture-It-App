@@ -1,3 +1,4 @@
+
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -81,6 +82,9 @@ const Header = ({ user }) => {
           <div className="ProfileDropdownMenu">
             <div className="dropdown-item">{user?.firstName}</div>
             <div className="dropdown-item">{user?.lastName}</div>
+            <div className="dropdown-item">
+              <Link to="/ProfilePage">Profile</Link>
+            </div>
             <div className="dropdown-item">Settings</div>
             <hr />
             <div className="dropdown-item">

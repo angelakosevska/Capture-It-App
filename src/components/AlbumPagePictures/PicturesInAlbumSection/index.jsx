@@ -1,7 +1,6 @@
 import PictureCoverCardInAlbum from "../PictureCoverCardInAlbum";
 import "./style.css";
-import { useEffect, useState } from "react";
-import axios from "axios";
+
 
 const PicturesInAlbumSection = ({
   picEWidth,

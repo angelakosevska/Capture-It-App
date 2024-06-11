@@ -1,8 +1,13 @@
 import { Route, Routes, Outlet, Navigate } from "react-router-dom";
 import { Home } from "../../pages/HomePage/index.jsx";
-import { Profile } from "../../pages/ProfilePage/index.jsx";
+
+import Profile from "../../pages/ProfilePage/index.jsx";
+//import { Profile } from "../../pages/ProfilePage/index.jsx";
+
 import { Album } from "../../pages/AlbumPage/index.jsx";
 import { Event } from "../../pages/EventPage/index.jsx";
+import Login from "../../pages/LogInPage/index.jsx";
+import Register from "../../pages/RegisterPage/index.jsx"
 import Footer from "../Footer/index.jsx";
 import Header from "../Header/index.jsx";
 import Login from "../../pages/LogInPage/index.jsx";
@@ -31,13 +36,8 @@ const Routing = () => {
     );
   };
 
-  const NoLayout = () => {
-    return (
-      <>
-        <Outlet />
-      </>
-    );
-  };
+
+const Routing = () => {
   return (
     <>
       <Routes>
@@ -50,6 +50,10 @@ const Routing = () => {
         </Route>
         <Route path="/login" element={<NoLayout />}>
           <Route path="/login" element={<Login />} />
+        </Route>
+  <Route path="/register" element={<NoLayout />}>
+          <Route path="/register" element={<Register />}>
+          </Route>
         </Route>
         <Route path="*" element={<PageNotFound />} />
       </Routes>
