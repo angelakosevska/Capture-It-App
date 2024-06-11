@@ -1,9 +1,28 @@
-import React from 'react';
+
 import { Link } from "react-router-dom";
 import './style.css';
 import Logo1 from "../../Logo";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../context/index";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const { login } = useContext(AuthContext);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState([]);
+  const navigate = useNavigate();
+  
+   const handleLoginSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await login(username, password);
+      navigate(`/`);
+    } catch (error) {
+      setError("Invalid Username or Password. Please try again.");
+    }
+  };
+  
     return (
       <div className="login-container">
         <div className="login-box">
@@ -21,8 +40,10 @@ const Login = () => {
       </div>
           <form>
 
-            <input type="text" placeholder="Username" className="input-field" />
-            <input type="password" placeholder="Password" className="input-field" />
+            <input type="text" placeholder="Username" className="input-field"  value={username}
+            onChange={(e) => setUsername(e.target.value)} />
+            <input type="password" placeholder="Password" className="input-field" value={password}
+            onChange={(e) => setPassword(e.target.value)}/>
             
             <div className="extra-options">
 
@@ -51,8 +72,11 @@ const Login = () => {
             Don't have an account? <Link to="/register">Register here</Link>
           </p>
         </div>
+
+
       </div>
-    );
+    </div>
+  );
 };
-  
+
 export default Login;

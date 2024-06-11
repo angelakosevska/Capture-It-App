@@ -1,12 +1,18 @@
 .eventHeader-flex {
-  width: 60%;
+  width: 100%;
   margin: 5px;
   display: flex;
   flex-direction: row;
   gap: 5px;
   align-items: center;
-  height: 70px;
+  height: 50px;
   font-size: large;
+}
+.dateTime {
+  display: flex;
+  align-items: center;
+  height: 70px;
+  color: rgb(124, 124, 124);
 }
 @media only screen and (max-width: 1000px) {
   .eventHeader-flex {

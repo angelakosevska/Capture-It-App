@@ -1,14 +1,20 @@
 .primaryButton {
   color: #ffffff;
-  font-size: 14px;
-
-  padding: 10px 20px;
+  font-size: 16px;
+  gap: 2px;
+  padding: 0px 20px;
   border-radius: 5px;
   border: 2px solid var(--primaryColor);
   background: var(--primaryColor);
-  margin: 0 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .primaryButton:hover {
   color: white;
+  opacity: 0.5;
+}
+
+.primaryButtonDisabled{
   opacity: 0.5;
 }

@@ -59,7 +59,6 @@
 .album-name {
   text-align: left;
   color: white;
-  padding: 0px;
-  margin-bottom: 10px;
+  padding: 5px;
   font-size: 14px;
 }

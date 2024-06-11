@@ -1,3 +1,4 @@
+
 import React from 'react';
 import './style2.css';
 
@@ -24,6 +25,7 @@ function Profile() {
         ></path>
       </svg>
     </div>
+
   );
 }
 

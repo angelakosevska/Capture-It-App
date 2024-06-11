@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Modal from "react-modal";
 import NoBgButton from "../../Buttons/NoBGButton";
 import CloseIcon from "@mui/icons-material/Close";
 import PrimaryButton from "../../Buttons/PrimaryButton";
 import axios from "axios";
 import styles from "./style.module.css";
+import { AuthContext } from "../../../context/index";
 
 Modal.setAppElement("#root");
 const customStyles = {
@@ -23,6 +24,8 @@ const customStyles = {
 const CreateAlbumModal = ({ onClose, eventId }) => {
   const [newAlbumName, setNewAlbumName] = useState("");
   const [error, setError] = useState("");
+  const { authToken, userId, username, login, logout } =
+    useContext(AuthContext);
 
   const handleAlbumNameChange = (e) => {
     setNewAlbumName(e.target.value);
@@ -41,18 +44,18 @@ const CreateAlbumModal = ({ onClose, eventId }) => {
         "https://capture-it.azurewebsites.net/api/album",
         {
           eventId: eventId,
-          albumName: { newAlbumName },
+          albumName: newAlbumName,
         },
         {
           headers: {
-            Authorization:
-              "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzY3NTczMH0.MEPXqGZ9SquOWePUY8n3h53R_YQ6OoPAVg3Gkzc5USg",
+            Authorization: `Bearer ${authToken}`,
           },
         }
       );
 
       console.log("Album created successfully:", response.data);
-      onClose(); // Close the modal after successful submission
+      onClose();
+      window.location.reload(); // Close the modal after successful submission
     } catch (error) {
       setError("Error creating album: " + error.message);
       console.error("Error creating album:", error);

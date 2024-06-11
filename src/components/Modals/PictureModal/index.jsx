@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Modal from "react-modal";
 import CommentsSection from "../../CommentsSection/index";
 import PictureContainer from "../../PictureContainer/index";
@@ -6,13 +6,13 @@ import styles from "./style.module.css";
 import NoBgButton from "../../Buttons/NoBGButton";
 import CloseIcon from "@mui/icons-material/Close";
 import PrimaryButton from "../../Buttons/PrimaryButton";
-import SecondaryButton from "../../Buttons/SecondaryButton";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
-import { Widgets } from "@mui/icons-material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 import PictureAndUsername from "../../PictureAndUsername";
+import FavoriteIcon from "@mui/icons-material/Favorite"; //liked
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined"; //like
 
 Modal.setAppElement("#root");
 const customStyles = {
@@ -31,7 +31,6 @@ const customStyles = {
 const Modalche = ({
   imageUrl,
   picDescription,
-  commCount,
   onClose,
   onNext,
   onPrev,
@@ -39,8 +38,46 @@ const Modalche = ({
   fetchPicture,
   profilePicture,
   username,
+  albumId,
+  fetchPictureComments,
+  comments,
+  commentsCount,
+  likesCount,
+  fetchCommentsOnPicture,
+  fetchCommentCount,
+  postLike,
+  deleteLike,
+  hasLiked,
 }) => {
   const [error, setError] = useState("");
+  // const [likes, setLikes] = useState(0);
+  const [isLiked, setIsLiked] = useState(hasLiked);
+  //polnokjen obid
+  const [likeCount, setLikeCount] = useState(0);
+
+  const fetchGetLike = async () => {
+    try {
+      const response = await axios.get(
+        `https://capture-it.azurewebsites.net/api/like?pictureId=${pictureId}`,
+        {
+          headers: {
+            Authorization: " Bearer  ${authToken} ",
+          },
+        }
+      );
+      setLikeCount(response.data.totalRecords);
+      console.log("like count 12: ".response.data.totalRecords);
+    } catch (error) {
+      setError(error);
+      console.error(" error fetching like count data ", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchGetLike();
+  }, [pictureId]);
+  // get like od slikata
+
   const deletePicture = async () => {
     const isConfirmed = window.confirm(
       "Are you sure you want to delete this picture?"
@@ -53,18 +90,17 @@ const Modalche = ({
         `https://capture-it.azurewebsites.net/api/picture/${pictureId}`,
         {
           headers: {
-            Authorization:
-              " eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzY3NTczMH0.MEPXqGZ9SquOWePUY8n3h53R_YQ6OoPAVg3Gkzc5USg",
+            Authorization: `Bearer ${authToken}`,
           },
         }
       );
-      fetchPicture();
+      fetchPicture([pictureId]);
     } catch (error) {
       setError(error);
       console.error("Error deleting album: ", error);
     }
     onClose();
-    //window.location.reload();
+    fetchPicture();
   };
 
   return (
@@ -111,16 +147,30 @@ const Modalche = ({
                   <PrimaryButton
                     buttonHeight={"40px"}
                     buttonWidth={"50%"}
-                    buttonText={`{} likes`}
+                    buttonText={`${likeCount}`}
+                    buttonIcon={<FavoriteIcon />}
+                    //  onClick={}
                   />
+
                   <PrimaryButton
                     buttonHeight={"40px"}
                     buttonWidth={"50%"}
-                    buttonText={`${commCount} comments `}
+                    buttonText={`${commentsCount} comments `}
                     className={styles.primaryButtonComment}
                   />
                 </div>
-                <CommentsSection />
+                <CommentsSection
+                  pictureId={pictureId}
+                  onPrev={onPrev}
+                  onNext={onNext}
+                  albumId={albumId}
+                  fetchCommentCount={fetchCommentCount}
+                  fetchPictureComments={fetchPictureComments}
+                  comments={comments}
+                  commentsCount={commentsCount}
+                  likesCount={likesCount}
+                  fetchCommentsOnPicture={fetchCommentsOnPicture}
+                />
               </div>
             </div>
 

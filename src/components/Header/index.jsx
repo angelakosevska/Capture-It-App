@@ -1,24 +1,34 @@
-import React, { useState } from "react";
+
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import Logo1 from "../../Logo";
 import "./style.css";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/index";
+import NoBgButton from "../Buttons/NoBGButton";
 
 const Header = ({ user }) => {
+  const { logout } = useContext(AuthContext);
   const [searchTerm, setSearchTerm] = useState("");
   const [showSearchDropdown, setShowSearchDropdown] = useState(false);
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
 
   const suggestions = ["John Doe", "Jane Smith", "Event Name"];
+  const navigate=useNavigate();
 
   const handleProfileClick = () => {
     setShowProfileDropdown(!showProfileDropdown);
   };
 
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
   return (
     <header>
       <div className="Logo">
-        <Link to="/Home">
+        <Link to="/">
           <svg
             width="40"
             height="40"
@@ -77,8 +87,8 @@ const Header = ({ user }) => {
             </div>
             <div className="dropdown-item">Settings</div>
             <hr />
-            <div className="ProfileDropdownItem">
-              <Link to="/Login">Log Out</Link>
+            <div className="dropdown-item">
+              <NoBgButton onClick={handleLogout} buttonText={"Logout"}/>
             </div>
           </div>
         )}

@@ -1,23 +1,24 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
-body, html {
-    height: 100%;
+body,
+html {
+  height: 100%;
 }
 
 .login-container {
-    background-image: url('../../components/gallery/dancing-people-club.jpg'); /* Replace with the path to your background image */
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: 100vw;
+  background-image: url("../../components/gallery/dancing-people-club.jpg"); /* Replace with the path to your background image */
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
 }
 
 .login-box {
@@ -30,6 +31,7 @@ body, html {
     text-align: center;
     width: 400px;
     height: 500px;
+
 }
 .Logo1 {
     display: flex;
@@ -37,6 +39,7 @@ body, html {
     align-items: center;
     margin-top: 10px;
   }
+
 
   .Logo1 svg {
     width: 50px;
@@ -54,8 +57,11 @@ body, html {
     margin-left: 10px;
   }
 
+
+
 .login-button,
 .social-button {
+
     position: relative;
     width: 120px;
     height: 40px;
@@ -118,67 +124,75 @@ body, html {
 
 .login-button:active::before{
     scale: 0.7;
+
 }
 
 .login-button:hover,
 .social-button:hover {
+
     background-color: #33333300;
     box-shadow: inset 0 0 10px rgba(255, 255, 255, 0);
 }
 
 /* .social-login {
     margin: 20px 0;
+
 }
 
 .social-button {
-    width: calc(100% - 20px);
+  width: calc(100% - 20px);
 }
 
 .social-button:not(:last-child) {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .facebook {
-    background-color: #3b5998;
+  background-color: #3b5998;
 }
 
 .facebook:hover {
-    background-color: #2d4373;
+  background-color: #2d4373;
 }
 
 .google {
-    background-color: #c2c2c2;
+  background-color: #c2c2c2;
 }
 
 .google:hover {
-    background-color: #9c9c9c;
+  background-color: #9c9c9c;
 }
 
 .apple {
-    background-color: #000000;
+  background-color: #000000;
 }
 
 .apple:hover {
+
     background-color: #333333;
 } */
 
+
 .extra-options {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
 }
+
 
 .forgot-password {
     text-decoration: none;
     color: #00338a;
+
 }
 
 .forgot-password:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .register-text {
+
     position: relative;
     margin-top: 70px;
     margin-bottom: 10px; /*ne znam oti ama bottom nekji da fati pa morav so top */
@@ -323,4 +337,5 @@ body, html {
     border-color: pink;
   }
   
+
 
