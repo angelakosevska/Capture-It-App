@@ -89,7 +89,6 @@ function AutoPlay() {
                 }
               );
               const participants = result.data.participants;
-              console.log("Participants: ", participants);
 
               if (
                 Array.isArray(participants) &&
@@ -132,7 +131,6 @@ function AutoPlay() {
         <p> No recent events</p>
       ) : (
         <>
-       
           <h2>Your Recent Events</h2>
           <Slider {...settings}>
             {images.map((image, index) => (

@@ -19,7 +19,6 @@ const Header = ({}) => {
   const { authToken, userId, username, login } = useContext(AuthContext);
   const navigate = useNavigate();
   const [suggestions, setSuggestions] = useState([]);
-  
 
   const createNewEvent = () => {
     setCreateEvent(true);
@@ -42,24 +41,38 @@ const Header = ({}) => {
   const handleProfileLink = () => {
     navigate(`/profile/${username}`);
   };
+  const navigateToEvent = (suggestion) => {
+    try {
+      const eventId = suggestion.eventId;
+      navigate(`/event/${eventId}`);
+    } catch (error) {
+      console.error("Error navigating to event details:", error);
+    }
+  };
 
   useEffect(() => {
     const fetchSuggestions = async () => {
       if (searchTerm) {
         try {
           const response = await axios.get(
-            `https://capture-it.azurewebsites.net/api/user`,
+            `https://capture-it.azurewebsites.net/api/event`,
             {
               headers: {
                 Authorization: `Bearer ${authToken}`,
               },
             }
           );
-          const userSuggestions= response.data.data.map((user) => user.username);
-          setSuggestions(userSuggestions);
-          console.log("header search suggestioons", response.data.data.username);
+          const eventSuggestions = response.data.data.map((event) => ({
+            eventId: event.eventId,
+            eventName: event.eventName,
+          }));
+          setSuggestions(eventSuggestions);
+          console.log(
+            "header event suggestioons",
+            response.data.data.eventName
+          );
         } catch (error) {
-          console.error("Error fetching user suggestions:", error);
+          console.error("Error fetching event suggestions:", error);
         }
       } else {
         setSuggestions([]);
@@ -67,12 +80,8 @@ const Header = ({}) => {
     };
 
     fetchSuggestions();
-  }, [username]);
+  }, [searchTerm]);
 
-  const navigateToProfile =(username)=>{
-    navigate(`/profile/${username}`)
-    
-  }
   return (
     <header>
       <div className="Logo">
@@ -105,18 +114,21 @@ const Header = ({}) => {
             onFocus={() => setShowSearchDropdown(true)}
             onBlur={() => setShowSearchDropdown(false)}
           />
-          {showSearchDropdown && (
+          {/* {showSearchDropdown && (
             <div className="SearchDropdownMenu">
               {suggestions
                 .filter((suggestion) =>
                   suggestion.toLowerCase().includes(searchTerm.toLowerCase())
                 )
                 .map((suggestion) => (
-                //  <div className="SearchDropdownItem">{suggestion}</div>
-                  <NoBgButton onClick={navigateToProfile(suggestion)} buttonText={suggestion}/>
+                  <div className="SearchDropdownItem">
+                    <NoBgButton
+                      onClick={() => navigateToEvent(suggestion.eventId)}
+                      buttonText={suggestion.eventName}
+                    />
+                  </div>
                 ))}
-            </div>
-          )}
+            </div>  )}*/}
         </div>
       </div>
       <div className="CreateEvent">
