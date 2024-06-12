@@ -49,7 +49,7 @@ const Routing = () => {
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/Home" element={<Home />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/:username" element={<Profile />} />
           <Route path="/event/:eventId" element={<Event />} />
           <Route path="/album/:albumId" element={<Album />} />
         </Route>

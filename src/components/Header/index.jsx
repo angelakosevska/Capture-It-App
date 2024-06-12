@@ -8,13 +8,15 @@ import { AuthContext } from "../../context/index";
 import NoBgButton from "../Buttons/NoBGButton";
 import CreateEventModal from "../Modals/CreateEventModal";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import SearchUsers from "../Search/SearchUsers";
 
-const Header = ({ user }) => {
+const Header = ({}) => {
   const { logout } = useContext(AuthContext);
   const [searchTerm, setSearchTerm] = useState("");
   const [showSearchDropdown, setShowSearchDropdown] = useState(false);
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
   const [createEvent, setCreateEvent] = useState(false);
+  const { authToken, userId, username, login } = useContext(AuthContext);
 
   const createNewEvent = () => {
     setCreateEvent(true);
@@ -32,7 +34,11 @@ const Header = ({ user }) => {
 
   const handleLogout = () => {
     logout();
-   navigate("/login");
+    navigate("/login");
+  };
+
+  const handleProfileLink = () => {
+    navigate(`/profile/${username}`);
   };
   return (
     <header>
@@ -52,6 +58,7 @@ const Header = ({ user }) => {
           <Link to="/">Capture It</Link>
         </div>
       </div>
+
       <div className="SearchBar">
         <div className="menuAndItem">
           <input
@@ -91,10 +98,10 @@ const Header = ({ user }) => {
         <i className="bi bi-person-circle"></i>
         {showProfileDropdown && (
           <div className="ProfileDropdownMenu">
-            <div className="dropdown-item">{user?.firstName}</div>
-            <div className="dropdown-item">{user?.lastName}</div>
+            <div className="dropdown-item">{username}</div>
+            <div className="dropdown-item"></div>
             <div className="dropdown-item">
-              <Link to="/profile">Profile</Link>
+              <NoBgButton onClick={handleProfileLink} buttonText={"Profile"} />
             </div>
             <div className="dropdown-item">Settings</div>
             <hr />
