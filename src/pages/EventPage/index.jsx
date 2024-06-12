@@ -32,6 +32,7 @@ export function Event() {
   const [invitePeople, setInvitePeople] = useState(false);
   const [eventParticipants, setEventParticipants] = useState([]);
   const [creator, setCreator] = useState("");
+  const [publicUser, setPublicUser] = useState();
   //const [user, setUser] = useState("");
   const [eventIsPrivate, setEventIsPrivate] = useState(true);
 
@@ -58,30 +59,6 @@ export function Event() {
     setEditEventIsopen(false);
   };
 
-  // const fetchUserById = async () => {
-  //   try {
-  //     const result = await axios.get(
-  //       //get user by id hardkodiram
-  //       `https://capture-it.azurewebsites.net/api/user/11`,
-  //       {
-  //         headers: {
-  //           Authorization:
-  //             " Bearer   ${authToken}",
-  //         },
-  //       }
-  //     );
-
-  //     setUser(result.data.username);
-  //     console?.log("logiran e userot: ", result.data.username);
-  //   } catch (error) {
-  //     setError(error);
-  //     console.error("error fetching username: ", error);
-  //   }
-  // };
-  // useEffect(() => {
-  //   fetchUserById();
-  // }, []);
-
   const fetchEventData = async () => {
     try {
       const result = await axios.get(
@@ -98,7 +75,8 @@ export function Event() {
       setCreator(result.data?.owner?.username);
       setEventData(result?.data);
       console?.log("event data", result.data);
-      console.log(" event is ", result.data.isPrivate);
+      console.log(" event is private ", result.data.isPrivate);
+      console.log("creator ", result.data?.owner?.username);
 
       // setEventParticipants([result.data?.owner, ...result.data.participants]);
     } catch (error) {
@@ -109,6 +87,9 @@ export function Event() {
   useEffect(() => {
     fetchEventData();
   }, [eventId]);
+
+
+
 
   const fetchParticipants = async () => {
     try {
@@ -153,136 +134,121 @@ export function Event() {
       console.error("Error deleting event: ", error);
     }
   };
-  const userIsParticipant =
-    Array.isArray(eventParticipants) &&
-    eventParticipants.some((participant) => participant.userId === userId);
 
   return (
     //logiraniot userId
     <>
-      {/* {eventIsPrivate &&
-      !eventParticipants.some((participant) => participant.userId === 11) ? (
-        <div className="eventPrivate">This event is private</div>
-      ) : ( */}
-      {eventIsPrivate &&
-      !eventParticipants.some(
-        (participant) => participant.userId === userId
-      ) ? (
-        <div className="eventPrivate">This event is private</div>
-      ) : (
-        <div className="all-in-events">
-          <div className="eventHeader">
-            <EventHeader
-              location={eventData.location}
-              profilePicture={eventData?.owner?.profilePicture}
-              username={eventData?.owner?.username}
-              eventName={eventData.eventName}
-              startDate={eventData.startDateTime}
-              endDate={eventData.endDateTime}
-            />
-          </div>
-          <div className="eventActions">
-            <SearchAlbums onSearch={setSearchTerm} />
+      {/* <div className="eventPrivate">This event is private</div> */}
+      <div className="all-in-events">
+        <div className="eventHeader">
+          <EventHeader
+            location={eventData.location}
+            profilePicture={eventData?.owner?.profilePicture}
+            username={eventData?.owner?.username}
+            eventName={eventData.eventName}
+            startDate={eventData.startDateTime}
+            endDate={eventData.endDateTime}
+          />
+        </div>
+        <div className="eventActions">
+          <SearchAlbums onSearch={setSearchTerm} />
 
-            {username === creator ? (
-              <>
-                {invitePeople && (
-                  <InviteParticipantsModal
-                    onClose={invitedPeopleInEvent}
-                    eventId={eventId}
-                    fetchParticipants={fetchParticipants}
-                  />
-                )}
-                {createAlbum && (
-                  <CreateAlbumModal eventId={eventId} onClose={postedAlbum} />
-                )}
-                <PrimaryButton
-                  buttonWidth={"auto"}
-                  buttonHeight={"40px"}
-                  buttonText={"Invite People"}
-                  onClick={invitePeopleInEvent}
-                />
-                <div className="dropdown-more">
-                  <NoBgButton
-                    buttonIcon={<MoreVertIcon fontSize="large" />}
-                    className="dropbtn"
-                  />
-                  <div className="dropdown-content-more">
-                    <NoBgButton
-                      buttonWidth={"auto"}
-                      buttonHeight={"40px"}
-                      buttonText={"Create Album"}
-                      buttonIcon={<PhotoAlbumIcon />}
-                      onClick={postAlbum}
-                    />
-
-                    <NoBgButton
-                      buttonIcon={<DeleteIcon />}
-                      buttonText={"Delete Event"}
-                      buttonHeight={"40px"}
-                      buttonWidth={"auto"}
-                      onClick={deleteEvent}
-                    />
-                    <NoBgButton
-                      buttonIcon={<EditIcon />}
-                      buttonText={"Edit event info"}
-                      buttonHeight={"40px"}
-                      buttonWidth={"auto"}
-                      onClick={editEvent}
-                    />
-                  </div>
-                </div>
-              </>
-            ) : (
-              <>
-              {createAlbum && userIsParticipant && (
-                  <CreateAlbumModal eventId={eventId} onClose={postedAlbum} />
-                )}
-                <SecondaryButton
-                  buttonWidth={"auto"}
-                  buttonHeight={"40px"}
-                  buttonText={"Create Album"}
-                  buttonIcon={<PhotoAlbumIcon />}
-                  onClick={postAlbum}
-                />
-              
-              </>
-            )}
-
-            {editEventIsOpen && <EditEventModal onClose={editedEvent} />}
-          </div>
-          <div className="mainAndInvite">
-            <div className="descriptionAndEvent">
-              <div className="event-description">
-                <EventDescription eventDescription={eventData.description} />
-              </div>
-              <main className="albumsInEvent">
-              
-                <AlbumsInEventSection
-                  picEHeight={"225px"}
-                  picEWidth={"225px"}
+          {username === creator ? (
+            <>
+              {invitePeople && (
+                <InviteParticipantsModal
+                  onClose={invitedPeopleInEvent}
                   eventId={eventId}
-                  searchTerm={searchTerm}
+                  fetchParticipants={fetchParticipants}
                 />
-              </main>
-            </div>
+              )}
+              {createAlbum && (
+                <CreateAlbumModal eventId={eventId} onClose={postedAlbum} />
+              )}
+              <PrimaryButton
+                buttonWidth={"auto"}
+                buttonHeight={"40px"}
+                buttonText={"Invite People"}
+                onClick={invitePeopleInEvent}
+              />
+              <div className="dropdown-more">
+                <NoBgButton
+                  buttonIcon={<MoreVertIcon fontSize="large" />}
+                  className="dropbtn"
+                />
+                <div className="dropdown-content-more">
+                  <NoBgButton
+                    buttonWidth={"auto"}
+                    buttonHeight={"40px"}
+                    buttonText={"Create Album"}
+                    buttonIcon={<PhotoAlbumIcon />}
+                    onClick={postAlbum}
+                  />
 
-            <div className="invitePeople">
-              <div className="labelInvitePeople">People in this event:</div>
-              {Array.isArray(eventParticipants) &&
-                eventParticipants.map((participant) => (
-                  <div key={participant.id} className="participantMap">
-                    <PictureAndUsername
-                      profilePic={participant?.profilePicture}
-                      username={participant.username}
-                      ppDimension={"25px"}
-                    />
-                  </div>
-                ))}
+                  <NoBgButton
+                    buttonIcon={<DeleteIcon />}
+                    buttonText={"Delete Event"}
+                    buttonHeight={"40px"}
+                    buttonWidth={"auto"}
+                    onClick={deleteEvent}
+                  />
+                  <NoBgButton
+                    buttonIcon={<EditIcon />}
+                    buttonText={"Edit event info"}
+                    buttonHeight={"40px"}
+                    buttonWidth={"auto"}
+                    onClick={editEvent}
+                  />
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+              {createAlbum && (
+                <CreateAlbumModal eventId={eventId} onClose={postedAlbum} />
+              )}
+              <SecondaryButton
+                buttonWidth={"auto"}
+                buttonHeight={"40px"}
+                buttonText={"Create Album"}
+                buttonIcon={<PhotoAlbumIcon />}
+                onClick={postAlbum}
+              />
+            </>
+          )}
+
+          {editEventIsOpen && <EditEventModal onClose={editedEvent} />}
+        </div>
+        <div className="mainAndInvite">
+          <div className="descriptionAndEvent">
+            <div className="event-description">
+              <EventDescription eventDescription={eventData.description} />
             </div>
+            <main className="albumsInEvent">
+              <AlbumsInEventSection
+                picEHeight={"225px"}
+                picEWidth={"225px"}
+                eventId={eventId}
+                searchTerm={searchTerm}
+              />
+            </main>
+          </div>
+
+          <div className="invitePeople">
+            <div className="labelInvitePeople">People in this event:</div>
+            {Array.isArray(eventParticipants) &&
+              eventParticipants.map((participant) => (
+                <div key={participant.id} className="participantMap">
+                  <PictureAndUsername
+                    profilePic={participant?.profilePicture}
+                    username={participant.username}
+                    ppDimension={"25px"}
+                  />
+                </div>
+              ))}
           </div>
         </div>
-      )}
+      </div>
     </>
   );
 }

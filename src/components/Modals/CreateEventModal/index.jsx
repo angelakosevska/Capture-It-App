@@ -67,8 +67,8 @@ const CreateEventModal = ({ onClose }) => {
           location,
           description,
           isPrivate,
-         // qrCodeUrl,
-         // invite,
+          qrCodeUrl,
+          invite,
         },
         {
           headers: {
@@ -78,11 +78,10 @@ const CreateEventModal = ({ onClose }) => {
       );
 
       const eventId = response.data.eventId;
-      const addParticipantResponse = await axios.post(
-        `https://capture-it.azurewebsites.net/api/event/participants`,
+      await axios.post(
+        `https://capture-it.azurewebsites.net/api/event/${eventId}/participants`,
         {
-          eventId,
-          username,
+          userId: userId, // Assuming userId is the ID of the creator
         },
         {
           headers: {
@@ -91,10 +90,22 @@ const CreateEventModal = ({ onClose }) => {
         }
       );
 
-      console.log("Event created successfully:", response.data);
-      console.log("User added as a participant:", addParticipantResponse.data);
+      // const addParticipantResponse = await axios.post(
+      //   `https://capture-it.azurewebsites.net/api/event/participants`,
+      //   {
+      //     eventId,
+      //     username,
+      //   },
+      //   {
+      //     headers: {
+      //       Authorization: `Bearer ${authToken}`,
+      //     },
+      //   }
+      // );
 
       console.log("Event created successfully:", response.data);
+      window.location.reload();
+      // console.log("User added as a participant:", addParticipantResponse.data);
 
       onClose(); // Close the modal after successful submission
     } catch (error) {
