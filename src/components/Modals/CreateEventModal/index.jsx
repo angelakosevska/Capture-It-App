@@ -67,8 +67,8 @@ const CreateEventModal = ({ onClose }) => {
           location,
           description,
           isPrivate,
-          qrCodeUrl: "sassffd",
-          invite:"dsadasda",
+          qrCodeUrl,
+          invite,
         },
         {
           headers: {

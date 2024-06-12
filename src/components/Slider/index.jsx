@@ -83,7 +83,7 @@ function AutoPlay() {
     const fetchEvents = async () => {
       try {
         const response = await axios.get(
-          "https://api.example.com/public-events"
+          "https://capture-it.azurewebsites.net/api/event"
         );
         setEvents(response.data);
       } catch (error) {

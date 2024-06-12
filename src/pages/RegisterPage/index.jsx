@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import { useState, useContext } from "react";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./style1.css";
 import Logo1 from "../../Logo";
 import axios from "axios";
+import { AuthContext } from "../../context/index";
+import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
-  const [name, setName] = useState("");
+  const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -16,14 +18,13 @@ const RegisterPage = () => {
   const [gender, setGender] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const { authToken, userId, login, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(""); // Clear previous error messages
-    setSuccess(""); // Clear previous success messages
-
     if (
-      !name ||
+      !firstName ||
       !lastName ||
       !username ||
       !email ||
@@ -35,13 +36,14 @@ const RegisterPage = () => {
       setError("Please fill out all required fields.");
     } else if (password !== repeatPassword) {
       setError("Passwords do not match.");
+      return;
     }
 
     try {
       const response = await axios.post(
         "https://capture-it.azurewebsites.net/api/authenticate/register",
         {
-          name,
+          firstName,
           lastName,
           username,
           email,
@@ -49,42 +51,26 @@ const RegisterPage = () => {
           password,
           dateOfBirth,
           gender,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
         }
       );
-      console.log(response.data.dateOfBirth);
-      if (response.data.success) {
-        setSuccess("Registration successful! Redirecting to login...");
-        setTimeout(() => {
-          window.location.href = "/login";
-        }, 2000);
-      } else {
-        setError("Registration failed. Please try again.");
-      }
+
+      navigate(`/login`);
     } catch (error) {
-      if (error.response) {
-        // The request was made and the server responded with a status code outside of the range of 2xx
-        setError(
-          `Registration failed: ${
-            error.response.data.message || error.response.statusText
-          }`
-        );
-        console.error("Registration error:", error.response.data);
-      } else if (error.request) {
-        // The request was made but no response was received
-        setError(
-          "Registration failed: No response from server. Please try again later."
-        );
-        console.error("Registration error:", error.request);
-      } else {
-        // Something happened in setting up the request that triggered an Error
-        setError(
-          "Registration failed: An unexpected error occurred. Please try again."
-        );
-        console.error("Registration error:", error.message);
-      }
+      console.error(" error register,", error);
     }
   };
-
+  const handleDateChange = (e) => {
+    // Format the date value to YYYY-MM-DD
+    const rawDate = e.target.value; // Get the raw date string from the input
+    const [year, month, day] = rawDate.split("-"); // Split the raw date string by "-"
+    const formattedDate = `${year}-${month}-${day}`;
+    setDateOfBirth(formattedDate);
+  };
   return (
     <div className="register-container">
       <div className="register-box">
@@ -105,10 +91,10 @@ const RegisterPage = () => {
           <div className="input-group">
             <input
               type="text"
-              placeholder="Name"
-              className={`input-field half-width${!name ? " error" : ""}`}
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              placeholder="First name"
+              className={`input-field half-width${!firstName ? " error" : ""}`}
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
             />
             <input
               type="text"
@@ -144,7 +130,7 @@ const RegisterPage = () => {
             placeholder="Date of Birth"
             className={`input-field${!dateOfBirth ? " error" : ""}`}
             value={dateOfBirth}
-            onChange={(e) => setDateOfBirth(e.target.value)}
+            onChange={handleDateChange}
           />
           <select
             className={`input-field${!gender ? " error" : ""}`}
