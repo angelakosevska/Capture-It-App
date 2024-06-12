@@ -46,6 +46,7 @@ function Feed() {
 
   return (
     <div className="feed">
+     
       {events.map((event) => (
         <div key={event.eventId} className="event">
           <div className="profile">

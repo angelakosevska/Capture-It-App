@@ -10,6 +10,7 @@ export function Home() {
     <>
       <HeroSection />
       <Slider />
+      <h2> Explore public events</h2>
       <Feed />
     </>
   );
