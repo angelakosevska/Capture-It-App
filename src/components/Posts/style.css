@@ -36,6 +36,7 @@
 .event-name {
     font-size: 1.2em;
     margin-bottom: 10px;
+    cursor: pointer;
 }
 
 .description {

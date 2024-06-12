@@ -45,17 +45,12 @@ const CreateEventModal = ({ onClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (
-      !eventName ||
-      !startDateTime ||
-      !endDateTime ||
-      !location ||
-      !description
-    ) {
+    if (!eventName || !location || !description) {
       setError("Please fill in all fields");
       return;
     }
-
+    const startDateTimeISO = new Date(startDateTime).toISOString();
+    const endDateTimeISO = new Date(endDateTime).toISOString();
     try {
       const response = await axios.post(
         //post event
@@ -67,8 +62,8 @@ const CreateEventModal = ({ onClose }) => {
           location,
           description,
           isPrivate,
-          qrCodeUrl,
-          invite,
+          qrCodeUrl: "stirng",
+          invite: "stging",
         },
         {
           headers: {
@@ -77,18 +72,18 @@ const CreateEventModal = ({ onClose }) => {
         }
       );
 
-      const eventId = response.data.eventId;
-      await axios.post(
-        `https://capture-it.azurewebsites.net/api/event/${eventId}/participants`,
-        {
-          userId: userId, // Assuming userId is the ID of the creator
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${authToken}`,
-          },
-        }
-      );
+      // const eventId = response.data.eventId;
+      // await axios.post(
+      //   `https://capture-it.azurewebsites.net/api/event/${eventId}/participants`,
+      //   {
+      //     userId: userId, // Assuming userId is the ID of the creator
+      //   },
+      //   {
+      //     headers: {
+      //       Authorization: `Bearer ${authToken}`,
+      //     },
+      //   }
+      // );
 
       // const addParticipantResponse = await axios.post(
       //   `https://capture-it.azurewebsites.net/api/event/participants`,
@@ -109,7 +104,6 @@ const CreateEventModal = ({ onClose }) => {
 
       onClose(); // Close the modal after successful submission
     } catch (error) {
-      setError("Error creating event: " + error.message);
       console.error("Error creating event: ", error);
     }
   };

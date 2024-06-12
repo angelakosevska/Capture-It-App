@@ -14,12 +14,13 @@ import PictureAndUsername from "../../PictureAndUsername";
 import FavoriteIcon from "@mui/icons-material/Favorite"; //liked
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined"; //like
 import { AuthContext } from "../../../context";
+import { FavoriteBorderOutlined } from "@mui/icons-material";
 
 Modal.setAppElement("#root");
 const customStyles = {
   content: {
     width: "90%",
-    height: "85%",
+    height: "90%",
     top: "52%",
     left: "50%",
     right: "auto",
@@ -53,10 +54,9 @@ const Modalche = ({
   const { authToken, userId, username, login, logout } =
     useContext(AuthContext);
   const [error, setError] = useState("");
-  // const [likes, setLikes] = useState(0);
   const [isLiked, setIsLiked] = useState(hasLiked);
   //polnokjen obid
-  const [likeCount, setLikeCount] = useState(0);
+  const [likeCount, setLikeCount] = useState(likesCount);
 
   const fetchGetLike = async () => {
     try {
@@ -64,12 +64,12 @@ const Modalche = ({
         `https://capture-it.azurewebsites.net/api/like?pictureId=${pictureId}`,
         {
           headers: {
-            Authorization: " Bearer  ${authToken} ",
+            Authorization: ` Bearer  ${authToken} `,
           },
         }
       );
       setLikeCount(response.data.totalRecords);
-      console.log("like count 12: ".response.data.totalRecords);
+      console.log("like count : ".response.data.totalRecords);
     } catch (error) {
       setError(error);
       console.error(" error fetching like count data ", error);
@@ -80,6 +80,16 @@ const Modalche = ({
     fetchGetLike();
   }, [pictureId]);
   // get like od slikata
+
+  const handleLike = async () => {
+    try {
+      await postLike();
+      setLikeCount((prevCount) => prevCount + 1);
+      setIsLiked(true);
+    } catch (error) {
+      console.error("error posting like", error);
+    }
+  };
 
   const deletePicture = async () => {
     const isConfirmed = window.confirm(
@@ -151,8 +161,13 @@ const Modalche = ({
                     buttonHeight={"40px"}
                     buttonWidth={"50%"}
                     buttonText={`${likeCount}`}
-                    buttonIcon={<FavoriteIcon />}
-                    //  onClick={}
+                    buttonIcon={
+                      isLiked ? (
+                        <FavoriteIcon />
+                      ) : (
+                        <FavoriteBorderOutlinedIcon />
+                      )
+                    }
                   />
 
                   <PrimaryButton

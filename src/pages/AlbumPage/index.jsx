@@ -35,10 +35,8 @@ export function Album() {
   const [selectedPictureIndex, setSelectedPictureIndex] = useState("");
   const [addPhotoM, setAddPhotoM] = useState(false);
   const { albumId } = useParams();
-  const [likes, setLikes] = useState(0);
-  const [hasLiked, setHasLiked] = useState(false);
-  const [likeId, setLikeId] = useState(null);
   const [breadcrumbs, setBreadcrumbs] = useState([]);
+  const [hasLiked, setHasLiked] = useState(false);
   const navigate = useNavigate();
   const { authToken, userId, username, login, logout } =
     useContext(AuthContext);
@@ -56,7 +54,7 @@ export function Album() {
       );
 
       setPictures(result?.data);
-      console.log("lajkoj ", result?.data?.data?.likeCount);
+
       console.log(" sliki", result.data);
     } catch (error) {
       setError(error);
@@ -126,18 +124,6 @@ export function Album() {
         }
       );
 
-      // const userLike = response.data.data.find(
-      //   (like) => like.user.username === "kosevskaa"
-      // );
-
-      // if (userLike) {
-      //   setHasLiked(true);
-      //   setLikeId(userLike.likeId);
-      //   console.log("like id: ", userLike.likeId);
-      // } else {
-      //   setLikeId(null);
-      // }
-
       setLikesCount(response.data.totalRecords);
     } catch (error) {
       console.log("error fetching likes", error);
@@ -146,56 +132,7 @@ export function Album() {
   useEffect(() => {
     fetchLikesOnPicture();
   }, [selectedPictureIndex]);
-  /*
-  const deleteLike = async () => {
-    try {
-      if (!likeId) return;
-      await axios.delete(
-        `https://capture-it.azurewebsites.net/api/like/${likeId}`,
-        {
-          headers: {
-            Authorization:
-              `Bearer ${authToken}`,
-          },
-        }
-      );
-      setHasLiked(false);
-      setLikes((prevLikes) => prevLikes - 1);
-      fetchLikesOnPicture();
-    } catch (error) {
-      console.error("error deleting like", error);
-    }
-  };
-*/ /*
-  const postLike = async () => {
-    setLikes((prevLikes) => prevLikes + 1);
-    try {
-      const response = await axios.post(
-        `https://capture-it.azurewebsites.net/api/like`,
-        { pictureId: pictures.data[selectedPictureIndex].pictureId },
-        {
-          headers: {
-            Authorization:
-              `Bearer ${authToken}`,
-          },
-        }
-      );
-      setHasLiked(true);
 
-      //fetchLikesOnPicture();
-      console.log("Loke posted ", response.data);
-    } catch (error) {
-      setLikes((prevLikes) => prevLikes - 1);
-      console.error("error posing like", error);
-      console.error("post like eror", error.response.data);
-    }
-  }; */ /*
-  useEffect(() => {
-    if (selectedPictureIndex !== null) {
-      fetchLikesOnPicture();
-    }
-  }, [likesCount, selectedPictureIndex]);
-*/
   const postLike = async () => {
     try {
       const response = await axios.post(
@@ -217,26 +154,6 @@ export function Album() {
       console.error("post like error", error.response.data);
     }
   };
-  // const deleteLike = async (likeId) => {
-  //   try {
-  //     if (!likeId) return;
-
-  //     await axios.delete(
-  //       `https://capture-it.azurewebsites.net/api/like/${likeId}`,
-  //       {
-  //         headers: {
-  //           Authorization:
-  //             `Bearer ${authToken}`,
-  //         },
-  //       }
-  //     );
-
-  //     setLikesCount((prevCount) => prevCount - 1);
-  //     setHasLiked(false);
-  //   } catch (error) {
-  //     console.error("Error deleting like:", error);
-  //   }
-  // };
 
   useEffect(() => {
     fetchCommentsOnPicture();
@@ -331,6 +248,29 @@ export function Album() {
     } catch (error) {
       setError(error);
       console.error("Error deleting album: ", error);
+    }
+  };
+
+  const handleLike = async (index) => {
+    try {
+      const response = await axios.post(
+        `https://capture-it.azurewebsites.net/api/like`,
+        { pictureId: pictures.data[index].pictureId },
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
+      );
+
+      // Update like count for the corresponding picture
+      const updatedPictures = [...pictures.data];
+      updatedPictures[index].likeCount++; // Assuming there's a likeCount property in the picture object
+      setPictures({ ...pictures, data: updatedPictures });
+
+      console.log("Like posted ", response.data);
+    } catch (error) {
+      console.error("Error posting like: ", error);
     }
   };
 

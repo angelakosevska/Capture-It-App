@@ -33,6 +33,7 @@ export function Event() {
   const [eventParticipants, setEventParticipants] = useState([]);
   const [creator, setCreator] = useState("");
   const [publicUser, setPublicUser] = useState();
+  const [isParticipant, setIsParticipant] = useState(false);
   //const [user, setUser] = useState("");
   const [eventIsPrivate, setEventIsPrivate] = useState(true);
 
@@ -88,9 +89,6 @@ export function Event() {
     fetchEventData();
   }, [eventId]);
 
-
-
-
   const fetchParticipants = async () => {
     try {
       const result = await axios.get(
@@ -104,6 +102,11 @@ export function Event() {
       );
       setEventParticipants(result.data.participants);
       console?.log("event participants", result.data.participants);
+
+      const participantIds = result.data.participants.map(
+        (participant) => participant.userId
+      );
+      setIsParticipant(participantIds.includes(userId));
     } catch (error) {
       setError(error);
       console.error("error fetching participants: ", error);
@@ -202,7 +205,7 @@ export function Event() {
                 </div>
               </div>
             </>
-          ) : (
+          ) : isParticipant && (
             <>
               {createAlbum && (
                 <CreateAlbumModal eventId={eventId} onClose={postedAlbum} />

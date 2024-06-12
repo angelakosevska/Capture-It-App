@@ -38,6 +38,7 @@
 }
 .pictureModal {
   width: 60%;
+  max-height: 400px;
   align-content: center;
 }
 .commentsModal {

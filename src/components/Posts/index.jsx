@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import "./style.css";
 import axios from "axios";
 import { AuthContext } from "../../context";
+import { useNavigate } from "react-router-dom";
 
 function shuffleArray(array) {
   const shuffledArray = [...array];
@@ -16,6 +17,7 @@ function Feed() {
   const { authToken, userId, username, login, logout } =
     useContext(AuthContext);
   const [events, setEvents] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -41,19 +43,23 @@ function Feed() {
   }, [authToken]);
 
   const handleViewMoreClick = (eventId) => {
-    alert(`Redirecting to event page for event ID: ${eventId}`);
+    navigate(`event/${eventId}`);
   };
 
   return (
     <div className="feed">
-     
       {events.map((event) => (
         <div key={event.eventId} className="event">
           <div className="profile">
             <img src={event.owner.profilePicture} alt="Profile" />
             <span>{event.owner.username}</span>
           </div>
-          <div className="event-name">{event.eventName}</div>
+          <div
+            className="event-name"
+            onClick={() => handleViewMoreClick(event.eventId)}
+          >
+            {event.eventName}
+          </div>
           <div className="description">{event.description}</div>
           <div className="photos">
             {event.pictures.slice(0, 5).map((photo, index) => (
