@@ -2,16 +2,27 @@ import { AuthContext } from "../../context/index.jsx";
 import { useEffect, useState, useContext } from "react";
 import "./style2.css";
 import axios from "axios";
+import Feed from "../../components/Posts/index.jsx";
+import NoBgButton from "../../components/Buttons/NoBGButton/index.jsx";
+import { useNavigate } from "react-router-dom";
 
 function Card({ event }) {
+  const navigate = useNavigate();
+  const navigateToEvent = (idEvent) => {
+    navigate(`/event/${idEvent}`);
+  };
+  const imageUrl = event.pictures.length > 0 ? event.pictures[0] : "";
   return (
     <div className="card-event">
-      <img src={event.image} alt={event.name} className="card-image" />
+      {imageUrl && (
+        <img src={imageUrl} alt={event.eventName} className="card-image" />
+      )}
       <div className="card-content">
-        <h2 className="card-title">{event.name}</h2>
-        <a href={`/events/${event.id}`} className="viewpfp-event-button">
-          View event
-        </a>
+        <h2 className="card-title">{event.eventName}</h2>
+        <NoBgButton
+          onClick={() => navigateToEvent(event.eventId)}
+          buttonText={"View Event"}
+        />
       </div>
     </div>
   );
@@ -21,8 +32,10 @@ function Profile() {
   const { authToken, userId, username, login, logout } =
     useContext(AuthContext);
 
-  const [events, setEvents] = useState();
-  const [userInfo, setUserInfo]=useState();
+  const [events, setEvents] = useState([]);
+  const [userInfo, setUserInfo] = useState();
+  const [userVisit, setUserVisit] = useState();
+
   const [error, setError] = useState("");
 
   const defaultCoverImage =
@@ -40,18 +53,16 @@ function Profile() {
         }
       );
 
-      setEvents(result.data.data);
-      console.log("events in profile", result.data.data)
-
+      setEvents(result?.data?.data || []);
+      console.log("events in profile", result?.data.data);
     } catch (error) {
       setError(error);
       console.error("error fetching event data ", error);
     }
   };
 
-
-  const fetchUSerInfo = async () => {
-    //get picture
+  const fetchUserInfo = async () => {
+    //get user by id
     try {
       const result = await axios.get(
         `https://capture-it.azurewebsites.net/api/user/${userId}`,
@@ -63,8 +74,7 @@ function Profile() {
       );
 
       setUserInfo(result.data);
-      console.log("user info", result.data)
-
+      console.log("user info", result.data);
     } catch (error) {
       setError(error);
       console.error("error fetching user info ", error);
@@ -73,7 +83,32 @@ function Profile() {
 
   useEffect(() => {
     fetchEventsInProfile();
-    fetchUSerInfo();
+    fetchUserInfo();
+  }, [userId]);
+
+  const fetchUserVisit = async () => {
+    //get user by id
+    try {
+      const result = await axios.get(
+        `https://capture-it.azurewebsites.net/api/user/${username}`,
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
+      );
+
+      setUserVisit(result.data);
+      console.log("user info", result.data);
+    } catch (error) {
+      setError(error);
+      console.error("error fetching user info ", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchEventsInProfile();
+    fetchUserVisit();
   }, [userId]);
 
   if (!userInfo) {
@@ -88,28 +123,38 @@ function Profile() {
   // );
 
   return (
-    <div className="profile-container">
-      <div className="profile-header">
-        <img
-          src={userInfo.profilePicture}
-          alt="Profile Picture"
-          className="profile-pic"
-        />
-        <div className="profile-info">
-          <h1 className="name">{userInfo.firstName}{" "}{userInfo.lastName} </h1>
-          <p className="username">@{username}</p>
+    <>
+      <div className="profile-container">
+        <div className="profile-header">
+          <img
+            src={userInfo.profilePicture}
+            alt="Profile "
+            className="profile-pic"
+          />
+          <div className="profile-info">
+            <h1 className="name">
+              {userInfo.firstName} {userInfo.lastName}{" "}
+            </h1>
+            <p className="username">@{userInfo.username}</p>
+          </div>
+        </div>
+        <div className="profile-actions">
+          <input
+            type="text"
+            placeholder="Search events"
+            className="search-bar"
+          />
+          <button className="edit-button">
+            <i class="bi bi-pencil-square"></i> Edit
+          </button>
+        </div>
+        <div className="cardpfp-container">
+          {events.map((event) => (
+            <Card key={event.eventId} event={event} />
+          ))}
         </div>
       </div>
-      <div className="profile-actions">
-        <input type="text" placeholder="Search events" className="search-bar" />
-        <button className="edit-button">
-          <i class="bi bi-pencil-square"></i> Edit
-        </button>
-      </div>
-      <div className="cardpfp-container">
-        
-      </div>
-    </div>
+    </>
   );
 }
 

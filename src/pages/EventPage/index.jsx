@@ -18,7 +18,6 @@ import PhotoAlbumIcon from "@mui/icons-material/PhotoAlbum";
 import InviteParticipantsModal from "../../components/Modals/InviteParticipantsModal/index.jsx";
 import PictureAndUsername from "../../components/PictureAndUsername/index.jsx";
 import { AuthContext } from "../../context/index.jsx";
-import SearchUsers from "../../components/Search/SearchUsers/index.jsx";
 
 export function Event() {
   const { eventId } = useParams();
@@ -258,7 +257,7 @@ export function Event() {
                 <EventDescription eventDescription={eventData.description} />
               </div>
               <main className="albumsInEvent">
-                <SearchUsers onSearch={setSearchTerm}/>
+              
                 <AlbumsInEventSection
                   picEHeight={"225px"}
                   picEWidth={"225px"}

@@ -19,7 +19,7 @@ const customStyles = {
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
   },
-  overlay: {zIndex: 1000}
+  overlay: { zIndex: 1000 },
 };
 
 const CreateEventModal = ({ onClose }) => {
@@ -76,6 +76,23 @@ const CreateEventModal = ({ onClose }) => {
           },
         }
       );
+
+      const eventId = response.data.eventId;
+      const addParticipantResponse = await axios.post(
+        `https://capture-it.azurewebsites.net/api/event/participants`,
+        {
+          eventId,
+          username,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
+      );
+
+      console.log("Event created successfully:", response.data);
+      console.log("User added as a participant:", addParticipantResponse.data);
 
       console.log("Event created successfully:", response.data);
 

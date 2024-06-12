@@ -16,7 +16,7 @@ const BreadCrumbs = ({ albumId, breadcrumbs }) => {
     navigate(`/album/${breadcrumbs.albumId}`);
   };
   const handleBreadcrumbUser = () => {
-    navigate(`/${breadcrumbs.creator.username}`);
+    navigate(`/profile/${breadcrumbs.creator.username}`);
   };
   return (
     <div className="breadCrumbsContainer">

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import Logo1 from "../../Logo";
@@ -8,7 +8,7 @@ import { AuthContext } from "../../context/index";
 import NoBgButton from "../Buttons/NoBGButton";
 import CreateEventModal from "../Modals/CreateEventModal";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import SearchUsers from "../Search/SearchUsers";
+import axios from "axios";
 
 const Header = ({}) => {
   const { logout } = useContext(AuthContext);
@@ -17,6 +17,9 @@ const Header = ({}) => {
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
   const [createEvent, setCreateEvent] = useState(false);
   const { authToken, userId, username, login } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const [suggestions, setSuggestions] = useState([]);
+  
 
   const createNewEvent = () => {
     setCreateEvent(true);
@@ -25,8 +28,7 @@ const Header = ({}) => {
     setCreateEvent(false);
   };
 
-  const suggestions = ["John Doe", "Jane Smith", "Event Name"];
-  const navigate = useNavigate();
+  // const suggestions = ["John Doe", "Jane Smith", "Event Name"];
 
   const handleProfileClick = () => {
     setShowProfileDropdown(!showProfileDropdown);
@@ -40,6 +42,37 @@ const Header = ({}) => {
   const handleProfileLink = () => {
     navigate(`/profile/${username}`);
   };
+
+  useEffect(() => {
+    const fetchSuggestions = async () => {
+      if (searchTerm) {
+        try {
+          const response = await axios.get(
+            `https://capture-it.azurewebsites.net/api/user`,
+            {
+              headers: {
+                Authorization: `Bearer ${authToken}`,
+              },
+            }
+          );
+          const userSuggestions= response.data.data.map((user) => user.username);
+          setSuggestions(userSuggestions);
+          console.log("header search suggestioons", response.data.data.username);
+        } catch (error) {
+          console.error("Error fetching user suggestions:", error);
+        }
+      } else {
+        setSuggestions([]);
+      }
+    };
+
+    fetchSuggestions();
+  }, [username]);
+
+  const navigateToProfile =(username)=>{
+    navigate(`/profile/${username}`)
+    
+  }
   return (
     <header>
       <div className="Logo">
@@ -78,10 +111,9 @@ const Header = ({}) => {
                 .filter((suggestion) =>
                   suggestion.toLowerCase().includes(searchTerm.toLowerCase())
                 )
-                .map((suggestion, index) => (
-                  <div key={index} className="SearchDropdownItem">
-                    {suggestion}
-                  </div>
+                .map((suggestion) => (
+                //  <div className="SearchDropdownItem">{suggestion}</div>
+                  <NoBgButton onClick={navigateToProfile(suggestion)} buttonText={suggestion}/>
                 ))}
             </div>
           )}
