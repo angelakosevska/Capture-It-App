@@ -11,6 +11,7 @@ export function Home() {
       <HeroSection />
       <Slider />
       <h2> Explore public events</h2>
+      {/* feed e okej so funkcionalnost */}
       <Feed />
     </>
   );

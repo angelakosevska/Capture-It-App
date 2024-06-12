@@ -133,15 +133,20 @@ function AutoPlay() {
         <>
           <h2>Your Recent Events</h2>
           <Slider {...settings}>
-            {images.map((image, index) => (
+            {events.map((event, index) => (
               <div key={index}>
                 <div
                   className="event-box"
-                  style={{ backgroundImage: `url(${image})` }}
+                  style={{
+                    backgroundImage:
+                      event.pictures && event.pictures.length > 0
+                        ? `url(${event.pictures[0].imageUrl})`
+                        : "",
+                  }}
                 >
                   <button
                     className="view-event-button"
-                    onClick={() => navigate(`/event/${events[index].eventId}`)}
+                    onClick={() => navigate(`/event/${event.eventId}`)}
                   >
                     View Event
                   </button>

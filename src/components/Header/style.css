@@ -390,3 +390,8 @@ a {
 .ProfileDropdownMenu .ProfileDropdownItem a:hover {
   background: #f8f9fa;
 }
+
+ 
+.bi-plus-circle{
+  font-size: 2rem;
+}
