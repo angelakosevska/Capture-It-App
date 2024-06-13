@@ -25,12 +25,12 @@ function Card({ event }) {
 
       <div className="card-content">
         <h2 className="card-title">{event.eventName}</h2>
-        <PrimaryButton
+        <button
           onClick={() => navigateToEvent(event.eventId)}
-          buttonText={"View Event"}
-          buttonHeight={"35px"}
-          buttonWidth={"30%"}
-        />
+          className="viewpfp-event-button"
+        >
+          View Event
+        </button>
       </div>
     </div>
   );
@@ -154,11 +154,6 @@ function Profile() {
         </div>
         {/* user info fetch rbaoti */}
         <div className="profile-actions">
-          <input
-            type="text"
-            placeholder="Search events"
-            className="search-bar"
-          />
           {editUserIsOpen && <EditUserModal onClose={editedUser} />}
           <button className="edit-button" onClick={editUser}>
             <i class="bi bi-pencil-square"></i> Edit

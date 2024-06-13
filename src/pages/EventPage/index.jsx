@@ -246,6 +246,7 @@ export function Event() {
                     profilePic={participant?.profilePicture}
                     username={participant.username}
                     ppDimension={"25px"}
+                    textColor={"black"}
                   />
                 </div>
               ))}

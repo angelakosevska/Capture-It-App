@@ -31,6 +31,7 @@ const BreadCrumbs = ({ albumId, breadcrumbs }) => {
           ppDimension={"30px"}
           username={breadcrumbs.creator?.username}
           profilePic={breadcrumbs.creator?.profilePicture}
+          textColor={"black"}
         />
       </div>
     </div>

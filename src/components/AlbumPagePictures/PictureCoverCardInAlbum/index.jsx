@@ -22,7 +22,7 @@ const PictureCoverCardInAlbum = ({
         <div className="overlay-pic" onClick={onClick}>
           <div className="PandU-pic">
             <PictureAndUsername
-              textColor={"black"}
+              textColor={"white"}
               ppDimension={"30px"}
               username={username}
               profilePic={profilePic}

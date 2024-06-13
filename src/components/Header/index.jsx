@@ -10,6 +10,7 @@ import CreateEventModal from "../Modals/CreateEventModal";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import axios from "axios";
 import NoBgButtonWhite from "../Buttons/NoBGButtonWhite";
+import SecondaryButton from "../Buttons/SecondaryButton";
 
 const Header = ({}) => {
   const { logout } = useContext(AuthContext);
@@ -132,31 +133,45 @@ const Header = ({}) => {
             </div>  )}*/}
         </div>
       </div>
-      <div className="CreateEvent">
-        {createEvent && <CreateEventModal onClose={createdNewEvent} />}
-        <NoBgButtonWhite
-          buttonIcon={<i class="bi bi-plus-circle"></i>}
-          onClick={createNewEvent}
-        />
-      </div>
-      <div className="ProfileLink" onClick={handleProfileClick}>
-        <NoBgButtonWhite
-          buttonIcon={<i className="bi bi-person-circle"></i>}
-        />
-        {showProfileDropdown && (
-          <div className="ProfileDropdownMenu">
-            <div className="dropdown-item">{username}</div>
-            <div className="dropdown-item"></div>
-            <div className="dropdown-item">
-              <NoBgButton onClick={handleProfileLink} buttonText={"Profile"} />
-            </div>
-            <hr />
-            <div className="dropdown-item">
-              <NoBgButton onClick={handleLogout} buttonText={"Logout"} />
-            </div>
+      {authToken ? (
+        <>
+          <div className="CreateEvent">
+            {createEvent && <CreateEventModal onClose={createdNewEvent} />}
+            <NoBgButtonWhite
+              buttonIcon={<i className="bi bi-plus-circle"></i>}
+              onClick={createNewEvent}
+            />
           </div>
-        )}
-      </div>
+          <div className="ProfileLink" onClick={handleProfileClick}>
+            <NoBgButtonWhite
+              buttonIcon={<i className="bi bi-person-circle"></i>}
+            />
+            {showProfileDropdown && (
+              <div className="ProfileDropdownMenu">
+                <div className="dropdown-item">{username}</div>
+                <div className="dropdown-item">
+                  <NoBgButton
+                    onClick={handleProfileLink}
+                    buttonText={"Profile"}
+                  />
+                </div>
+                <hr />
+                <div className="dropdown-item">
+                  <NoBgButton onClick={handleLogout} buttonText={"Logout"} />
+                </div>
+              </div>
+            )}
+          </div>
+        </>
+      ) : (
+        <div className="LoginButton">
+          <NoBgButtonWhite
+            buttonText="Login"
+            onClick={() => navigate("/login")}
+            buttonHeight={"35px"}
+          />
+        </div>
+      )}
     </header>
   );
 };

@@ -64,12 +64,12 @@ const AlbumCoverCardInEvent = ({
         style={{ width: picWidth, height: picHeight }}
         onClick={onClick}
       >
+        <img src={picAlbum} className="coverImage" />
         <div className="overlay">
-          <img src={picAlbum} className="coverImage" />
           <div className="PandU">
             <div className="album-name-event">
               <PictureAndUsername
-                textColor={"var(--secondaryColor)"}
+                textColor={"white"}
                 ppDimension={"30px"}
                 username={usernameCreator}
                 profilePic={profilePic}
