@@ -14,7 +14,7 @@ import PictureAndUsername from "../../PictureAndUsername";
 import FavoriteIcon from "@mui/icons-material/Favorite"; //liked
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined"; //like
 import { AuthContext } from "../../../context";
-import { FavoriteBorderOutlined } from "@mui/icons-material";
+import { FavoriteBorderOutlined, HideImageRounded } from "@mui/icons-material";
 
 Modal.setAppElement("#root");
 const customStyles = {
@@ -44,50 +44,114 @@ const Modalche = ({
   fetchPictureComments,
   comments,
   commentsCount,
-  likesCount,
   fetchCommentsOnPicture,
   fetchCommentCount,
-  postLike,
-  deleteLike,
-  hasLiked,
 }) => {
   const { authToken, userId, username, login, logout } =
     useContext(AuthContext);
   const [error, setError] = useState("");
-  const [isLiked, setIsLiked] = useState(hasLiked);
-  //polnokjen obid
-  const [likeCount, setLikeCount] = useState(likesCount);
+  const [isLiked, setIsLiked] = useState(false);
+  const [likeId, setLikeId] = useState(0);
+  const [likesCount, setLikesCount] = useState(0);
+  const [userLiked, setUserLiked] = useState(false);
 
-  const fetchGetLike = async () => {
+  const handlePrevPic = () => {
+    onPrev();
+    fetchLikesOnPicture();
+  };
+  const handleNextPic = () => {
+    onNext();
+    fetchLikesOnPicture();
+  };
+  // get likes od slikata
+  const fetchLikesOnPicture = async () => {
     try {
       const response = await axios.get(
         `https://capture-it.azurewebsites.net/api/like?pictureId=${pictureId}`,
         {
           headers: {
-            Authorization: ` Bearer  ${authToken} `,
+            Authorization: `Bearer ${authToken}`,
           },
         }
       );
-      setLikeCount(response.data.totalRecords);
-      console.log("like count : ".response.data.totalRecords);
+
+      setLikesCount(response.data.totalRecords);
+      const likes = response.data.data;
+      const userLiked = likes.some((like) => like.userId === userId);
+
+      setIsLiked(userLiked);
+
+      if (userLiked) {
+        const userLike = likes.find((like) => like.userId === userId);
+        setLikeId(userLike.likeId);
+      }
+      setUserLiked(userLiked);
+      setIsLiked(userLiked);
+      console.log(" users that like this album", response.data.data.userId);
     } catch (error) {
-      setError(error);
-      console.error(" error fetching like count data ", error);
+      console.log("error fetching likes", error);
+    }
+  };
+  useEffect(() => {
+    fetchLikesOnPicture();
+  }, [pictureId, userId]);
+
+  const handleLike = async () => {
+    if (userLiked) {
+      try {
+        deleteLike(likeId);
+ 
+      } catch (error) {
+        console.error("Error deleting like: ", error);
+      }
+    } else {
+      try {
+        postLike(pictureId);
+    
+      } catch (error) {
+        console.error("Error posting like: ", error);
+      }
+    }
+    fetchLikesOnPicture();
+  };
+
+  const postLike = async (pictureId) => {
+    try {
+      const response = await axios.post(
+        `https://capture-it.azurewebsites.net/api/like`,
+        { pictureId },
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
+      );
+
+      setLikeId(response.likeId);
+      setIsLiked(true);
+      fetchLikesOnPicture();
+      console.log("Like posted ", response.data);
+    } catch (error) {
+      console.error("error posting like", error);
     }
   };
 
-  useEffect(() => {
-    fetchGetLike();
-  }, [pictureId]);
-  // get like od slikata
-
-  const handleLike = async () => {
+  const deleteLike = async (likeId) => {
     try {
-      await postLike();
-      setLikeCount((prevCount) => prevCount + 1);
-      setIsLiked(true);
+      await axios.delete(
+        //delete album
+        `https://capture-it.azurewebsites.net/api/like/${likeId}`,
+        {
+          headers: {
+            Authorization: ` Bearer ${authToken}`,
+          },
+        }
+      );
+      setIsLiked(false);
+      fetchLikesOnPicture();
     } catch (error) {
-      console.error("error posting like", error);
+      setError(error);
+      console.error("Error deleting like: ", error);
     }
   };
 
@@ -140,7 +204,7 @@ const Modalche = ({
           <div className={styles.arrowsAndMain}>
             <NoBgButton
               buttonIcon={<NavigateBeforeIcon />}
-              onClick={onPrev}
+              onClick={handlePrevPic}
             ></NoBgButton>
 
             <div className={styles.pictureAndComments}>
@@ -160,7 +224,7 @@ const Modalche = ({
                   <PrimaryButton
                     buttonHeight={"40px"}
                     buttonWidth={"50%"}
-                    buttonText={`${likeCount}`}
+                    buttonText={`${likesCount}`}
                     buttonIcon={
                       isLiked ? (
                         <FavoriteIcon />
@@ -168,6 +232,7 @@ const Modalche = ({
                         <FavoriteBorderOutlinedIcon />
                       )
                     }
+                    onClick={handleLike}
                   />
 
                   <PrimaryButton
@@ -194,7 +259,7 @@ const Modalche = ({
 
             <NoBgButton
               buttonIcon={<NavigateNextIcon />}
-              onClick={onNext}
+              onClick={handleNextPic}
             ></NoBgButton>
           </div>
         </Modal>

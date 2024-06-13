@@ -17,10 +17,11 @@ const AddComment = ({
 }) => {
   const [commentsGet, setCommentsGet] = useState(comments);
   const [commentsCountGet, setCommentsCountGet] = useState(commentsCount);
+  
+
   const onComment = (newComment) => {
     if (newComment.commentBody && newComment.commentBody.trim()) {
       setCommentsGet((prev) => [...prev, newComment]);
-
     } else {
       return;
     }
@@ -34,12 +35,11 @@ const AddComment = ({
           comments.map((comment) => (
             <CommentItem
               key={comment.commentId}
-
-
               comment={comment.comment1}
               username={comment.user.username}
               profilePic={comment.user.profilePicture}
               createdAt={comment.createdAt}
+    
             />
           ))
         ) : (
@@ -53,13 +53,11 @@ const AddComment = ({
           buttonIcon={<SendIcon />}
           placeholderInput="Add a comment"
           onComment={onComment}
-
           pictureId={pictureId}
           fetchCommentCount={fetchCommentCount}
           albumId={albumId}
           commentsCount={commentsCount}
           fetchCommentsOnPicture={fetchCommentsOnPicture}
-
         />
       </div>
     </>

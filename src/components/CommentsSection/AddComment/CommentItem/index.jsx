@@ -7,9 +7,9 @@ import { parseISO, format } from "date-fns";
 TimeAgo.addLocale(en);
 
 const CommentItem = ({ comment, username, profilePic, createdAt }) => {
- //const date= parseISO(createdAt);
- const date = new Date(createdAt);
- const localDate= date.toLocaleString();
+  //const date= parseISO(createdAt);
+  const date = new Date(createdAt);
+  const localDate = date.toLocaleString();
   return (
     <>
       <div className="comment-show">
@@ -18,10 +18,10 @@ const CommentItem = ({ comment, username, profilePic, createdAt }) => {
             ppDimension="30px"
             username={username}
             profilePic={profilePic}
+            textColor={"black"}
           />
           &nbsp;
           <ReactTimeAgo date={localDate} locale="en-US" />
-          {createdAt}
         </div>
         <span>{comment}</span>
       </div>

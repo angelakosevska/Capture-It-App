@@ -137,7 +137,7 @@ const EditUserModal = ({ onClose }) => {
               name="firstName"
               value={userData.firstName}
               onChange={handleChange}
-              placeholder=" First Name:"
+              placeholder="First Name:"
             />
           </label>
         </div>
@@ -198,7 +198,7 @@ const EditUserModal = ({ onClose }) => {
               name="dateOfBirth"
               value={userData.dateOfBirth}
               onChange={handleChange}
-              placeholder=" Date of Birth:"
+              placeholder="Date of Birth:"
             />
           </label>
         </div>
