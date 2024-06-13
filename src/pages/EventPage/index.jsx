@@ -34,7 +34,6 @@ export function Event() {
   const [creator, setCreator] = useState("");
   const [publicUser, setPublicUser] = useState();
   const [isParticipant, setIsParticipant] = useState(false);
-  //const [user, setUser] = useState("");
   const [eventIsPrivate, setEventIsPrivate] = useState(true);
 
   const invitePeopleInEvent = () => {

@@ -12,14 +12,15 @@ import axios from "axios";
 import NoBgButtonWhite from "../Buttons/NoBGButtonWhite";
 import SecondaryButton from "../Buttons/SecondaryButton";
 import EditUserModal from "../Modals/EditUserModal";
+import SearchEvents from "../Search/SearchEvent";
 
 const Header = ({}) => {
-  const { logout } = useContext(AuthContext);
   const [searchTerm, setSearchTerm] = useState("");
   const [showSearchDropdown, setShowSearchDropdown] = useState(false);
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
   const [createEvent, setCreateEvent] = useState(false);
-  const { authToken, userId, username, login } = useContext(AuthContext);
+  const { authToken, userId, username, login, logout } =
+    useContext(AuthContext);
   const navigate = useNavigate();
   const [suggestions, setSuggestions] = useState([]);
   const [editUserIsOpen, setEditUserIsOpen] = useState(false);
@@ -31,7 +32,7 @@ const Header = ({}) => {
     setCreateEvent(false);
   };
 
-  // const suggestions = ["John Doe", "Jane Smith", "Event Name"];
+  const suggestionsDummy = ["John Doe", "Jane Smith", "Event Name"];
 
   const handleProfileClick = () => {
     setShowProfileDropdown(!showProfileDropdown);
@@ -45,6 +46,7 @@ const Header = ({}) => {
   const handleProfileLink = () => {
     navigate(`/profile/${username}`);
   };
+
   const navigateToEvent = (suggestion) => {
     try {
       const eventId = suggestion.eventId;
@@ -110,85 +112,60 @@ const Header = ({}) => {
         </div>
       </div>
 
-      <div className="SearchBar">
-        <div className="menuAndItem">
-          <input
-            type="text"
-            placeholder="Search..."
-            value={searchTerm}
-            onChange={(e) => {
-              setSearchTerm(e.target.value);
-              setShowSearchDropdown(true);
-            }}
-            onFocus={() => setShowSearchDropdown(true)}
-            onBlur={() => setShowSearchDropdown(false)}
-          />
-          {/* {showSearchDropdown && (
-            <div className="SearchDropdownMenu">
-              {suggestions
-                .filter((suggestion) =>
-                  suggestion.toLowerCase().includes(searchTerm.toLowerCase())
-                )
-                .map((suggestion) => (
-                  <div className="SearchDropdownItem">
+      <div className="searchHeader">
+        <SearchEvents />
+      </div>
+      <div className="headerRight">
+        {authToken ? (
+          <>
+            <div className="CreateEvent">
+              {editUserIsOpen && <EditUserModal onClose={editedUser} />}
+              {createEvent && <CreateEventModal onClose={createdNewEvent} />}
+              <NoBgButtonWhite
+                buttonIcon={<i className="bi bi-plus-circle" />}
+                onClick={createNewEvent}
+              />
+            </div>
+            <div className="ProfileLink" onClick={handleProfileClick}>
+              <NoBgButtonWhite
+                buttonIcon={<i className="bi bi-person-circle" />}
+              />
+              {showProfileDropdown && (
+                <div className="ProfileDropdownMenu">
+                  <div className="dropdown-item">{username}</div>
+                  <div className="dropdown-item">
                     <NoBgButton
-                      onClick={() => navigateToEvent(suggestion.eventId)}
-                      buttonText={suggestion.eventName}
+                      onClick={handleProfileLink}
+                      buttonText={"Profile"}
+                      buttonIcon={<i class="bi bi-person-fill"></i>}
                     />
                   </div>
-                ))}
-            </div>  )}*/}
-        </div>
+                  <div className="dropdown-item">
+                    <NoBgButton
+                      className="edit-button"
+                      onClick={editUser}
+                      buttonIcon={<i class="bi bi-pencil-square" />}
+                      buttonText={" Edit user"}
+                    />
+                  </div>
+                  <hr />
+                  <div className="dropdown-item">
+                    <NoBgButton onClick={handleLogout} buttonText={"Logout"} />
+                  </div>
+                </div>
+              )}
+            </div>
+          </>
+        ) : (
+          <div className="LoginButton">
+            <NoBgButtonWhite
+              buttonText="Login"
+              onClick={() => navigate("/login")}
+              buttonHeight={"35px"}
+            />
+          </div>
+        )}
       </div>
-      {authToken ? (
-        <>
-          <div className="CreateEvent">
-            {editUserIsOpen && <EditUserModal onClose={editedUser} />}
-            {createEvent && <CreateEventModal onClose={createdNewEvent} />}
-            <NoBgButtonWhite
-              buttonIcon={<i className="bi bi-plus-circle" />}
-              onClick={createNewEvent}
-            />
-          </div>
-          <div className="ProfileLink" onClick={handleProfileClick}>
-            <NoBgButtonWhite
-              buttonIcon={<i className="bi bi-person-circle" />}
-            />
-            {showProfileDropdown && (
-              <div className="ProfileDropdownMenu">
-                <div className="dropdown-item">{username}</div>
-                <div className="dropdown-item">
-                  <NoBgButton
-                    onClick={handleProfileLink}
-                    buttonText={"Profile"}
-                    buttonIcon={<i class="bi bi-person-fill"></i>}
-                  />
-                </div>
-                <div className="dropdown-item">
-                  <NoBgButton
-                    className="edit-button"
-                    onClick={editUser}
-                    buttonIcon={<i class="bi bi-pencil-square" />}
-                    buttonText={" Edit user"}
-                  />
-                </div>
-                <hr />
-                <div className="dropdown-item">
-                  <NoBgButton onClick={handleLogout} buttonText={"Logout"} />
-                </div>
-              </div>
-            )}
-          </div>
-        </>
-      ) : (
-        <div className="LoginButton">
-          <NoBgButtonWhite
-            buttonText="Login"
-            onClick={() => navigate("/login")}
-            buttonHeight={"35px"}
-          />
-        </div>
-      )}
     </header>
   );
 };

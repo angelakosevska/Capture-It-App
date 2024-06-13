@@ -10,7 +10,6 @@
   border-radius: 5px;
   box-shadow: 3px 3px 2px 0px #e2e2e2;
   transition: 0.3s ease;
-
 }
 .input-search:focus {
   background: #f0f0ff;
