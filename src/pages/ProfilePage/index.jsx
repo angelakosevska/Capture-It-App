@@ -5,23 +5,31 @@ import axios from "axios";
 import Feed from "../../components/Posts/index.jsx";
 import NoBgButton from "../../components/Buttons/NoBGButton/index.jsx";
 import { useNavigate } from "react-router-dom";
+import PrimaryButton from "../../components/Buttons/PrimaryButton";
+import EditAlbumModal from "../../components/Modals/EditAlbumModal/index.jsx";
+import EditUserModal from "../../components/Modals/EditUserModal/index.jsx";
 
 function Card({ event }) {
   const navigate = useNavigate();
   const navigateToEvent = (idEvent) => {
     navigate(`/event/${idEvent}`);
   };
-  const imageUrl = event.pictures.length > 0 ? event.pictures[0] : "";
+  const imageUrl =
+    event.pictures && event.pictures.length > 0
+      ? event.pictures[0].imageUrl
+      : null;
+
   return (
     <div className="card-event">
-      {imageUrl && (
-        <img src={imageUrl} alt={event.eventName} className="card-image" />
-      )}
+      <img src={imageUrl} alt={event.eventName} className="card-image" />
+
       <div className="card-content">
         <h2 className="card-title">{event.eventName}</h2>
-        <NoBgButton
+        <PrimaryButton
           onClick={() => navigateToEvent(event.eventId)}
           buttonText={"View Event"}
+          buttonHeight={"35px"}
+          buttonWidth={"30%"}
         />
       </div>
     </div>
@@ -31,9 +39,14 @@ function Card({ event }) {
 function Profile() {
   const { authToken, userId, username, login, logout } =
     useContext(AuthContext);
-
+  const [editUserIsOpen, setEditUserIsOpen] = useState(false);
   const [events, setEvents] = useState([]);
-  const [userInfo, setUserInfo] = useState();
+  const [userInfo, setUserInfo] = useState({
+    profilePicture: null, // Provide a default value or null
+    firstName: "",
+    lastName: "",
+    username: "",
+  });
   const [userVisit, setUserVisit] = useState();
 
   const [error, setError] = useState("");
@@ -107,14 +120,15 @@ function Profile() {
   };
 
   useEffect(() => {
-    fetchEventsInProfile();
     fetchUserVisit();
-  }, [userId]);
+  }, [username]);
 
-  if (!userInfo) {
-    return <div>Loading...</div>; // Show a loading state while fetching user info
-  }
-
+  const editUser = () => {
+    setEditUserIsOpen(true);
+  };
+  const editedUser = () => {
+    setEditUserIsOpen(false);
+  };
   // Filter out duplicate events
   // const uniqueEvents = Array.from(new Set(events.map((event) => event.eventId))).map(
   //   (id) => {
@@ -127,7 +141,7 @@ function Profile() {
       <div className="profile-container">
         <div className="profile-header">
           <img
-            src={userInfo.profilePicture}
+            src={userInfo.profilePicture || defaultCoverImage}
             alt="Profile "
             className="profile-pic"
           />
@@ -138,19 +152,21 @@ function Profile() {
             <p className="username">@{userInfo.username}</p>
           </div>
         </div>
+        {/* user info fetch rbaoti */}
         <div className="profile-actions">
           <input
             type="text"
             placeholder="Search events"
             className="search-bar"
           />
-          <button className="edit-button">
+          {editUserIsOpen && <EditUserModal onClose={editedUser} />}
+          <button className="edit-button" onClick={editUser}>
             <i class="bi bi-pencil-square"></i> Edit
           </button>
         </div>
         <div className="cardpfp-container">
           {events.map((event) => (
-            <Card key={event.eventId} event={event} />
+            <Card event={event} />
           ))}
         </div>
       </div>

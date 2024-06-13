@@ -1,7 +1,6 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import Modal from "react-modal";
-import { useParams } from "react-router-dom";
 import styles from "./style.module.css";
 import NoBgButton from "../../Buttons/NoBGButton";
 import CloseIcon from "@mui/icons-material/Close";
@@ -22,48 +21,85 @@ const customStyles = {
   },
 };
 
-const EditEventModal = ({ onClose }) => {
-  const [eventName, setEventName] = useState("");
-  const [startDateTime, setStartDateTime] = useState("");
-  const [endDateTime, setEndDateTime] = useState("");
-  const [location, setLocation] = useState("");
-  const [description, setDescription] = useState("");
+const EditUserModal = ({ onClose }) => {
+  const { authToken, userId, username } = useContext(AuthContext);
+  const [userData, setUserData] = useState({
+    firstName: "",
+    lastName: "",
+    phoneNumber: "",
+    email: "",
+    password: "",
+    dateOfBirth: "",
+    gender: "",
+    username: "",
+    bio: "",
+    profilePicture: "",
+  });
   const [error, setError] = useState("");
-  const { eventId } = useParams();
-  const { authToken, userId, username, login, logout } =
-    useContext(AuthContext);
+
+  useEffect(() => {
+    // Fetch user details when component mounts
+    const fetchUser = async () => {
+      try {
+        const response = await axios.get(
+          `https://capture-it.azurewebsites.net/api/user`, // Adjust endpoint to fetch user details
+          {
+            headers: {
+              Authorization: `Bearer ${authToken}`,
+            },
+          }
+        );
+        const {
+          firstName,
+          lastName,
+          phoneNumber,
+          email,
+          dateOfBirth,
+          gender,
+          username,
+          bio,
+          profilePicture,
+        } = response.data;
+        setUserData({
+          firstName,
+          lastName,
+          phoneNumber,
+          email,
+          dateOfBirth: formatDate(dateOfBirth),
+          gender,
+          username,
+          bio,
+          profilePicture,
+        });
+      } catch (error) {
+        setError("Error fetching user: " + error.message);
+        console.error("Error fetching user:", error);
+      }
+    };
+
+    fetchUser();
+  }, [authToken]);
+
+  const formatDate = (dateStr) => {
+    // Format date string for input field (yyyy-MM-dd)
+    return dateStr ? dateStr.slice(0, 10) : "";
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name === "eventName") {
-      setEventName(value);
-    } else if (name === "startDateTime") {
-      setStartDateTime(value);
-    } else if (name === "endDateTime") {
-      setEndDateTime(value);
-    } else if (name === "location") {
-      setLocation(value);
-    } else if (name === "description") {
-      setDescription(value);
-    }
+    setUserData({
+      ...userData,
+      [name]: value,
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const updatedEventData = {
-      eventName: eventName,
-      startDateTime: startDateTime,
-      endDateTime: endDateTime,
-      location: location,
-      description: description,
-    };
-
     try {
       const response = await axios.put(
-        //put album
-        `https://capture-it.azurewebsites.net/api/event/${eventId}`,
-        updatedEventData,
+        `https://capture-it.azurewebsites.net/api/user/${userId}`, // Adjust endpoint to update user details
+        userData,
         {
           headers: {
             Authorization: `Bearer ${authToken}`,
@@ -71,100 +107,157 @@ const EditEventModal = ({ onClose }) => {
         }
       );
 
-      console.log("Event updated successfully:", response.data);
+      console.log("User updated successfully:", response.data);
       onClose();
-      window.location.reload();
-      // Close the modal after successful update
+      window.location.reload(); // Consider a better way to refresh user data
     } catch (error) {
-      setError("Error updating event: " + error.message);
-      console.error("Error updating event:", error);
+      setError("Error updating user: " + error.message);
+      console.error("Error updating user:", error);
     }
   };
 
   return (
-    <>
-      <Modal
-        isOpen={true}
-        onRequestClose={onClose}
-        style={customStyles}
-        contentLabel="Edit Album Modal"
-      >
-        <div className={styles.closeModalButton}>
-          <NoBgButton onClick={onClose} buttonIcon={<CloseIcon />} />
+    <Modal
+      isOpen={true}
+      onRequestClose={onClose}
+      style={customStyles}
+      contentLabel="Edit User Modal"
+    >
+      <div className={styles.closeModalButton}>
+        <NoBgButton onClick={onClose} buttonIcon={<CloseIcon />} />
+      </div>
+      <h1 className={styles.h1style}>Edit Profile</h1>
+      <form onSubmit={handleSubmit} className={styles.editUserForm}>
+        <div className={styles.inputContainer}>
+          <label>
+            First Name:
+            <input
+              className={styles.inputField}
+              type="text"
+              name="firstName"
+              value={userData.firstName}
+              onChange={handleChange}
+            />
+          </label>
         </div>
-        <h1 className={styles.h1style}>Edit event</h1>
-        <form onSubmit={handleSubmit} className={styles.addPhotoForm}>
-          <div className={styles.inputContainer}>
-            <label>
-              Event Name:
-              <input
-                className={styles.inputField}
-                type="text"
-                name="eventName"
-                value={eventName}
-                onChange={handleChange}
-              />
-            </label>
-          </div>
-          <div className={styles.inputContainer}>
-            <label>
-              Start Date and Time:
-              <input
-                className={styles.inputField}
-                type="datetime-local"
-                name="startDateTime"
-                value={startDateTime}
-                onChange={handleChange}
-              />
-            </label>
-          </div>
-          <div className={styles.inputContainer}>
-            <label>
-              End Date and Time:
-              <input
-                className={styles.inputField}
-                type="datetime-local"
-                name="endDateTime"
-                value={endDateTime}
-                onChange={handleChange}
-              />
-            </label>
-          </div>
-          <div className={styles.inputContainer}>
-            <label>
-              Location:
-              <input
-                className={styles.inputField}
-                type="text"
-                name="location"
-                value={location}
-                onChange={handleChange}
-              />
-            </label>
-          </div>
-          <div className={styles.inputContainer}>
-            <label>
-              Description:
-              <textarea
-                className={styles.descriptionInput}
-                name="description"
-                value={description}
-                onChange={handleChange}
-              ></textarea>
-            </label>
-          </div>
-          <PrimaryButton
-            buttonText="Submit"
-            buttonWidth="100%"
-            buttonHeight="40px"
-            type="submit"
-          />
+        <div className={styles.inputContainer}>
+          <label>
+            Last Name:
+            <input
+              className={styles.inputField}
+              type="text"
+              name="lastName"
+              value={userData.lastName}
+              onChange={handleChange}
+            />
+          </label>
+        </div>
+        <div className={styles.inputContainer}>
+          <label>
+            Phone Number:
+            <input
+              className={styles.inputField}
+              type="text"
+              name="phoneNumber"
+              value={userData.phoneNumber}
+              onChange={handleChange}
+            />
+          </label>
+        </div>
+        <div className={styles.inputContainer}>
+          <label>
+            Email:
+            <input
+              className={styles.inputField}
+              type="email"
+              name="email"
+              value={userData.email}
+              onChange={handleChange}
+            />
+          </label>
+        </div>
+        <div className={styles.inputContainer}>
+          <label>
+            Password:
+            <input
+              className={styles.inputField}
+              type="password"
+              name="password"
+              value={userData.password}
+              onChange={handleChange}
+            />
+          </label>
+        </div>
+        <div className={styles.inputContainer}>
+          <label>
+            Date of Birth:
+            <input
+              className={styles.inputField}
+              type="date"
+              name="dateOfBirth"
+              value={userData.dateOfBirth}
+              onChange={handleChange}
+            />
+          </label>
+        </div>
+        <div className={styles.inputContainer}>
+          <label>
+            Gender:
+            <input
+              className={styles.inputField}
+              type="text"
+              name="gender"
+              value={userData.gender}
+              onChange={handleChange}
+            />
+          </label>
+        </div>
+        <div className={styles.inputContainer}>
+          <label>
+            Username:
+            <input
+              className={styles.inputField}
+              type="text"
+              name="username"
+              value={userData.username}
+              onChange={handleChange}
+            />
+          </label>
+        </div>
+        <div className={styles.inputContainer}>
+          <label>
+            Bio:
+            <textarea
+              className={styles.bioInput}
+              name="bio"
+              value={userData.bio}
+              onChange={handleChange}
+            ></textarea>
+          </label>
+        </div>
+        <div className={styles.inputContainer}>
+          <label>
+            Profile Picture URL:
+            <input
+              className={styles.inputField}
+              type="text"
+              name="profilePicture"
+              value={userData.profilePicture}
+              onChange={handleChange}
+            />
+          </label>
+        </div>
+        <PrimaryButton
+          buttonText="Save Changes"
+          buttonWidth="100%"
+          buttonHeight="40px"
+          type="submit"
+        />
 
-          {error && <div className="error">{error}</div>}
-        </form>
-      </Modal>
-    </>
+        {error && <div className="error">{error}</div>}
+      </form>
+    </Modal>
   );
 };
 
-export default EditEventModal;
+export default EditUserModal;
