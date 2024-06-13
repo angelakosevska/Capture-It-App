@@ -11,6 +11,7 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import axios from "axios";
 import NoBgButtonWhite from "../Buttons/NoBGButtonWhite";
 import SecondaryButton from "../Buttons/SecondaryButton";
+import EditUserModal from "../Modals/EditUserModal";
 
 const Header = ({}) => {
   const { logout } = useContext(AuthContext);
@@ -21,6 +22,7 @@ const Header = ({}) => {
   const { authToken, userId, username, login } = useContext(AuthContext);
   const navigate = useNavigate();
   const [suggestions, setSuggestions] = useState([]);
+  const [editUserIsOpen, setEditUserIsOpen] = useState(false);
 
   const createNewEvent = () => {
     setCreateEvent(true);
@@ -83,7 +85,12 @@ const Header = ({}) => {
 
     fetchSuggestions();
   }, [searchTerm]);
-
+  const editUser = () => {
+    setEditUserIsOpen(true);
+  };
+  const editedUser = () => {
+    setEditUserIsOpen(false);
+  };
   return (
     <header>
       <div className="Logo">
@@ -136,15 +143,16 @@ const Header = ({}) => {
       {authToken ? (
         <>
           <div className="CreateEvent">
+            {editUserIsOpen && <EditUserModal onClose={editedUser} />}
             {createEvent && <CreateEventModal onClose={createdNewEvent} />}
             <NoBgButtonWhite
-              buttonIcon={<i className="bi bi-plus-circle"></i>}
+              buttonIcon={<i className="bi bi-plus-circle" />}
               onClick={createNewEvent}
             />
           </div>
           <div className="ProfileLink" onClick={handleProfileClick}>
             <NoBgButtonWhite
-              buttonIcon={<i className="bi bi-person-circle"></i>}
+              buttonIcon={<i className="bi bi-person-circle" />}
             />
             {showProfileDropdown && (
               <div className="ProfileDropdownMenu">
@@ -153,6 +161,15 @@ const Header = ({}) => {
                   <NoBgButton
                     onClick={handleProfileLink}
                     buttonText={"Profile"}
+                    buttonIcon={<i class="bi bi-person-fill"></i>}
+                  />
+                </div>
+                <div className="dropdown-item">
+                  <NoBgButton
+                    className="edit-button"
+                    onClick={editUser}
+                    buttonIcon={<i class="bi bi-pencil-square" />}
+                    buttonText={" Edit user"}
                   />
                 </div>
                 <hr />
