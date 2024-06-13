@@ -92,22 +92,21 @@ const Modalche = ({
       console.log("error fetching likes", error);
     }
   };
+
   useEffect(() => {
     fetchLikesOnPicture();
-  }, [pictureId, userId]);
+  }, [pictureId]);
 
   const handleLike = async () => {
     if (userLiked) {
       try {
         deleteLike(likeId);
- 
       } catch (error) {
         console.error("Error deleting like: ", error);
       }
     } else {
       try {
         postLike(pictureId);
-    
       } catch (error) {
         console.error("Error posting like: ", error);
       }
@@ -217,6 +216,7 @@ const Modalche = ({
                     profilePic={profilePicture}
                     username={username}
                     ppDimension={"25px"}
+                    textColor={"black"}
                   />
                   <p className={styles.description}>{picDescription} </p>
                 </div>

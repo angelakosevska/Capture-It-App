@@ -17,7 +17,6 @@ const AddComment = ({
 }) => {
   const [commentsGet, setCommentsGet] = useState(comments);
   const [commentsCountGet, setCommentsCountGet] = useState(commentsCount);
-  
 
   const onComment = (newComment) => {
     if (newComment.commentBody && newComment.commentBody.trim()) {
@@ -26,7 +25,6 @@ const AddComment = ({
       return;
     }
   };
-
 
   return (
     <>
@@ -39,7 +37,6 @@ const AddComment = ({
               username={comment.user.username}
               profilePic={comment.user.profilePicture}
               createdAt={comment.createdAt}
-    
             />
           ))
         ) : (

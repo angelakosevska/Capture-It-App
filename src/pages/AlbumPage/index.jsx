@@ -113,7 +113,9 @@ export function Album() {
       console.error("error fetching comment get data ", error);
     }
   };
-
+  useEffect(() => {
+    fetchCommentsOnPicture();
+  }, []);
   const openModal = (index) => {
     setSelectedPictureIndex(index);
     setIsOpen(true);
