@@ -1,5 +1,6 @@
 .SearchBar {
   display: flex;
+  width: 100%;
   margin: 5px;
 }
 .SearchBar input {
@@ -14,7 +15,9 @@
   border-radius: 5px;
   box-shadow: var(--shadow);
 }
-
+.menuAndItem {
+  width: 100%;
+}
 .SearchBar input:focus {
   background: #f0f0ff;
   border: 1px solid var(--secondaryColor);
@@ -22,7 +25,8 @@
   height: 36px;
 }
 
-.SearchDropdownMenu {
+.SearchDropDownMenu {
+  width: 100%;
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -34,6 +38,7 @@
   z-index: 1;
 }
 .SearchDropDownItem {
+  width: 100%;
   background-color: #f8f9fa00;
   font-size: 20px;
   height: 30px;
