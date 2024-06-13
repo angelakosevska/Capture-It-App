@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import Modal from "react-modal";
 import CommentsSection from "../../CommentsSection/index";
 import PictureContainer from "../../PictureContainer/index";
@@ -6,19 +6,21 @@ import styles from "./style.module.css";
 import NoBgButton from "../../Buttons/NoBGButton";
 import CloseIcon from "@mui/icons-material/Close";
 import PrimaryButton from "../../Buttons/PrimaryButton";
-import SecondaryButton from "../../Buttons/SecondaryButton";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
-import { Widgets } from "@mui/icons-material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 import PictureAndUsername from "../../PictureAndUsername";
+import FavoriteIcon from "@mui/icons-material/Favorite"; //liked
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined"; //like
+import { AuthContext } from "../../../context";
+import { FavoriteBorderOutlined, HideImageRounded } from "@mui/icons-material";
 
 Modal.setAppElement("#root");
 const customStyles = {
   content: {
     width: "90%",
-    height: "85%",
+    height: "90%",
     top: "52%",
     left: "50%",
     right: "auto",
@@ -31,16 +33,127 @@ const customStyles = {
 const Modalche = ({
   imageUrl,
   picDescription,
-  commCount,
   onClose,
   onNext,
   onPrev,
   pictureId,
   fetchPicture,
   profilePicture,
-  username,
+  usernameCreator,
+  albumId,
+  fetchPictureComments,
+  comments,
+  commentsCount,
+  fetchCommentsOnPicture,
+  fetchCommentCount,
 }) => {
+  const { authToken, userId, username, login, logout } =
+    useContext(AuthContext);
   const [error, setError] = useState("");
+  const [isLiked, setIsLiked] = useState(false);
+  const [likeId, setLikeId] = useState(0);
+  const [likesCount, setLikesCount] = useState(0);
+  const [userLiked, setUserLiked] = useState(false);
+
+  const handlePrevPic = () => {
+    onPrev();
+    fetchLikesOnPicture();
+  };
+  const handleNextPic = () => {
+    onNext();
+    fetchLikesOnPicture();
+  };
+  // get likes od slikata
+  const fetchLikesOnPicture = async () => {
+    try {
+      const response = await axios.get(
+        `https://capture-it.azurewebsites.net/api/like?pictureId=${pictureId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
+      );
+
+      setLikesCount(response.data.totalRecords);
+      const likes = response.data.data;
+      const userLiked = likes.some((like) => like.userId === userId);
+
+      setIsLiked(userLiked);
+
+      if (userLiked) {
+        const userLike = likes.find((like) => like.userId === userId);
+        setLikeId(userLike.likeId);
+      }
+      setUserLiked(userLiked);
+      setIsLiked(userLiked);
+      console.log(" users that like this album", response.data.data.userId);
+    } catch (error) {
+      console.log("error fetching likes", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchLikesOnPicture();
+  }, [pictureId]);
+
+  const handleLike = async () => {
+    if (userLiked) {
+      try {
+        deleteLike(likeId);
+      } catch (error) {
+        console.error("Error deleting like: ", error);
+      }
+    } else {
+      try {
+        postLike(pictureId);
+      } catch (error) {
+        console.error("Error posting like: ", error);
+      }
+    }
+    fetchLikesOnPicture();
+  };
+
+  const postLike = async (pictureId) => {
+    try {
+      const response = await axios.post(
+        `https://capture-it.azurewebsites.net/api/like`,
+        { pictureId },
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
+      );
+
+      setLikeId(response.likeId);
+      setIsLiked(true);
+      fetchLikesOnPicture();
+      console.log("Like posted ", response.data);
+    } catch (error) {
+      console.error("error posting like", error);
+    }
+  };
+
+  const deleteLike = async (likeId) => {
+    try {
+      await axios.delete(
+        //delete album
+        `https://capture-it.azurewebsites.net/api/like/${likeId}`,
+        {
+          headers: {
+            Authorization: ` Bearer ${authToken}`,
+          },
+        }
+      );
+      setIsLiked(false);
+      fetchLikesOnPicture();
+    } catch (error) {
+      setError(error);
+      console.error("Error deleting like: ", error);
+    }
+  };
+
   const deletePicture = async () => {
     const isConfirmed = window.confirm(
       "Are you sure you want to delete this picture?"
@@ -53,18 +166,17 @@ const Modalche = ({
         `https://capture-it.azurewebsites.net/api/picture/${pictureId}`,
         {
           headers: {
-            Authorization:
-              " eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzY3NTczMH0.MEPXqGZ9SquOWePUY8n3h53R_YQ6OoPAVg3Gkzc5USg",
+            Authorization: `Bearer ${authToken}`,
           },
         }
       );
-      fetchPicture();
+      fetchPicture([pictureId]);
     } catch (error) {
       setError(error);
       console.error("Error deleting album: ", error);
     }
     onClose();
-    //window.location.reload();
+    fetchPicture();
   };
 
   return (
@@ -91,7 +203,7 @@ const Modalche = ({
           <div className={styles.arrowsAndMain}>
             <NoBgButton
               buttonIcon={<NavigateBeforeIcon />}
-              onClick={onPrev}
+              onClick={handlePrevPic}
             ></NoBgButton>
 
             <div className={styles.pictureAndComments}>
@@ -104,6 +216,7 @@ const Modalche = ({
                     profilePic={profilePicture}
                     username={username}
                     ppDimension={"25px"}
+                    textColor={"black"}
                   />
                   <p className={styles.description}>{picDescription} </p>
                 </div>
@@ -111,22 +224,42 @@ const Modalche = ({
                   <PrimaryButton
                     buttonHeight={"40px"}
                     buttonWidth={"50%"}
-                    buttonText={`{} likes`}
+                    buttonText={`${likesCount}`}
+                    buttonIcon={
+                      isLiked ? (
+                        <FavoriteIcon />
+                      ) : (
+                        <FavoriteBorderOutlinedIcon />
+                      )
+                    }
+                    onClick={handleLike}
                   />
+
                   <PrimaryButton
                     buttonHeight={"40px"}
                     buttonWidth={"50%"}
-                    buttonText={`${commCount} comments `}
+                    buttonText={`${commentsCount} comments `}
                     className={styles.primaryButtonComment}
                   />
                 </div>
-                <CommentsSection />
+                <CommentsSection
+                  pictureId={pictureId}
+                  onPrev={onPrev}
+                  onNext={onNext}
+                  albumId={albumId}
+                  fetchCommentCount={fetchCommentCount}
+                  fetchPictureComments={fetchPictureComments}
+                  comments={comments}
+                  commentsCount={commentsCount}
+                  likesCount={likesCount}
+                  fetchCommentsOnPicture={fetchCommentsOnPicture}
+                />
               </div>
             </div>
 
             <NoBgButton
               buttonIcon={<NavigateNextIcon />}
-              onClick={onNext}
+              onClick={handleNextPic}
             ></NoBgButton>
           </div>
         </Modal>

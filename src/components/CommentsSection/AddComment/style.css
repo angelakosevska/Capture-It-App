@@ -23,7 +23,7 @@
 .all-comments {
   margin: 5px 0px;
   border-radius: 5px;
-  max-height: 435px;
+  max-height: 400px;
   overflow-y: auto;
   width: 100%;
 }

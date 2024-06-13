@@ -10,7 +10,7 @@ const PictureCoverCardInAlbum = ({
   altText,
   picWidth,
   picHeight,
-  onClick
+  onClick,
 }) => {
   return (
     <>
@@ -21,7 +21,12 @@ const PictureCoverCardInAlbum = ({
         <img src={picture} alt={altText} className="picture" />
         <div className="overlay-pic" onClick={onClick}>
           <div className="PandU-pic">
-            <PictureAndUsername textColor={"black"} ppDimension={"30px"} username={username} profilePic={profilePic}/>
+            <PictureAndUsername
+              textColor={"white"}
+              ppDimension={"30px"}
+              username={username}
+              profilePic={profilePic}
+            />
           </div>
         </div>
       </div>

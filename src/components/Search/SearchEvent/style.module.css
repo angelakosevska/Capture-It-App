@@ -1,0 +1,51 @@
+.SearchBar {
+  display: flex;
+  width: 100%;
+  margin: 5px;
+}
+.SearchBar input {
+  width: 100%;
+  font-size: 18px;
+  padding: 5px 10px;
+  height: 36px;
+  outline: none;
+  background: #ffffff;
+  color: #000000;
+  border: 1px solid var(--primaryColor);
+  border-radius: 5px;
+  box-shadow: var(--shadow);
+}
+.menuAndItem {
+  width: 100%;
+}
+.SearchBar input:focus {
+  background: #f0f0ff;
+  border: 1px solid var(--secondaryColor);
+  border-radius: 5px;
+  height: 36px;
+}
+
+.SearchDropDownMenu {
+  width: 100%;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 28%;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid #ccc;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 2px 5px rgba(247, 238, 238, 0.1);
+  z-index: 1;
+}
+.SearchDropDownItem {
+  width: 100%;
+  background-color: #f8f9fa00;
+  font-size: 20px;
+  height: 30px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-family: "Urbanist", sans-serif;
+}
+.SearchDropdownItem:hover {
+  color: var(--secondaryColor);
+}

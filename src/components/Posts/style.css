@@ -6,7 +6,7 @@
 }
 
 .post {
-    background-color: #f9f9f9;
+    background-image: linear-gradient(45deg, #ff7e4f4c, #A7788A4c, #5F5D9C4c);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -14,6 +14,7 @@
     margin-bottom: 20px;
     box-sizing: border-box;
 }
+
 
 .profile {
     display: flex;
@@ -35,6 +36,7 @@
 .event-name {
     font-size: 1.2em;
     margin-bottom: 10px;
+    cursor: pointer;
 }
 
 .description {
@@ -48,7 +50,7 @@
     gap: 10px;
     margin-top: 20px;
     height: 400px;
-    margin-bottom: -100px;
+    margin-bottom: -120px;
 }
 
 .photo-wrapper {
@@ -103,23 +105,93 @@
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-.actions {
-    margin-top: 10px;
-}
-
-.actions button {
-    margin-right: 10px;
-    padding: 5px 10px;
-    background-color: #6a5294;
-    color: white;
-    border: none;
-    border-radius: 5px;
+@keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  .ui-like {
+    --icon-size: 24px;
+    --icon-color: rgb(230, 26, 26);
+    --icon-hover-color: rgb(207, 23, 23);
+    font-size: var(--icon-size);
     cursor: pointer;
+    transition: color 0.2s;
+  }
+  
+  .ui-like .bi {
+    color: var(--icon-color);
+    transition: transform 0.2s;
+  }
+  
+  .ui-like:hover .bi {
+    color: var(--icon-hover-color);
+  }
+  
+  .ui-like.pulsing .bi {
+    animation: pulse 0.2s;
+  }
+  
+  .ui-comment {
+    font-size: var(--icon-size);
+    cursor: pointer;
+    transition: color 0.2s;
 }
 
-.actions button:hover {
-    background-color: #553b7b;
+.ui-comment .bi {
+    color: var(--icon-color);
+    transition: transform 0.2s;
 }
+
+.ui-comment:hover .bi {
+    color: var(--icon-hover-color);
+}
+
+.ui-share {
+    font-size: var(--icon-size);
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.ui-share .bi {
+    color: var(--icon-color);
+    transition: transform 0.2s;
+}
+
+.ui-share:hover .bi {
+    color: var(--icon-hover-color);
+}
+
+.actions {
+    display: flex;
+    gap: 10px; /* Add space between buttons */
+}
+
+.actions button,
+.actions .ui-comment,
+.actions .ui-share {
+    display: inline-flex; /* Ensure buttons are inline */
+    align-items: center; /* Align items vertically */
+    justify-content: center; /* Align items horizontally */
+    font-size: 20px;
+    padding: 4px 8px
+}
+
+.actions .ui-like {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 23px;
+    padding: 4px 8px;
+}
+
 
   
   

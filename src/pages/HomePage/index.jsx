@@ -1,5 +1,6 @@
 import "./style.css";
-
+import { Link } from "react-router-dom";
+import Routing from "../../components/Routing";
 import HeroSection from "../../components/HeroSection";
 import Slider from "../../components/Slider/index";
 import Feed from "../../components/Posts/index";
@@ -9,6 +10,8 @@ export function Home() {
     <>
       <HeroSection />
       <Slider />
+      <h2> Explore public events</h2>
+      {/* feed e okej so funkcionalnost */}
       <Feed />
     </>
   );

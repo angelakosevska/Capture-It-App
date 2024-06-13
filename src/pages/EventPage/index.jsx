@@ -1,32 +1,47 @@
 import "./style.css";
 import AlbumsInEventSection from "../../components/EventPageAlbums/AlbumsInEventSection/index.jsx";
 import EventHeader from "../../components/EventHeader/index.jsx";
-import CommentsSection from "../../components/CommentsSection/index.jsx";
 import EventDescription from "../../components/EventHeader/EventDescription/index.jsx";
 import PrimaryButton from "../../components/Buttons/PrimaryButton/index.jsx";
 import SecondaryButton from "../../components/Buttons/SecondaryButton/index.jsx";
-import SearchIcon from "@mui/icons-material/Search";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import IconButton from "../../components/Buttons/IconButton/index.jsx";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SearchAlbums from "../../components/Search/SearchAlbum/index.jsx";
 import CreateAlbumModal from "../../components/Modals/CreateAlbum/index.jsx";
+import EditIcon from "@mui/icons-material/Edit";
+import EditEventModal from "../../components/Modals/EditEventModal/index.jsx";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import NoBgButton from "../../components/Buttons/NoBGButton/index.jsx";
+import PhotoAlbumIcon from "@mui/icons-material/PhotoAlbum";
+import InviteParticipantsModal from "../../components/Modals/InviteParticipantsModal/index.jsx";
+import PictureAndUsername from "../../components/PictureAndUsername/index.jsx";
+import { AuthContext } from "../../context/index.jsx";
 
 export function Event() {
   const { eventId } = useParams();
-  const [eventData, setEventData] = useState({
-    data: [],
-    pageNumber: 0,
-    pageSize: 0,
-    totalRecords: 0,
-  });
+  //context
+  const { authToken, userId, username, login, logout } =
+    useContext(AuthContext);
+
+  const [eventData, setEventData] = useState({});
   const [error, setError] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [createAlbum, setCreateAlbum] = useState(false);
-  const [isNavOpen, setIsNavOpen] = useState(false);
+  const [invitePeople, setInvitePeople] = useState(false);
+  const [eventParticipants, setEventParticipants] = useState([]);
+  const [creator, setCreator] = useState("");
+  const [publicUser, setPublicUser] = useState();
+  const [isParticipant, setIsParticipant] = useState(false);
+  const [eventIsPrivate, setEventIsPrivate] = useState(true);
+
+  const invitePeopleInEvent = () => {
+    setInvitePeople(true);
+  };
+  const invitedPeopleInEvent = () => {
+    setInvitePeople(false);
+  };
 
   const postAlbum = () => {
     setCreateAlbum(true);
@@ -34,9 +49,16 @@ export function Event() {
   const postedAlbum = () => {
     setCreateAlbum(false);
   };
-  const toggleNav = () => {
-    setIsNavOpen(!isNavOpen);
+  const [editEventIsOpen, setEditEventIsopen] = useState(false);
+
+  const editEvent = () => {
+    setEditEventIsopen(true);
   };
+
+  const editedEvent = () => {
+    setEditEventIsopen(false);
+  };
+
   const fetchEventData = async () => {
     try {
       const result = await axios.get(
@@ -44,14 +66,19 @@ export function Event() {
         `https://capture-it.azurewebsites.net/api/event/${eventId}`,
         {
           headers: {
-            Authorization:
-              " eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzY3NTczMH0.MEPXqGZ9SquOWePUY8n3h53R_YQ6OoPAVg3Gkzc5USg",
+            Authorization: ` Bearer  ${authToken}`,
           },
         }
       );
 
+      setEventIsPrivate(result.data.isPrivate);
+      setCreator(result.data?.owner?.username);
       setEventData(result?.data);
       console?.log("event data", result.data);
+      console.log(" event is private ", result.data.isPrivate);
+      console.log("creator ", result.data?.owner?.username);
+
+      // setEventParticipants([result.data?.owner, ...result.data.participants]);
     } catch (error) {
       setError(error);
       console.error("error fetching data: ", error);
@@ -59,78 +86,174 @@ export function Event() {
   };
   useEffect(() => {
     fetchEventData();
-  }, []);
+  }, [eventId]);
+
+  const fetchParticipants = async () => {
+    try {
+      const result = await axios.get(
+        //get participants
+        `https://capture-it.azurewebsites.net/api/event/${eventId}/participants`,
+        {
+          headers: {
+            Authorization: ` Bearer  ${authToken}`,
+          },
+        }
+      );
+      setEventParticipants(result.data.participants);
+      console?.log("event participants", result.data.participants);
+
+      const participantIds = result.data.participants.map(
+        (participant) => participant.userId
+      );
+      setIsParticipant(participantIds.includes(userId));
+    } catch (error) {
+      setError(error);
+      console.error("error fetching participants: ", error);
+    }
+  };
+  useEffect(() => {
+    fetchParticipants();
+  }, [eventId]);
+
+  const deleteEvent = async () => {
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this event?"
+    );
+    if (!isConfirmed) return;
+
+    try {
+      await axios.delete(
+        //delete album
+        `https://capture-it.azurewebsites.net/api/event/${eventId}`,
+        {
+          headers: {
+            Authorization: ` Bearer  ${authToken}`,
+          },
+        }
+      );
+    } catch (error) {
+      setError(error);
+      console.error("Error deleting event: ", error);
+    }
+  };
+
   return (
+    //logiraniot userId
     <>
+      {/* <div className="eventPrivate">This event is private</div> */}
       <div className="all-in-events">
-        <div className="name-and-search">
-          <div className="eventHeader">
-            <EventHeader
-              location={eventData.location}
-              profilePicture={eventData?.owner?.profilePicture}
-              username={eventData?.owner?.username}
-              eventName={eventData.eventName}
-            />
-            <div className="eventActions">
+        <div className="eventHeader">
+          <EventHeader
+            location={eventData.location}
+            profilePicture={eventData?.owner?.profilePicture}
+            username={eventData?.owner?.username}
+            eventName={eventData.eventName}
+            startDate={eventData.startDateTime}
+            endDate={eventData.endDateTime}
+          />
+        </div>
+        <div className="eventActions">
+          <SearchAlbums onSearch={setSearchTerm} />
+
+          {username === creator ? (
+            <>
+              {invitePeople && (
+                <InviteParticipantsModal
+                  onClose={invitedPeopleInEvent}
+                  eventId={eventId}
+                  fetchParticipants={fetchParticipants}
+                />
+              )}
+              {createAlbum && (
+                <CreateAlbumModal eventId={eventId} onClose={postedAlbum} />
+              )}
               <PrimaryButton
                 buttonWidth={"auto"}
                 buttonHeight={"40px"}
                 buttonText={"Invite People"}
+                onClick={invitePeopleInEvent}
               />
+              <div className="dropdown-more">
+                <NoBgButton
+                  buttonIcon={<MoreVertIcon fontSize="large" />}
+                  className="dropbtn"
+                />
+                <div className="dropdown-content-more">
+                  <NoBgButton
+                    buttonWidth={"auto"}
+                    buttonHeight={"40px"}
+                    buttonText={"Create Album"}
+                    buttonIcon={<PhotoAlbumIcon />}
+                    onClick={postAlbum}
+                  />
+
+                  <NoBgButton
+                    buttonIcon={<DeleteIcon />}
+                    buttonText={"Delete Event"}
+                    buttonHeight={"40px"}
+                    buttonWidth={"auto"}
+                    onClick={deleteEvent}
+                  />
+                  <NoBgButton
+                    buttonIcon={<EditIcon />}
+                    buttonText={"Edit event info"}
+                    buttonHeight={"40px"}
+                    buttonWidth={"auto"}
+                    onClick={editEvent}
+                  />
+                </div>
+              </div>
+            </>
+          ) : isParticipant && (
+            <>
+              {createAlbum && (
+                <CreateAlbumModal eventId={eventId} onClose={postedAlbum} />
+              )}
               <SecondaryButton
                 buttonWidth={"auto"}
                 buttonHeight={"40px"}
                 buttonText={"Create Album"}
+                buttonIcon={<PhotoAlbumIcon />}
                 onClick={postAlbum}
               />
-              <IconButton
-                buttonIcon={<DeleteIcon />}
-                buttonHeight={"40px"}
-                buttonWidth={"40px"}
-              />
-              <SearchAlbums onSearch={setSearchTerm} />
-            </div>
-          </div>
+            </>
+          )}
+
+          {editEventIsOpen && <EditEventModal onClose={editedEvent} />}
         </div>
-        <main className="albumsAndAside">
-          <div className="containerForAlbums">
-            <AlbumsInEventSection
-              picEHeight={"100px"}
-              picEWidth={"225px"}
-              eventId={eventId}
-              searchTerm={searchTerm}
-            />
-          </div>
-          <aside className="likes-comments-description">
+        <div className="mainAndInvite">
+          <div className="descriptionAndEvent">
             <div className="event-description">
               <EventDescription eventDescription={eventData.description} />
             </div>
-            <div className="buttonsEvent">
-              <NoBgButton
-                buttonText={"likes"}
-                buttonHeight={"40px"}
-                buttonWidth={"50%"}
+            <main className="albumsInEvent">
+              <AlbumsInEventSection
+                picEHeight={"225px"}
+                picEWidth={"225px"}
+                eventId={eventId}
+                searchTerm={searchTerm}
               />
-              <NoBgButton
-                buttonText={` comments`}
-                buttonHeight={"40px"}
-                buttonWidth={"50%"}
-              />
-            </div>
-            <div className="containerForCommentSection">
-              <CommentsSection />
-            </div>
-          </aside>
-        </main>
+            </main>
+          </div>
+
+          <div className="invitePeople">
+            <div className="labelInvitePeople">People in this event:</div>
+            {Array.isArray(eventParticipants) &&
+              eventParticipants.map((participant) => (
+                <div key={participant.id} className="participantMap">
+                  <PictureAndUsername
+                    profilePic={participant?.profilePicture}
+                    username={participant.username}
+                    ppDimension={"25px"}
+                    textColor={"black"}
+                  />
+                </div>
+              ))}
+          </div>
+        </div>
       </div>
-      {createAlbum && (
-        <CreateAlbumModal eventId={eventId} onClose={postedAlbum} />
-      )}
     </>
   );
 }
-//soodvetna pateka do albumite
-export default Event;
 
-//search po ime
-//da se bira cover photo so tochno odredeni dimenzii
+export default Event;

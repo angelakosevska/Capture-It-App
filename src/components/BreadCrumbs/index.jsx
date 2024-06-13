@@ -1,38 +1,13 @@
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./style.css";
 import PictureAndUsername from "../PictureAndUsername";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState } from "react";
 
-const BreadCrumbs = ({ albumId }) => {
+const BreadCrumbs = ({ albumId, breadcrumbs }) => {
   const location = useLocation();
   const [error, setError] = useState(null);
-  const [breadcrumbs, setBreadcrumbs] = useState([]);
+  // const [breadcrumbs, setBreadcrumbs] = useState([]);
   const navigate = useNavigate();
-  const fetchBreadcrumbs = async () => {
-    //get albumById
-    try {
-      const result = await axios.get(
-        `https://capture-it.azurewebsites.net/api/album/${albumId}`,
-        {
-          headers: {
-            Authorization:
-              "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia29zZXZza2FhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxMSIsImV4cCI6MTcxNzY3NTczMH0.MEPXqGZ9SquOWePUY8n3h53R_YQ6OoPAVg3Gkzc5USg",
-          },
-        }
-      );
-
-      setBreadcrumbs(result.data);
-      console?.log(" data for breadcrumbs albumby id data", result.data);
-    } catch (error) {
-      setError(error);
-      console.error("error fetching data for breadcrumbs: ", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchBreadcrumbs();
-  }, [albumId]);
 
   const handleBreadcrumbEvent = () => {
     navigate(`/event/${breadcrumbs.eventId}`);
@@ -41,7 +16,7 @@ const BreadCrumbs = ({ albumId }) => {
     navigate(`/album/${breadcrumbs.albumId}`);
   };
   const handleBreadcrumbUser = () => {
-    navigate(`/${breadcrumbs.creator.username}`);
+    navigate(`/profile/${breadcrumbs.creator.username}`);
   };
   return (
     <div className="breadCrumbsContainer">
@@ -56,6 +31,7 @@ const BreadCrumbs = ({ albumId }) => {
           ppDimension={"30px"}
           username={breadcrumbs.creator?.username}
           profilePic={breadcrumbs.creator?.profilePicture}
+          textColor={"black"}
         />
       </div>
     </div>

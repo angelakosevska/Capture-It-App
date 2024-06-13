@@ -1,10 +1,28 @@
 import AddComment from "../CommentsSection/AddComment";
 import "./style.css";
 
-const CommentsSection = () => {
+const CommentsSection = ({
+  pictureId,
+  onPrev,
+  onNext,
+  albumId,
+  fetchCommentCount,
+  fetchPictureComments,
+  commentsCount,
+  comments,
+  fetchCommentsOnPicture,
+}) => {
   return (
     <>
-      <AddComment/>
+      <AddComment
+        pictureId={pictureId}
+        albumId={albumId}
+        fetchCommentCount={fetchCommentCount}
+        fetchPictureComments={fetchPictureComments}
+        comments={comments}
+        commentsCount={commentsCount}
+        fetchCommentsOnPicture={fetchCommentsOnPicture}
+      />
     </>
   );
 };
