@@ -1,198 +1,193 @@
 .feed {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
 }
 
 .post {
-    background-image: linear-gradient(45deg, #ff7e4f4c, #A7788A4c, #5F5D9C4c);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: calc(50% - 20px);
-    margin-bottom: 20px;
-    box-sizing: border-box;
+  background-image: linear-gradient(45deg, #ff7e4f4c, #a7788a4c, #5f5d9c4c);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: calc(50% - 20px);
+  margin-bottom: 20px;
+  box-sizing: border-box;
 }
 
-
 .profile {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
 }
 
 .profile img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin-right: 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
 }
 
 .profile span {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .event-name {
-    font-size: 1.2em;
-    margin-bottom: 10px;
-    cursor: pointer;
+  font-size: 1.2em;
+
+  cursor: pointer;
 }
 
 .description {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .photos {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    gap: 10px;
-    margin-top: 20px;
-    height: 400px;
-    margin-bottom: -120px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 20px;
+  height: 400px;
+  margin-bottom: -120px;
 }
 
 .photo-wrapper {
-    position: relative;
-    border-radius: 5px;
-    overflow: hidden;
+  position: relative;
+  border-radius: 5px;
+  overflow: hidden;
 }
 
 .photo-wrapper:nth-child(1) {
-    grid-column: 1 / 3;
-    grid-row: 1 / 3;
+  grid-column: 1 / 3;
+  grid-row: 1 / 3;
 }
 
 .photo-wrapper:nth-child(2),
 .photo-wrapper:nth-child(3) {
-    grid-column: 3 / 4;
+  grid-column: 3 / 4;
 }
 
 .photo-wrapper:nth-child(4),
 .photo-wrapper:nth-child(5) {
-    grid-column: 4 / 5;
+  grid-column: 4 / 5;
 }
 
 .photo-wrapper:nth-child(3),
 .photo-wrapper:nth-child(5) {
-    grid-row: 2 / 3;
+  grid-row: 2 / 3;
 }
 
 .photo {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .view-more {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.3);
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .photo-wrapper:hover .view-more {
-    background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 @keyframes pulse {
-    0% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.1);
-    }
-    100% {
-      transform: scale(1);
-    }
+  0% {
+    transform: scale(1);
   }
-  
-  .ui-like {
-    --icon-size: 24px;
-    --icon-color: rgb(230, 26, 26);
-    --icon-hover-color: rgb(207, 23, 23);
-    font-size: var(--icon-size);
-    cursor: pointer;
-    transition: color 0.2s;
+  50% {
+    transform: scale(1.1);
   }
-  
-  .ui-like .bi {
-    color: var(--icon-color);
-    transition: transform 0.2s;
+  100% {
+    transform: scale(1);
   }
-  
-  .ui-like:hover .bi {
-    color: var(--icon-hover-color);
-  }
-  
-  .ui-like.pulsing .bi {
-    animation: pulse 0.2s;
-  }
-  
-  .ui-comment {
-    font-size: var(--icon-size);
-    cursor: pointer;
-    transition: color 0.2s;
+}
+
+.ui-like {
+  --icon-size: 24px;
+  --icon-color: rgb(230, 26, 26);
+  --icon-hover-color: rgb(207, 23, 23);
+  font-size: var(--icon-size);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.ui-like .bi {
+  color: var(--icon-color);
+  transition: transform 0.2s;
+}
+
+.ui-like:hover .bi {
+  color: var(--icon-hover-color);
+}
+
+.ui-like.pulsing .bi {
+  animation: pulse 0.2s;
+}
+
+.ui-comment {
+  font-size: var(--icon-size);
+  cursor: pointer;
+  transition: color 0.2s;
 }
 
 .ui-comment .bi {
-    color: var(--icon-color);
-    transition: transform 0.2s;
+  color: var(--icon-color);
+  transition: transform 0.2s;
 }
 
 .ui-comment:hover .bi {
-    color: var(--icon-hover-color);
+  color: var(--icon-hover-color);
 }
 
 .ui-share {
-    font-size: var(--icon-size);
-    cursor: pointer;
-    transition: color 0.2s;
+  font-size: var(--icon-size);
+  cursor: pointer;
+  transition: color 0.2s;
 }
 
 .ui-share .bi {
-    color: var(--icon-color);
-    transition: transform 0.2s;
+  color: var(--icon-color);
+  transition: transform 0.2s;
 }
 
 .ui-share:hover .bi {
-    color: var(--icon-hover-color);
+  color: var(--icon-hover-color);
 }
 
 .actions {
-    display: flex;
-    gap: 10px; /* Add space between buttons */
+  display: flex;
+  gap: 10px; /* Add space between buttons */
 }
 
 .actions button,
 .actions .ui-comment,
 .actions .ui-share {
-    display: inline-flex; /* Ensure buttons are inline */
-    align-items: center; /* Align items vertically */
-    justify-content: center; /* Align items horizontally */
-    font-size: 20px;
-    padding: 4px 8px
+  display: inline-flex; /* Ensure buttons are inline */
+  align-items: center; /* Align items vertically */
+  justify-content: center; /* Align items horizontally */
+  font-size: 20px;
+  padding: 4px 8px;
 }
 
 .actions .ui-like {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 23px;
-    padding: 4px 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 23px;
+  padding: 4px 8px;
 }
-
-
-  
-  
-  

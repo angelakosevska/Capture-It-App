@@ -1,5 +1,6 @@
 import EventName from "./EventName";
 import EventLocation from "./EventLocation/index";
+import moment from "moment";
 
 import "./style.css";
 
@@ -11,6 +12,14 @@ const EventHeader = ({
   startDate,
   endDate,
 }) => {
+  // const startDateTime = toDateTimeString(
+  //   startDate,
+  //   " dd MMM yy 'at' hh:mm:ss z,E",
+  //   "CEST"
+  // );
+  let startDateTime = moment(startDate).format("MMMM Do YYYY, h:mm:ss a");
+  let endDateTime = moment(endDate).format("MMMM Do YYYY, h:mm:ss a");
+
   return (
     <>
       <div className="eventHeader-flex">
@@ -20,8 +29,9 @@ const EventHeader = ({
           eventName={eventName}
         />
         <EventLocation location={location} />
-        <div className="dateTime">{startDate} - {endDate}</div>
-        
+        <div className="dateTime">
+          {startDateTime} - {endDateTime}
+        </div>
       </div>
     </>
   );

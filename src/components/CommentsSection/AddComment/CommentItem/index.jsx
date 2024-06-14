@@ -3,13 +3,15 @@ import ReactTimeAgo from "react-time-ago";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
 import PictureAndUsername from "../../../PictureAndUsername";
-import { parseISO, format } from "date-fns";
+import moment from "moment";
+
 TimeAgo.addLocale(en);
 
 const CommentItem = ({ comment, username, profilePic, createdAt }) => {
   //const date= parseISO(createdAt);
+
   const date = new Date(createdAt);
-  const localDate = date.toLocaleString();
+
   return (
     <>
       <div className="comment-show">
@@ -21,7 +23,7 @@ const CommentItem = ({ comment, username, profilePic, createdAt }) => {
             textColor={"black"}
           />
           &nbsp;
-          <ReactTimeAgo date={localDate} locale="en-US" />
+          {/*<ReactTimeAgo date={date} locale="en-US" />*/}
         </div>
         <span>{comment}</span>
       </div>

@@ -53,13 +53,14 @@ function Feed() {
           <div className="profile">
             <img src={event.owner.profilePicture} alt="Profile" />
             <span>{event.owner.username}</span>
+            <div
+              className="event-name"
+              onClick={() => handleViewMoreClick(event.eventId)}
+            >
+              {event.eventName}
+            </div>
           </div>
-          <div
-            className="event-name"
-            onClick={() => handleViewMoreClick(event.eventId)}
-          >
-            {event.eventName}
-          </div>
+
           <div className="description">{event.description}</div>
           <div className="photos">
             {event.pictures.slice(0, 5).map((photo, index) => (
