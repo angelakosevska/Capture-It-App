@@ -193,7 +193,7 @@ const EditUserModal = ({ onClose }) => {
           <label>
             Birthday
             <input
-              className={"input-field"}
+              className={styles.inputContainer}
               type="date"
               name="dateOfBirth"
               value={userData.dateOfBirth}
@@ -205,7 +205,7 @@ const EditUserModal = ({ onClose }) => {
         <div className={styles.inputContainer}>
           <label>
             <select
-              className={`input-field ${!userData.gender ? " error" : ""}`}
+              className={` inputContainer ${!userData.gender ? " error" : ""}`}
               value={userData.gender}
               onChange={handleChange}
             >

@@ -156,9 +156,11 @@ const RegisterPage = () => {
             value={repeatPassword}
             onChange={(e) => setRepeatPassword(e.target.value)}
           />
-          <button type="submit" className="login-button">
-            Register
-          </button>
+          <div className="register-div">
+            <button type="submit" className="register-button">
+              Register
+            </button>
+          </div>
         </form>
         <div className="login-text">
           Already have an account? <a href="/login">Login</a>
