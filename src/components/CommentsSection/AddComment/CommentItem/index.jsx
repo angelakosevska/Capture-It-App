@@ -7,7 +7,7 @@ import moment from "moment";
 
 TimeAgo.addLocale(en);
 
-const CommentItem = ({ comment, usernameCreator, profilePic, createdAt }) => {
+const CommentItem = ({ comment, username, profilePic, createdAt }) => {
   //const date= parseISO(createdAt);
 
   const date = new Date(createdAt);
@@ -18,7 +18,7 @@ const CommentItem = ({ comment, usernameCreator, profilePic, createdAt }) => {
         <div className="who-what-when">
           <PictureAndUsername
             ppDimension="30px"
-            username={usernameCreator}
+            username={username}
             profilePic={profilePic}
             textColor={"black"}
           />

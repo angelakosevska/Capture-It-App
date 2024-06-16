@@ -214,7 +214,7 @@ const Modalche = ({
                 <div className={styles.picDescription}>
                   <PictureAndUsername
                     profilePic={profilePicture}
-                    username={username}
+                    username={usernameCreator}
                     ppDimension={"25px"}
                     textColor={"black"}
                   />
