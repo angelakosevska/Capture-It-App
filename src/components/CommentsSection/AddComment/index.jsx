@@ -34,7 +34,7 @@ const AddComment = ({
             <CommentItem
               key={comment.commentId}
               comment={comment.comment1}
-              username={comment.user.username}
+              usernameCreator={comment.user.username}
               profilePic={comment.user.profilePicture}
               createdAt={comment.createdAt}
             />

@@ -140,8 +140,6 @@ export function Event() {
   return (
     //logiraniot userId
     <>
-      <div className="eventPrivate">This event is private</div>
-
       <>
         <div className="all-in-events">
           <div className="eventHeader">
